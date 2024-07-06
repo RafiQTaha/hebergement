@@ -1,0 +1,3 @@
+<?php //App%255CController%255CParametre%255CSynchronisationController%2523api_etudiant
+
+return [PHP_INT_MAX, []];

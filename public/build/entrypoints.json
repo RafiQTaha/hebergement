@@ -1,0 +1,137 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/515.caf3cc39.js",
+        "/build/440.1617e568.js",
+        "/build/app.99551630.js"
+      ],
+      "css": [
+        "/build/440.3ac474f7.css",
+        "/build/app.36f2aff0.css"
+      ]
+    },
+    "login": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/login.57bc728f.js"
+      ],
+      "css": [
+        "/build/login.b0135c94.css"
+      ]
+    },
+    "preinscription": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/preinscription.3627e9f3.js"
+      ]
+    },
+    "gestionPreinscription": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/515.caf3cc39.js",
+        "/build/gestionPreinscription.8cb30954.js"
+      ]
+    },
+    "admission": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/admission.0fe2470f.js"
+      ]
+    },
+    "gestionadmission": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/515.caf3cc39.js",
+        "/build/gestionadmission.c67b97de.js"
+      ]
+    },
+    "inscription": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/515.caf3cc39.js",
+        "/build/inscription.32b93234.js"
+      ]
+    },
+    "facture": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/515.caf3cc39.js",
+        "/build/facture.84466640.js"
+      ]
+    },
+    "bordereau": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/bordereau.70af8b66.js"
+      ]
+    },
+    "reglement": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/515.caf3cc39.js",
+        "/build/reglement.2f101a7a.js"
+      ]
+    },
+    "departement": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/departement.ea903c09.js"
+      ]
+    },
+    "etage": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/etage.3bda8f69.js"
+      ]
+    },
+    "chambre": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/chambre.5c234ba9.js"
+      ]
+    },
+    "synchronisation": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/synchronisation.e7be5f75.js"
+      ]
+    },
+    "user": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/user.48e9ff4f.js"
+      ]
+    }
+  }
+}

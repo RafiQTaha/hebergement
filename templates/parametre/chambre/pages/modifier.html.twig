@@ -1,0 +1,32 @@
+<label for="TypeChambre">Type de Chambre:</label>
+<select class="form-control" name="typechambre" id="typechambre">
+    <option value="">Choix de Chambre</option>
+    {% for typechambre in typechambres %}
+        <option value="{{typechambre.id}}" {% if chambre.typechambre == typechambre %}selected{% endif %}>{{typechambre.designation}}</option>
+    {% endfor %}
+</select>
+
+<label for="statutChambre">Statut de Chambre:</label>
+<select class="form-control" name="statutchambre" id="statutchambre">
+    <option value="">Choix de statut</option>
+    {% for statutchambre in statutchambres %}    
+        <option value="{{statutchambre.id}}" {% if chambre.statutChambre == statutchambre %}selected{% endif %}>{{statutchambre.designation}}</option>
+    {% endfor %}
+</select>
+
+<label for="designation">Désignation:</label>
+<input type="text" class="form-control" name="designation" id="designation" value="{{chambre.designation}}" />
+
+<label for="abreviation">Abreviation:</label>
+<input type="text" class="form-control" name="abreviation" id="abreviation" value="{{chambre.abreviation}}"  />  
+
+<div class="d-flex align-items-center mt-2">
+    <label for="active" >Active:</label>
+    {% if chambre.active == 1 %}
+      <input  type="checkbox"  class="mb-2 ml-4" name="active" id="active" checked />
+      {% else %}
+      <input  type="checkbox"  class="mb-2 ml-4" name="active" id="active" />
+    {% endif %}
+</div>
+
+<button type="submit" class="btn btn-success mt-4"><i class="fas fa-check-circle"></i> Enregister</button>

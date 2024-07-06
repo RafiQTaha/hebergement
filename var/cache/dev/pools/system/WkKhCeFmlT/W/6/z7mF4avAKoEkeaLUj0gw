@@ -1,0 +1,3 @@
+<?php //App%255CController%255CInscription%255CGestionInscriptionController%2523getFraisByInscription
+
+return [PHP_INT_MAX, []];
