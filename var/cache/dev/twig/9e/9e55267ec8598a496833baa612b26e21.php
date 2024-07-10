@@ -71,41 +71,18 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
         <table style=\"width: 100% ;\" cellspacing=\"0\">
             <tr>
                 <th style=\"width: 100% ; font-size: 13px ;font-weight: 200;font-weight: bold;padding:4px;color:rgb(3, 35, 68);\">
-                    ";
-        // line 34
-        yield "                </th>
+                </th>
                 <th style=\"width: 100% ; font-size: 13px ;font-weight: 200;font-weight: bold;padding:4px;color:rgb(3, 35, 68);\">
-                    ";
-        // line 36
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 36, $this->source); })()), "preinscription", [], "any", false, false, false, 36), "annee", [], "any", false, false, false, 36), "formation", [], "any", false, false, false, 36), "etablissement", [], "any", false, false, false, 36), "id", [], "any", false, false, false, 36) == 28)) {
-            // line 37
-            yield "                            <img src=\"./assets/img/logo/cpge.svg\" style=\" width: 800px; margin: 20 auto;\"> 
-                    ";
-        } elseif ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source,         // line 38
-(isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 38, $this->source); })()), "preinscription", [], "any", false, false, false, 38), "annee", [], "any", false, false, false, 38), "formation", [], "any", false, false, false, 38), "etablissement", [], "any", false, false, false, 38), "id", [], "any", false, false, false, 38) == 5)) {
-            // line 39
-            yield "                            <img src=\"./assets/img/logo/logo_lez.png\" style=\" width: 800px; margin: 0 auto;\">
-                    ";
-        } else {
-            // line 40
-            yield "                
-                            <img src=\"./assets/img/logo/Logo_UIASS_bkack2.png\" style=\" width: 500px; margin: 0 auto;\">
-                    ";
-        }
-        // line 43
-        yield "                    ";
-        // line 44
-        yield "                </th>
+                    <img src=\"./assets/img/logo/logo-hebergement.png\" style=\" width: 800px; margin: 0 auto;\">
+                </th>
                 <th style=\"width: 100% ; font-size: 13px ;font-weight: 200;font-weight: bold;padding:4px;color:rgb(3, 35, 68);\">
-                    ";
-        // line 49
-        yield "                </th>                    
+                </th>                    
             </tr>
         </table>
     ";
-        // line 53
+        // line 40
         yield "    ";
-        // line 54
+        // line 41
         yield "</div>
 <div >
     <table style=\"width: 100% ;text-align: center;border: 1px solid #292929; border-bottom: none;\" cellspacing=\"0\">        <tr>
@@ -120,21 +97,21 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
     
                     <tr>
                         <td style=\"width: 100% ; font-size: 11px ;padding:4px;color:rgb(31, 79, 122);\">";
-        // line 67
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 67, $this->source); })()), "code", [], "any", false, false, false, 67), "html", null, true);
+        // line 54
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 54, $this->source); })()), "code", [], "any", false, false, false, 54), "html", null, true);
         yield "</td>
                     </tr>
                 </table>
             </td>
             <td style=\"width: 40% ;font-size: 20px;font-weight: bold ; border-left: 1px solid #292929 ;border-right: 1px solid #292929; border-bottom: 1px solid #292929 ;color:rgb(3, 35, 68);\">";
-        // line 71
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 71, $this->source); })()), "active", [], "any", false, false, false, 71) == 0)) {
+        // line 58
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 58, $this->source); })()), "active", [], "any", false, false, false, 58) == 0)) {
             yield " FACTURE ";
         } else {
             yield " FACTURE PRO FORMAT
                  ";
         }
-        // line 73
+        // line 60
         yield "              </td>
             <td style=\"width: 30% ;border-bottom: 1px solid #292929 ;\">
                 <table style=\"width: 100% ; background: #FFFFFF; text-align: center\" cellspacing=\"0\">
@@ -149,9 +126,9 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
     
                     <tr>
                         ";
-        // line 87
+        // line 74
         yield "                        <td style=\"width: 100% ; font-size: 11px ;padding:4px;color:rgb(3, 35, 68);\">";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 87, $this->source); })()), "created", [], "any", false, false, false, 87), "d/m/Y"), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 74, $this->source); })()), "created", [], "any", false, false, false, 74), "d/m/Y"), "html", null, true);
         yield "</td>
                     </tr>
                 </table>
@@ -166,7 +143,7 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
     </table>
 
     ";
-        // line 101
+        // line 88
         yield "    
     <table cellspacing=\"0\" style=\"width: 100%; text-align: left; font-size: 12px\" >
         <tr>
@@ -175,64 +152,55 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
         </tr> 
         <tr>
             <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">ETABLISSEMENT   :   ";
-        // line 108
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 108, $this->source); })()), "annee", [], "any", false, false, false, 108), "formation", [], "any", false, false, false, 108), "etablissement", [], "any", false, false, false, 108), "designation", [], "any", false, false, false, 108), "html", null, true);
+        // line 95
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 95, $this->source); })()), "annee", [], "any", false, false, false, 95), "formation", [], "any", false, false, false, 95), "etablissement", [], "any", false, false, false, 95), "designation", [], "any", false, false, false, 95), "html", null, true);
         yield "</td>
             <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">REFERENCE   :   ";
-        // line 109
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 109, $this->source); })()), "preinscription", [], "any", false, false, false, 109), "code", [], "any", false, false, false, 109), "html", null, true);
-        yield "</td>
-        </tr>  
-        <tr>
-            <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">FORMATION   :   ";
-        // line 112
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 112, $this->source); })()), "annee", [], "any", false, false, false, 112), "formation", [], "any", false, false, false, 112), "designation", [], "any", false, false, false, 112), "html", null, true);
-        yield "</td>
-            <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">NOM & PRENOM :  ";
-        // line 113
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 113, $this->source); })()), "preinscription", [], "any", false, false, false, 113), "etudiant", [], "any", false, false, false, 113), "nom", [], "any", false, false, false, 113), "html", null, true);
-        yield " ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 113, $this->source); })()), "preinscription", [], "any", false, false, false, 113), "etudiant", [], "any", false, false, false, 113), "prenom", [], "any", false, false, false, 113), "html", null, true);
+        // line 96
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 96, $this->source); })()), "preinscription", [], "any", false, false, false, 96), "code", [], "any", false, false, false, 96), "html", null, true);
         yield "</td>
         </tr>  
         <tr>
             <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">ANNEE UNIVERSITAIRE :  ";
-        // line 116
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 116, $this->source); })()), "annee", [], "any", false, false, false, 116), "designation", [], "any", false, false, false, 116), "html", null, true);
+        // line 99
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 99, $this->source); })()), "annee", [], "any", false, false, false, 99), "designation", [], "any", false, false, false, 99), "html", null, true);
         yield "</td>
-                ";
-        // line 117
-        $context["codes"] = ["FMA-FAC00016175/2017", "FMA-FAC00028745/2019", "FMA-FAC00042874/2021", "FMA-FAC00028744/2019", "FMA-FAC00042872/2021"];
-        // line 118
-        yield "                ";
-        if (CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 118, $this->source); })()), "code", [], "any", false, false, false, 118), (isset($context["codes"]) || array_key_exists("codes", $context) ? $context["codes"] : (function () { throw new RuntimeError('Variable "codes" does not exist.', 118, $this->source); })()))) {
-            // line 119
-            yield "                    <td style=\"font-size:10px;padding:2px 0px 5px 2px;\"></td>
-                ";
-        } else {
-            // line 121
-            yield "                    <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">NIVEAU   :   ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["promotion"]) || array_key_exists("promotion", $context) ? $context["promotion"] : (function () { throw new RuntimeError('Variable "promotion" does not exist.', 121, $this->source); })()), "html", null, true);
-            yield "</td>
-                ";
-        }
-        // line 123
-        yield "        </tr>  
+            <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">NOM & PRENOM :  ";
+        // line 100
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 100, $this->source); })()), "preinscription", [], "any", false, false, false, 100), "etudiant", [], "any", false, false, false, 100), "nom", [], "any", false, false, false, 100), "html", null, true);
+        yield " ";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 100, $this->source); })()), "preinscription", [], "any", false, false, false, 100), "etudiant", [], "any", false, false, false, 100), "prenom", [], "any", false, false, false, 100), "html", null, true);
+        yield "</td>
+        </tr>  
+        <tr>
+            <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">PERIODE De: ";
+        // line 103
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 103, $this->source); })()), "litInscription", [], "any", false, false, false, 103), "start", [], "any", false, false, false, 103), "Y-m-d"), "html", null, true);
+        yield " Au: ";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 103, $this->source); })()), "litInscription", [], "any", false, false, false, 103), "end", [], "any", false, false, false, 103), "Y-m-d"), "html", null, true);
+        yield "</td>
+            <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">CHAMBRE   :   ";
+        // line 104
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 104, $this->source); })()), "litInscription", [], "any", false, false, false, 104), "lit", [], "any", false, false, false, 104), "chambre", [], "any", false, false, false, 104), "designation", [], "any", false, false, false, 104), "html", null, true);
+        yield " - ";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 104, $this->source); })()), "litInscription", [], "any", false, false, false, 104), "lit", [], "any", false, false, false, 104), "chambre", [], "any", false, false, false, 104), "typeChambre", [], "any", false, false, false, 104), "designation", [], "any", false, false, false, 104), "html", null, true);
+        yield "</td>
+        </tr>  
         <tr>
             ";
-        // line 125
-        if (((isset($context["source"]) || array_key_exists("source", $context) ? $context["source"] : (function () { throw new RuntimeError('Variable "source" does not exist.', 125, $this->source); })()) == "Payant")) {
-            // line 126
+        // line 107
+        if (((isset($context["source"]) || array_key_exists("source", $context) ? $context["source"] : (function () { throw new RuntimeError('Variable "source" does not exist.', 107, $this->source); })()) == "Payant")) {
+            // line 108
             yield "                <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">Source :  Payant</td>
             ";
         } else {
-            // line 128
+            // line 110
             yield "                <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">Source :  Fondation Cheikh Zaid</td>
             ";
         }
-        // line 130
+        // line 112
         yield "            <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">Structure   :   ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["source"]) || array_key_exists("source", $context) ? $context["source"] : (function () { throw new RuntimeError('Variable "source" does not exist.', 130, $this->source); })()), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["source"]) || array_key_exists("source", $context) ? $context["source"] : (function () { throw new RuntimeError('Variable "source" does not exist.', 112, $this->source); })()), "html", null, true);
         yield "</td>
         </tr>  
     </table>
@@ -247,58 +215,58 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
             <td style=\"font-weight: bold;padding:3px 0px 3px 2px;width:15%;text-align:center;font-size: 10px\"> MONTANT TOTAL</td> 
         </tr> 
         ";
-        // line 143
+        // line 125
         $context["i"] = 1;
-        // line 144
+        // line 126
         yield "        ";
         $context["SommeOrganisme"] = 0;
-        // line 145
+        // line 127
         yield "        ";
         $context["SommePayant"] = 0;
-        // line 146
+        // line 128
         yield "        ";
         $context["SommeToTal"] = 0;
-        // line 147
+        // line 129
         yield "        ";
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["operationdets"]) || array_key_exists("operationdets", $context) ? $context["operationdets"] : (function () { throw new RuntimeError('Variable "operationdets" does not exist.', 147, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["operationdets"]) || array_key_exists("operationdets", $context) ? $context["operationdets"] : (function () { throw new RuntimeError('Variable "operationdets" does not exist.', 129, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["operationdet"]) {
-            // line 148
+            // line 130
             yield "                <tr>
                     <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:20%;text-align:center\">";
-            // line 149
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "dateOperation", [], "any", false, false, false, 149), "html", null, true);
+            // line 131
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "dateOperation", [], "any", false, false, false, 131), "html", null, true);
             yield "</td>
                     <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:30%;text-align:center\">";
-            // line 150
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "designation", [], "any", false, false, false, 150), "html", null, true);
+            // line 132
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "designation", [], "any", false, false, false, 132), "html", null, true);
             yield "</td>
                     <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:20%;text-align:center\">";
-            // line 151
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByOrg", [], "any", false, false, false, 151), 2, ",", " "), "html", null, true);
+            // line 133
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByOrg", [], "any", false, false, false, 133), 2, ",", " "), "html", null, true);
             yield "</td>
                     <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:15%;text-align:center\">";
-            // line 152
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByPayant", [], "any", false, false, false, 152), 2, ",", " "), "html", null, true);
+            // line 134
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByPayant", [], "any", false, false, false, 134), 2, ",", " "), "html", null, true);
             yield "</td>
                     <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:15%;text-align:center\">";
-            // line 153
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "total", [], "any", false, false, false, 153), 2, ",", " "), "html", null, true);
+            // line 135
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "total", [], "any", false, false, false, 135), 2, ",", " "), "html", null, true);
             yield "</td>
                 </tr>
             ";
-            // line 155
-            $context["i"] = ((isset($context["i"]) || array_key_exists("i", $context) ? $context["i"] : (function () { throw new RuntimeError('Variable "i" does not exist.', 155, $this->source); })()) + 1);
-            // line 156
+            // line 137
+            $context["i"] = ((isset($context["i"]) || array_key_exists("i", $context) ? $context["i"] : (function () { throw new RuntimeError('Variable "i" does not exist.', 137, $this->source); })()) + 1);
+            // line 138
             yield "            ";
-            $context["SommeOrganisme"] = ((isset($context["SommeOrganisme"]) || array_key_exists("SommeOrganisme", $context) ? $context["SommeOrganisme"] : (function () { throw new RuntimeError('Variable "SommeOrganisme" does not exist.', 156, $this->source); })()) + CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByOrg", [], "any", false, false, false, 156));
-            // line 157
+            $context["SommeOrganisme"] = ((isset($context["SommeOrganisme"]) || array_key_exists("SommeOrganisme", $context) ? $context["SommeOrganisme"] : (function () { throw new RuntimeError('Variable "SommeOrganisme" does not exist.', 138, $this->source); })()) + CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByOrg", [], "any", false, false, false, 138));
+            // line 139
             yield "            ";
-            $context["SommePayant"] = ((isset($context["SommePayant"]) || array_key_exists("SommePayant", $context) ? $context["SommePayant"] : (function () { throw new RuntimeError('Variable "SommePayant" does not exist.', 157, $this->source); })()) + CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByPayant", [], "any", false, false, false, 157));
-            // line 158
+            $context["SommePayant"] = ((isset($context["SommePayant"]) || array_key_exists("SommePayant", $context) ? $context["SommePayant"] : (function () { throw new RuntimeError('Variable "SommePayant" does not exist.', 139, $this->source); })()) + CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "SumByPayant", [], "any", false, false, false, 139));
+            // line 140
             yield "            ";
-            $context["SommeToTal"] = ((isset($context["SommeToTal"]) || array_key_exists("SommeToTal", $context) ? $context["SommeToTal"] : (function () { throw new RuntimeError('Variable "SommeToTal" does not exist.', 158, $this->source); })()) + CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "total", [], "any", false, false, false, 158));
-            // line 159
+            $context["SommeToTal"] = ((isset($context["SommeToTal"]) || array_key_exists("SommeToTal", $context) ? $context["SommeToTal"] : (function () { throw new RuntimeError('Variable "SommeToTal" does not exist.', 140, $this->source); })()) + CoreExtension::getAttribute($this->env, $this->source, $context["operationdet"], "total", [], "any", false, false, false, 140));
+            // line 141
             yield "        ";
         }
         $_parent = $context['_parent'];
@@ -315,16 +283,16 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
                 <td style=\"color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-weight: bold;font-size: 11px;width:20%\"> </td>
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-weight: bold;font-size: 11px;width:30%\">Total </td>
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:20% \">";
-        // line 169
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["SommeOrganisme"]) || array_key_exists("SommeOrganisme", $context) ? $context["SommeOrganisme"] : (function () { throw new RuntimeError('Variable "SommeOrganisme" does not exist.', 169, $this->source); })()), 2, ",", " "), "html", null, true);
+        // line 151
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["SommeOrganisme"]) || array_key_exists("SommeOrganisme", $context) ? $context["SommeOrganisme"] : (function () { throw new RuntimeError('Variable "SommeOrganisme" does not exist.', 151, $this->source); })()), 2, ",", " "), "html", null, true);
         yield "</td> 
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:15% \">";
-        // line 170
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["SommePayant"]) || array_key_exists("SommePayant", $context) ? $context["SommePayant"] : (function () { throw new RuntimeError('Variable "SommePayant" does not exist.', 170, $this->source); })()), 2, ",", " "), "html", null, true);
+        // line 152
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["SommePayant"]) || array_key_exists("SommePayant", $context) ? $context["SommePayant"] : (function () { throw new RuntimeError('Variable "SommePayant" does not exist.', 152, $this->source); })()), 2, ",", " "), "html", null, true);
         yield "</td> 
                 <td style=\"background: #5F5A58; color: #fff;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:15% \">";
-        // line 171
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["SommeToTal"]) || array_key_exists("SommeToTal", $context) ? $context["SommeToTal"] : (function () { throw new RuntimeError('Variable "SommeToTal" does not exist.', 171, $this->source); })()), 2, ",", " "), "html", null, true);
+        // line 153
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["SommeToTal"]) || array_key_exists("SommeToTal", $context) ? $context["SommeToTal"] : (function () { throw new RuntimeError('Variable "SommeToTal" does not exist.', 153, $this->source); })()), 2, ",", " "), "html", null, true);
         yield "</td> 
             </tr>
     
@@ -332,16 +300,16 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
                 <td style=\"color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-weight: bold;font-size: 11px;width:20%\"> </td> 
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-weight: bold;font-size: 11px;width:30%\">Total Encaissement </td> 
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:20% \">";
-        // line 177
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["reglementOrg"]) || array_key_exists("reglementOrg", $context) ? $context["reglementOrg"] : (function () { throw new RuntimeError('Variable "reglementOrg" does not exist.', 177, $this->source); })()), 2, ",", " "), "html", null, true);
+        // line 159
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["reglementOrg"]) || array_key_exists("reglementOrg", $context) ? $context["reglementOrg"] : (function () { throw new RuntimeError('Variable "reglementOrg" does not exist.', 159, $this->source); })()), 2, ",", " "), "html", null, true);
         yield "</td> 
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:15% \">";
-        // line 178
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["reglementPyt"]) || array_key_exists("reglementPyt", $context) ? $context["reglementPyt"] : (function () { throw new RuntimeError('Variable "reglementPyt" does not exist.', 178, $this->source); })()), 2, ",", " "), "html", null, true);
+        // line 160
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["reglementPyt"]) || array_key_exists("reglementPyt", $context) ? $context["reglementPyt"] : (function () { throw new RuntimeError('Variable "reglementPyt" does not exist.', 160, $this->source); })()), 2, ",", " "), "html", null, true);
         yield "</td> 
                 <td style=\"background: #5F5A58; color: #fff;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:15% \">";
-        // line 179
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(((isset($context["reglementOrg"]) || array_key_exists("reglementOrg", $context) ? $context["reglementOrg"] : (function () { throw new RuntimeError('Variable "reglementOrg" does not exist.', 179, $this->source); })()) + (isset($context["reglementPyt"]) || array_key_exists("reglementPyt", $context) ? $context["reglementPyt"] : (function () { throw new RuntimeError('Variable "reglementPyt" does not exist.', 179, $this->source); })())), 2, ",", " "), "html", null, true);
+        // line 161
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(((isset($context["reglementOrg"]) || array_key_exists("reglementOrg", $context) ? $context["reglementOrg"] : (function () { throw new RuntimeError('Variable "reglementOrg" does not exist.', 161, $this->source); })()) + (isset($context["reglementPyt"]) || array_key_exists("reglementPyt", $context) ? $context["reglementPyt"] : (function () { throw new RuntimeError('Variable "reglementPyt" does not exist.', 161, $this->source); })())), 2, ",", " "), "html", null, true);
         yield "</td> 
             </tr>
             <tr>
@@ -350,8 +318,8 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:20% \"></td> 
                 <td style=\"background: #DBDBDB; color: #000;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:15% \"></td> 
                 <td style=\"background: #5F5A58; color: #fff;height: 15px;padding: 2px ;padding-left: 25px;font-size: 11px;width:15% \">";
-        // line 186
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(((isset($context["SommeToTal"]) || array_key_exists("SommeToTal", $context) ? $context["SommeToTal"] : (function () { throw new RuntimeError('Variable "SommeToTal" does not exist.', 186, $this->source); })()) - ((isset($context["reglementOrg"]) || array_key_exists("reglementOrg", $context) ? $context["reglementOrg"] : (function () { throw new RuntimeError('Variable "reglementOrg" does not exist.', 186, $this->source); })()) + (isset($context["reglementPyt"]) || array_key_exists("reglementPyt", $context) ? $context["reglementPyt"] : (function () { throw new RuntimeError('Variable "reglementPyt" does not exist.', 186, $this->source); })()))), 2, ",", " "), "html", null, true);
+        // line 168
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(((isset($context["SommeToTal"]) || array_key_exists("SommeToTal", $context) ? $context["SommeToTal"] : (function () { throw new RuntimeError('Variable "SommeToTal" does not exist.', 168, $this->source); })()) - ((isset($context["reglementOrg"]) || array_key_exists("reglementOrg", $context) ? $context["reglementOrg"] : (function () { throw new RuntimeError('Variable "reglementOrg" does not exist.', 168, $this->source); })()) + (isset($context["reglementPyt"]) || array_key_exists("reglementPyt", $context) ? $context["reglementPyt"] : (function () { throw new RuntimeError('Variable "reglementPyt" does not exist.', 168, $this->source); })()))), 2, ",", " "), "html", null, true);
         yield "</td> 
             </tr>
     
@@ -361,15 +329,15 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
         <table cellspacing=\"0\" style=\"width: 100%; text-align: left; font-size: 9px;margin-top:100px;\" >
         
             ";
-        // line 194
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 194, $this->source); })()), "preinscription", [], "any", false, false, false, 194), "annee", [], "any", false, false, false, 194), "formation", [], "any", false, false, false, 194), "etablissement", [], "any", false, false, false, 194), "id", [], "any", false, false, false, 194) == 25)) {
-            // line 195
+        // line 176
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 176, $this->source); })()), "preinscription", [], "any", false, false, false, 176), "annee", [], "any", false, false, false, 176), "formation", [], "any", false, false, false, 176), "etablissement", [], "any", false, false, false, 176), "id", [], "any", false, false, false, 176) == 25)) {
+            // line 177
             yield "                <tr>
                         <td style=\"width: 100% ;padding:2px 2px 2px 30px;\"><b>RIB CFC : 007 810 0012408000301574 49</b></td> 
                 </tr>
             ";
         } else {
-            // line 199
+            // line 181
             yield "                <tr>
                     <td style=\"width: 100% ;padding:2px 2px 10px 30px \"> <b>Délai de paiement :</b> </td> 
                 </tr>
@@ -390,31 +358,31 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
                 </tr>
                 <tr>
                     ";
-            // line 218
-            if (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 218, $this->source); })()), "preinscription", [], "any", false, false, false, 218), "annee", [], "any", false, false, false, 218), "formation", [], "any", false, false, false, 218), "etablissement", [], "any", false, false, false, 218), "id", [], "any", false, false, false, 218) == 28) || (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 218, $this->source); })()), "preinscription", [], "any", false, false, false, 218), "annee", [], "any", false, false, false, 218), "formation", [], "any", false, false, false, 218), "etablissement", [], "any", false, false, false, 218), "id", [], "any", false, false, false, 218) == 5))) {
-                // line 219
+            // line 200
+            if (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 200, $this->source); })()), "preinscription", [], "any", false, false, false, 200), "annee", [], "any", false, false, false, 200), "formation", [], "any", false, false, false, 200), "etablissement", [], "any", false, false, false, 200), "id", [], "any", false, false, false, 200) == 28) || (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 200, $this->source); })()), "preinscription", [], "any", false, false, false, 200), "annee", [], "any", false, false, false, 200), "formation", [], "any", false, false, false, 200), "etablissement", [], "any", false, false, false, 200), "id", [], "any", false, false, false, 200) == 5))) {
+                // line 201
                 yield "                        <td style=\"width: 100% ;padding:40px 2px 2px 30px;\"><b>RIB UIASS - LEZ : 007 810 0012405000301617 32</b></td>
                         ";
             } else {
-                // line 221
+                // line 203
                 yield "                        <td style=\"width: 100% ;padding:40px 2px 2px 30px;\"><b>RIB UIASS : 007 810 0012404000300234 15</b></td>
                     ";
             }
-            // line 223
+            // line 205
             yield "                </tr>
                 <tr>
                     ";
-            // line 225
-            if (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 225, $this->source); })()), "preinscription", [], "any", false, false, false, 225), "annee", [], "any", false, false, false, 225), "formation", [], "any", false, false, false, 225), "etablissement", [], "any", false, false, false, 225), "id", [], "any", false, false, false, 225) != 28) && (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 225, $this->source); })()), "preinscription", [], "any", false, false, false, 225), "annee", [], "any", false, false, false, 225), "formation", [], "any", false, false, false, 225), "etablissement", [], "any", false, false, false, 225), "id", [], "any", false, false, false, 225) != 5))) {
-                // line 226
+            // line 207
+            if (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 207, $this->source); })()), "preinscription", [], "any", false, false, false, 207), "annee", [], "any", false, false, false, 207), "formation", [], "any", false, false, false, 207), "etablissement", [], "any", false, false, false, 207), "id", [], "any", false, false, false, 207) != 28) && (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["operationcab"]) || array_key_exists("operationcab", $context) ? $context["operationcab"] : (function () { throw new RuntimeError('Variable "operationcab" does not exist.', 207, $this->source); })()), "preinscription", [], "any", false, false, false, 207), "annee", [], "any", false, false, false, 207), "formation", [], "any", false, false, false, 207), "etablissement", [], "any", false, false, false, 207), "id", [], "any", false, false, false, 207) != 5))) {
+                // line 208
                 yield "                        <td style=\"width: 100% ;padding:2px 2px 2px 30px;\"><b>RIB UIASS - EAS : 007 810 0012405000301616 35</b></td> 
                     ";
             }
-            // line 228
+            // line 210
             yield "                </tr>
             ";
         }
-        // line 230
+        // line 212
         yield "        </table>
 
 
@@ -449,7 +417,7 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
      */
     public function getDebugInfo()
     {
-        return array (  418 => 230,  414 => 228,  410 => 226,  408 => 225,  404 => 223,  400 => 221,  396 => 219,  394 => 218,  373 => 199,  367 => 195,  365 => 194,  354 => 186,  344 => 179,  340 => 178,  336 => 177,  327 => 171,  323 => 170,  319 => 169,  302 => 159,  299 => 158,  296 => 157,  293 => 156,  291 => 155,  286 => 153,  282 => 152,  278 => 151,  274 => 150,  270 => 149,  267 => 148,  262 => 147,  259 => 146,  256 => 145,  253 => 144,  251 => 143,  234 => 130,  230 => 128,  226 => 126,  224 => 125,  220 => 123,  214 => 121,  210 => 119,  207 => 118,  205 => 117,  201 => 116,  193 => 113,  189 => 112,  183 => 109,  179 => 108,  170 => 101,  153 => 87,  138 => 73,  131 => 71,  124 => 67,  109 => 54,  107 => 53,  102 => 49,  98 => 44,  96 => 43,  91 => 40,  87 => 39,  85 => 38,  82 => 37,  80 => 36,  76 => 34,  44 => 1,);
+        return array (  386 => 212,  382 => 210,  378 => 208,  376 => 207,  372 => 205,  368 => 203,  364 => 201,  362 => 200,  341 => 181,  335 => 177,  333 => 176,  322 => 168,  312 => 161,  308 => 160,  304 => 159,  295 => 153,  291 => 152,  287 => 151,  270 => 141,  267 => 140,  264 => 139,  261 => 138,  259 => 137,  254 => 135,  250 => 134,  246 => 133,  242 => 132,  238 => 131,  235 => 130,  230 => 129,  227 => 128,  224 => 127,  221 => 126,  219 => 125,  202 => 112,  198 => 110,  194 => 108,  192 => 107,  184 => 104,  178 => 103,  170 => 100,  166 => 99,  160 => 96,  156 => 95,  147 => 88,  130 => 74,  115 => 60,  108 => 58,  101 => 54,  86 => 41,  84 => 40,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -484,24 +452,11 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
         <table style=\"width: 100% ;\" cellspacing=\"0\">
             <tr>
                 <th style=\"width: 100% ; font-size: 13px ;font-weight: 200;font-weight: bold;padding:4px;color:rgb(3, 35, 68);\">
-                    {# {% if operationcab.preinscription.annee.formation.etablissement.id == 28 %}
-                        <img src=\"./assets/img/logo/cpge.jpg\" style=\" width: 400px; margin: 0 auto;\">                
-                    {% endif %} #}
                 </th>
                 <th style=\"width: 100% ; font-size: 13px ;font-weight: 200;font-weight: bold;padding:4px;color:rgb(3, 35, 68);\">
-                    {% if operationcab.preinscription.annee.formation.etablissement.id == 28 %}
-                            <img src=\"./assets/img/logo/cpge.svg\" style=\" width: 800px; margin: 20 auto;\"> 
-                    {% elseif operationcab.preinscription.annee.formation.etablissement.id == 5 %}
-                            <img src=\"./assets/img/logo/logo_lez.png\" style=\" width: 800px; margin: 0 auto;\">
-                    {% else %}                
-                            <img src=\"./assets/img/logo/Logo_UIASS_bkack2.png\" style=\" width: 500px; margin: 0 auto;\">
-                    {% endif %}
-                    {# <img src=\"./assets/img/logo/Logo_UIASS_bkack2.png\" style=\" width: 400px; margin: 0 auto;\"> #}
+                    <img src=\"./assets/img/logo/logo-hebergement.png\" style=\" width: 800px; margin: 0 auto;\">
                 </th>
                 <th style=\"width: 100% ; font-size: 13px ;font-weight: 200;font-weight: bold;padding:4px;color:rgb(3, 35, 68);\">
-                    {# {% if operationcab.preinscription.annee.formation.etablissement.id == 28 %}               
-                        <img src=\"./assets/img/logo/Logo_UIASS_bkack2.png\" style=\" width: 400px; margin: 0 auto;\">
-                    {% endif %} #}
                 </th>                    
             </tr>
         </table>
@@ -565,17 +520,12 @@ class __TwigTemplate_2cb2cbeddca2e6cee1c2b4099766288f extends Template
             <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">REFERENCE   :   {{operationcab.preinscription.code}}</td>
         </tr>  
         <tr>
-            <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">FORMATION   :   {{operationcab.annee.formation.designation}}</td>
+            <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">ANNEE UNIVERSITAIRE :  {{operationcab.annee.designation}}</td>
             <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">NOM & PRENOM :  {{operationcab.preinscription.etudiant.nom}} {{operationcab.preinscription.etudiant.prenom}}</td>
         </tr>  
         <tr>
-            <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">ANNEE UNIVERSITAIRE :  {{operationcab.annee.designation}}</td>
-                {% set codes = ['FMA-FAC00016175/2017','FMA-FAC00028745/2019','FMA-FAC00042874/2021','FMA-FAC00028744/2019','FMA-FAC00042872/2021'] %}
-                {% if operationcab.code in codes %}
-                    <td style=\"font-size:10px;padding:2px 0px 5px 2px;\"></td>
-                {% else %}
-                    <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">NIVEAU   :   {{promotion}}</td>
-                {% endif %}
+            <td style=\"font-size:10px;padding:2px 0px 5px 2px;width:70%\">PERIODE De: {{operationcab.litInscription.start | date('Y-m-d')}} Au: {{operationcab.litInscription.end | date('Y-m-d')}}</td>
+            <td style=\"font-size:10px;padding:2px 0px 5px 2px;\">CHAMBRE   :   {{operationcab.litInscription.lit.chambre.designation}} - {{operationcab.litInscription.lit.chambre.typeChambre.designation}}</td>
         </tr>  
         <tr>
             {% if source == 'Payant' %}

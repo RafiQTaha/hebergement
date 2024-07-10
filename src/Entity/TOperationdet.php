@@ -52,6 +52,9 @@ class TOperationdet
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tOperationdets')]
     private $userUpdated;
 
+    #[ORM\ManyToOne(inversedBy: 'tOperationdets')]
+    private ?Grille $grille = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -209,6 +212,18 @@ class TOperationdet
     public function setUserUpdated(?User $userUpdated): self
     {
         $this->userUpdated = $userUpdated;
+
+        return $this;
+    }
+
+    public function getGrille(): ?Grille
+    {
+        return $this->grille;
+    }
+
+    public function setGrille(?Grille $grille): static
+    {
+        $this->grille = $grille;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GrilleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,6 +42,14 @@ class Grille
 
     #[ORM\Column(type: 'float', nullable: true)]
     private $montant;
+
+    #[ORM\OneToMany(mappedBy: 'grille', targetEntity: TOperationdet::class)]
+    private Collection $tOperationdets;
+
+    public function __construct()
+    {
+        $this->tOperationdets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +160,36 @@ class Grille
     public function setMontant(?int $montant): self
     {
         $this->montant = $montant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TOperationdet>
+     */
+    public function getTOperationdets(): Collection
+    {
+        return $this->tOperationdets;
+    }
+
+    public function addTOperationdet(TOperationdet $tOperationdet): static
+    {
+        if (!$this->tOperationdets->contains($tOperationdet)) {
+            $this->tOperationdets->add($tOperationdet);
+            $tOperationdet->setGrille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTOperationdet(TOperationdet $tOperationdet): static
+    {
+        if ($this->tOperationdets->removeElement($tOperationdet)) {
+            // set the owning side to null (unless already changed)
+            if ($tOperationdet->getGrille() === $this) {
+                $tOperationdet->setGrille(null);
+            }
+        }
 
         return $this;
     }

@@ -68,7 +68,7 @@ class __TwigTemplate_8fa759e746e751d907f0309a6a493d6f extends Template
 <table style=\"width: 100%;\" cellspacing=\"0\">
     <tbody>
         <tr>
-            <td style=\"width:25%; text-align:center\"><img style=\"width:80px;margin: 0 auto;\" src=\"./assets/img/logo/Logo_UIASS_bkack2.png\" alt=\"Logo\"></td>
+            <td style=\"width:25%; text-align:center\"><img style=\"width:80px;margin: 0 auto;\" src=\"./assets/img/logo/logo-hebergement.png\" alt=\"Logo\"></td>
             <td style=\"width:1%;\"></td>
             <td style=\"width:70%;\"><p style=\"margin-left:10px;margin-top:25px;width:5px;text-align:center;font-weight:bold;\">UNIVERSITE INTERNATIONALE ABULCASIS DES SCIENCES DE LA SANTE</p></td>
         </tr>
@@ -423,7 +423,7 @@ class __TwigTemplate_8fa759e746e751d907f0309a6a493d6f extends Template
 <table style=\"width: 100%;\" cellspacing=\"0\">
     <tbody>
         <tr>
-            <td style=\"width:25%; text-align:center\"><img style=\"width:80px;margin: 0 auto;\" src=\"./assets/img/logo/Logo_UIASS_bkack2.png\" alt=\"Logo\"></td>
+            <td style=\"width:25%; text-align:center\"><img style=\"width:80px;margin: 0 auto;\" src=\"./assets/img/logo/logo-hebergement.png\" alt=\"Logo\"></td>
             <td style=\"width:1%;\"></td>
             <td style=\"width:70%;\"><p style=\"margin-left:10px;margin-top:25px;width:5px;text-align:center;font-weight:bold;\">UNIVERSITE INTERNATIONALE ABULCASIS DES SCIENCES DE LA SANTE</p></td>
         </tr>

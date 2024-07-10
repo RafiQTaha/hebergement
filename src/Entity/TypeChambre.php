@@ -30,10 +30,14 @@ class TypeChambre
     #[ORM\OneToMany(mappedBy: 'typeChambre', targetEntity: Grille::class)]
     private Collection $grilles;
 
+    #[ORM\OneToMany(mappedBy: 'typeChambre', targetEntity: Pfrais::class)]
+    private Collection $pfrais;
+
     public function __construct()
     {
         $this->chambres = new ArrayCollection();
         $this->grilles = new ArrayCollection();
+        $this->pfrais = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +135,36 @@ class TypeChambre
             // set the owning side to null (unless already changed)
             if ($grille->getTypeChambre() === $this) {
                 $grille->setTypeChambre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pfrais>
+     */
+    public function getPfrais(): Collection
+    {
+        return $this->pfrais;
+    }
+
+    public function addPfrai(Pfrais $pfrai): static
+    {
+        if (!$this->pfrais->contains($pfrai)) {
+            $this->pfrais->add($pfrai);
+            $pfrai->setTypeChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removePfrai(Pfrais $pfrai): static
+    {
+        if ($this->pfrais->removeElement($pfrai)) {
+            // set the owning side to null (unless already changed)
+            if ($pfrai->getTypeChambre() === $this) {
+                $pfrai->setTypeChambre(null);
             }
         }
 

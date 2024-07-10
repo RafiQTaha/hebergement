@@ -72,9 +72,12 @@ class TInscription
     #[ORM\ManyToOne(targetEntity: PGroupe::class, inversedBy: 'inscriptions')]
     private $groupe;
 
+    #[ORM\OneToMany(mappedBy: 'inscription', targetEntity: LitInscription::class)]
+    private Collection $litInscriptions;
+
     public function __construct()
     {
-        
+        $this->litInscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -307,6 +310,36 @@ class TInscription
     public function setGroupe(?PGroupe $groupe): self
     {
         $this->groupe = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LitInscription>
+     */
+    public function getLitInscriptions(): Collection
+    {
+        return $this->litInscriptions;
+    }
+
+    public function addLitInscription(LitInscription $litInscription): static
+    {
+        if (!$this->litInscriptions->contains($litInscription)) {
+            $this->litInscriptions->add($litInscription);
+            $litInscription->setInscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLitInscription(LitInscription $litInscription): static
+    {
+        if ($this->litInscriptions->removeElement($litInscription)) {
+            // set the owning side to null (unless already changed)
+            if ($litInscription->getInscription() === $this) {
+                $litInscription->setInscription(null);
+            }
+        }
 
         return $this;
     }

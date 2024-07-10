@@ -233,8 +233,8 @@ $(document).ready(function  () {
             const request = await axios.post('/parametre/synchronisation/api_semestre');
             const response = request.data;
             $('.syn_ac_semestre_content').text(' (Ajoutée: '+response.newRow+' Modifiée: '+response.updated+')').css('color','green')
-            $('.synchnisation_etudiant').removeClass('disabled btn-secondary').addClass('btn-primary')
-            // syncsemestre()
+            // $('.synchnisation_etudiant').removeClass('disabled btn-secondary').addClass('btn-primary')
+            syncOrganisme()
         } catch (error) {
             const message = error.response.data;
             $('.syn_ac_semestre_content').text('('+message+')').css('color','red')
@@ -242,7 +242,76 @@ $(document).ready(function  () {
         }
         icon.addClass("fa-edit").removeClass("fa-spinner fa-spin");
     }
+    const syncOrganisme = async ()=>{
+        const icon = $(".syn_organisme");
+        icon.removeClass("fa-edit").addClass("fa-spinner fa-spin");
+        try {
+            // const request = await axios.post(Routing.generate('api_semestre'));
+            const request = await axios.post('/parametre/synchronisation/api_organisme');
+            const response = request.data;
+            $('.syn_organisme_content').text(' (Ajoutée: '+response.newRow+' Modifiée: '+response.updated+')').css('color','green')
+            // $('.synchnisation_etudiant').removeClass('disabled btn-secondary').addClass('btn-primary')
+            syncBanque()
+        } catch (error) {
+            const message = error.response.data;
+            $('.syn_organisme_content').text('('+message+')').css('color','red')
+            $('.synchnisation_academique').removeClass('disabled')
+        }
+        icon.addClass("fa-edit").removeClass("fa-spinner fa-spin");
+    }
+    const syncBanque = async ()=>{
+        const icon = $(".syn_banque");
+        icon.removeClass("fa-edit").addClass("fa-spinner fa-spin");
+        try {
+            // const request = await axios.post(Routing.generate('api_semestre'));
+            const request = await axios.post('/parametre/synchronisation/api_banque');
+            const response = request.data;
+            $('.syn_banque_content').text(' (Ajoutée: '+response.newRow+' Modifiée: '+response.updated+')').css('color','green')
+            // $('.synchnisation_etudiant').removeClass('disabled btn-secondary').addClass('btn-primary')
+            syncModalite()
+        } catch (error) {
+            const message = error.response.data;
+            $('.syn_banque_content').text('('+message+')').css('color','red')
+            $('.synchnisation_academique').removeClass('disabled')
+        }
+        icon.addClass("fa-edit").removeClass("fa-spinner fa-spin");
+    }
+    const syncModalite = async ()=>{
+        const icon = $(".syn_modalite");
+        icon.removeClass("fa-edit").addClass("fa-spinner fa-spin");
+        try {
+            // const request = await axios.post(Routing.generate('api_semestre'));
+            const request = await axios.post('/parametre/synchronisation/api_modalite');
+            const response = request.data;
+            $('.syn_modalite_content').text(' (Ajoutée: '+response.newRow+' Modifiée: '+response.updated+')').css('color','green')
+            // $('.synchnisation_etudiant').removeClass('disabled btn-secondary').addClass('btn-primary')
+            syncNatureDemande()
+        } catch (error) {
+            const message = error.response.data;
+            $('.syn_modalite_content').text('('+message+')').css('color','red')
+            $('.synchnisation_academique').removeClass('disabled')
+        }
+        icon.addClass("fa-edit").removeClass("fa-spinner fa-spin");
+    }
 
+    
+    const syncNatureDemande = async ()=>{
+        const icon = $(".syn_naturedemande");
+        icon.removeClass("fa-edit").addClass("fa-spinner fa-spin");
+        try {
+            // const request = await axios.post(Routing.generate('api_semestre'));
+            const request = await axios.post('/parametre/synchronisation/api_naturedemande');
+            const response = request.data;
+            $('.syn_naturedemande_content').text(' (Ajoutée: '+response.newRow+' Modifiée: '+response.updated+')').css('color','green')
+            $('.synchnisation_etudiant').removeClass('disabled btn-secondary').addClass('btn-primary')
+            // syncsemestre()
+        } catch (error) {
+            const message = error.response.data;
+            $('.syn_naturedemande_content').text('('+message+')').css('color','red')
+            $('.synchnisation_academique').removeClass('disabled')
+        }
+        icon.addClass("fa-edit").removeClass("fa-spinner fa-spin");
+    }
 })
     
     

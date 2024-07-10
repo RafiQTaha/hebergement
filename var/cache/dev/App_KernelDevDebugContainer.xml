@@ -343,28 +343,20 @@
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\DatatablesController"/>
       </call>
     </service>
-    <service id="App\Controller\Etudiant\CentreDappelController" class="App\Controller\Etudiant\CentreDappelController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\Etudiant\GestionHebergementController" class="App\Controller\Etudiant\GestionHebergementController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Etudiant\CentreDappelController"/>
+        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Etudiant\GestionHebergementController"/>
       </call>
     </service>
-    <service id="App\Controller\Etudiant\EtudiantController" class="App\Controller\Etudiant\EtudiantController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\Etudiant\GestionInscriptionController" class="App\Controller\Etudiant\GestionInscriptionController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Etudiant\EtudiantController"/>
-      </call>
-    </service>
-    <service id="App\Controller\Etudiant\RechercheAvanceController" class="App\Controller\Etudiant\RechercheAvanceController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="doctrine"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Etudiant\RechercheAvanceController"/>
+        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Etudiant\GestionInscriptionController"/>
       </call>
     </service>
     <service id="App\Controller\Facture\BordereauController" class="App\Controller\Facture\BordereauController" public="true" autowire="true" autoconfigure="true">
@@ -391,20 +383,11 @@
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Facture\GestionReglementsController"/>
       </call>
     </service>
-    <service id="App\Controller\Facture\SynchronisationController" class="App\Controller\Facture\SynchronisationController" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\IndexController" class="App\Controller\IndexController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\IndexController"/>
-      </call>
-    </service>
-    <service id="App\Controller\Inscription\GestionInscriptionController" class="App\Controller\Inscription\GestionInscriptionController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="doctrine"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Inscription\GestionInscriptionController"/>
       </call>
     </service>
     <service id="App\Controller\Parametre\AcademieController" class="App\Controller\Parametre\AcademieController" public="true" autowire="true" autoconfigure="true">
@@ -503,6 +486,14 @@
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Parametre\LanguesController"/>
       </call>
     </service>
+    <service id="App\Controller\Parametre\LitController" class="App\Controller\Parametre\LitController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Parametre\LitController"/>
+      </call>
+    </service>
     <service id="App\Controller\Parametre\ModalitesController" class="App\Controller\Parametre\ModalitesController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -541,14 +532,6 @@
       <argument type="service" id="doctrine"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Parametre\SemainesController"/>
-      </call>
-    </service>
-    <service id="App\Controller\Parametre\SemestreController" class="App\Controller\Parametre\SemestreController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="doctrine"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\Parametre\SemestreController"/>
       </call>
     </service>
     <service id="App\Controller\Parametre\SerieBacController" class="App\Controller\Parametre\SerieBacController" public="true" autowire="true" autoconfigure="true">
@@ -624,6 +607,14 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\GrilleRepository" class="App\Repository\GrilleRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\LitInscriptionRepository" class="App\Repository\LitInscriptionRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\LitRepository" class="App\Repository\LitRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -4923,7 +4914,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.JBvQhoJ"/>
+      <argument type="service" id=".service_locator.7fRm4Z."/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -6173,15 +6164,12 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DatatablesController" class="App\Controller\DatatablesController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DatatablesController" class="App\Controller\DatatablesController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\DatatablesController" class="App\Controller\DatatablesController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Etudiant\CentreDappelController" class="App\Controller\Etudiant\CentreDappelController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Etudiant\CentreDappelController" class="App\Controller\Etudiant\CentreDappelController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Etudiant\CentreDappelController" class="App\Controller\Etudiant\CentreDappelController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Etudiant\EtudiantController" class="App\Controller\Etudiant\EtudiantController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Etudiant\EtudiantController" class="App\Controller\Etudiant\EtudiantController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Etudiant\EtudiantController" class="App\Controller\Etudiant\EtudiantController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Etudiant\RechercheAvanceController" class="App\Controller\Etudiant\RechercheAvanceController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Etudiant\RechercheAvanceController" class="App\Controller\Etudiant\RechercheAvanceController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Etudiant\RechercheAvanceController" class="App\Controller\Etudiant\RechercheAvanceController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Etudiant\GestionHebergementController" class="App\Controller\Etudiant\GestionHebergementController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Etudiant\GestionHebergementController" class="App\Controller\Etudiant\GestionHebergementController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Etudiant\GestionHebergementController" class="App\Controller\Etudiant\GestionHebergementController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Etudiant\GestionInscriptionController" class="App\Controller\Etudiant\GestionInscriptionController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Etudiant\GestionInscriptionController" class="App\Controller\Etudiant\GestionInscriptionController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Etudiant\GestionInscriptionController" class="App\Controller\Etudiant\GestionInscriptionController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Facture\BordereauController" class="App\Controller\Facture\BordereauController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Facture\BordereauController" class="App\Controller\Facture\BordereauController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Facture\BordereauController" class="App\Controller\Facture\BordereauController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6194,9 +6182,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\IndexController" class="App\Controller\IndexController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\IndexController" class="App\Controller\IndexController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\IndexController" class="App\Controller\IndexController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Inscription\GestionInscriptionController" class="App\Controller\Inscription\GestionInscriptionController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Inscription\GestionInscriptionController" class="App\Controller\Inscription\GestionInscriptionController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Inscription\GestionInscriptionController" class="App\Controller\Inscription\GestionInscriptionController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Parametre\AcademieController" class="App\Controller\Parametre\AcademieController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Parametre\AcademieController" class="App\Controller\Parametre\AcademieController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Parametre\AcademieController" class="App\Controller\Parametre\AcademieController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6233,6 +6218,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Parametre\LanguesController" class="App\Controller\Parametre\LanguesController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Parametre\LanguesController" class="App\Controller\Parametre\LanguesController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Parametre\LanguesController" class="App\Controller\Parametre\LanguesController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Parametre\LitController" class="App\Controller\Parametre\LitController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Parametre\LitController" class="App\Controller\Parametre\LitController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Parametre\LitController" class="App\Controller\Parametre\LitController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Parametre\ModalitesController" class="App\Controller\Parametre\ModalitesController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Parametre\ModalitesController" class="App\Controller\Parametre\ModalitesController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Parametre\ModalitesController" class="App\Controller\Parametre\ModalitesController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6248,9 +6236,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Parametre\SemainesController" class="App\Controller\Parametre\SemainesController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Parametre\SemainesController" class="App\Controller\Parametre\SemainesController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Parametre\SemainesController" class="App\Controller\Parametre\SemainesController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Parametre\SemestreController" class="App\Controller\Parametre\SemestreController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Parametre\SemestreController" class="App\Controller\Parametre\SemestreController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\Parametre\SemestreController" class="App\Controller\Parametre\SemestreController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Parametre\SerieBacController" class="App\Controller\Parametre\SerieBacController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Parametre\SerieBacController" class="App\Controller\Parametre\SerieBacController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Parametre\SerieBacController" class="App\Controller\Parametre\SerieBacController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6283,6 +6268,10 @@
     <service id=".abstract.instanceof.App\Repository\AcSemestreRepository" class="App\Repository\AcSemestreRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\GrilleRepository" class="App\Repository\GrilleRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\GrilleRepository" class="App\Repository\GrilleRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\LitInscriptionRepository" class="App\Repository\LitInscriptionRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\LitInscriptionRepository" class="App\Repository\LitInscriptionRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\LitRepository" class="App\Repository\LitRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\LitRepository" class="App\Repository\LitRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\MouchardRepository" class="App\Repository\MouchardRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\MouchardRepository" class="App\Repository\MouchardRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\NatureDemandeRepository" class="App\Repository\NatureDemandeRepository" autowire="true" abstract="true"/>
@@ -6725,36 +6714,16 @@
         <argument key="admission" type="service_closure" id=".errored..service_locator.2dGTN8Q.App\Entity\TAdmission"/>
       </argument>
     </service>
-    <service id=".service_locator.XsMPLre" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="etudiant" type="service_closure" id=".errored..service_locator.XsMPLre.App\Entity\TEtudiant"/>
-      </argument>
-    </service>
-    <service id=".service_locator.qH9NJFW" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="slugger" type="service_closure" id="slugger"/>
-      </argument>
-    </service>
-    <service id=".errored.uPjJulf" class="App\Entity\TPreinscriptionReleveNote"/>
-    <service id=".service_locator.kcTRyyk" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="preinscriptionnote" type="service_closure" id=".errored.uPjJulf"/>
-      </argument>
-    </service>
     <service id=".service_locator.KdQC4yG" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="inscription" type="service_closure" id=".errored..service_locator.KdQC4yG.App\Entity\TInscription"/>
       </argument>
     </service>
-    <service id=".service_locator.GCYAGow" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Tpx2.fL" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="inscription" type="service_closure" id=".errored..service_locator.GCYAGow.App\Entity\TInscription"/>
-        <argument key="semestre" type="service_closure" id=".errored..service_locator.GCYAGow.App\Entity\AcSemestre"/>
+        <argument key="operationcab" type="service_closure" id=".errored..service_locator.Tpx2.fL.App\Entity\TOperationcab"/>
       </argument>
     </service>
     <service id=".service_locator.eP3ATxI" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6769,12 +6738,6 @@
         <argument key="bordereau" type="service_closure" id=".errored..service_locator.hCwiHiU.App\Entity\TBrdpaiement"/>
       </argument>
     </service>
-    <service id=".service_locator.Tpx2.fL" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="operationcab" type="service_closure" id=".errored..service_locator.Tpx2.fL.App\Entity\TOperationcab"/>
-      </argument>
-    </service>
     <service id=".service_locator.xJHEfkR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6786,6 +6749,12 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="operationdet" type="service_closure" id=".errored..service_locator.qNiIFJB.App\Entity\TOperationdet"/>
+      </argument>
+    </service>
+    <service id=".service_locator.qH9NJFW" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
     </service>
     <service id=".service_locator.Moow_pu" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6948,6 +6917,12 @@
         <argument key="langue" type="service_closure" id=".errored.uqkeXsn"/>
       </argument>
     </service>
+    <service id=".service_locator.cKgdrPx" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="lit" type="service_closure" id=".errored..service_locator.cKgdrPx.App\Entity\Lit"/>
+      </argument>
+    </service>
     <service id=".service_locator.RqS8q2t" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7008,12 +6983,6 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="salle" type="service_closure" id=".errored.bun5A5F"/>
-      </argument>
-    </service>
-    <service id=".service_locator.KjKYqyJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="semestre" type="service_closure" id=".errored..service_locator.KjKYqyJ.App\Entity\AcSemestre"/>
       </argument>
     </service>
     <service id=".errored.8v6TEwy" class="App\Entity\XSerieBac"/>
@@ -7105,7 +7074,7 @@
         <argument key="user" type="service_closure" id=".errored..service_locator.K9AuB6p.App\Entity\User"/>
       </argument>
     </service>
-    <service id=".service_locator.9pMdHHH" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.k3FVfsL" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ApiController::anneeResidanat" type="service_closure" id=".service_locator.Q3TXFYb"/>
@@ -7114,39 +7083,11 @@
         <argument key="App\Controller\ApiController::getFraisByFormation" type="service_closure" id=".service_locator.2dGTN8Q"/>
         <argument key="App\Controller\ApiController::getNatureEtudiant" type="service_closure" id=".service_locator.2dGTN8Q"/>
         <argument key="App\Controller\ApiController::getPromotion" type="service_closure" id=".service_locator.Q3TXFYb"/>
-        <argument key="App\Controller\Etudiant\CentreDappelController::getAppelRdv_appel" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\CentreDappelController::rdvappel" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::addMatiere" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::dateDernierAppele" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::edit_infos" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::etudiantImport" type="service_closure" id=".service_locator.qH9NJFW"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::etudiant_valider" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::getAppelRdv" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::getEtudiantInfos" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::getMatiere" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::listPreinscription" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::persistStatutEtudiant" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::removeMatiere" type="service_closure" id=".service_locator.kcTRyyk"/>
-        <argument key="App\Controller\Etudiant\EtudiantController::statutEtudiant" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationInscription" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationReleveAllAnnee" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationReleveAnnee" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationReleveModule" type="service_closure" id=".service_locator.GCYAGow"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationReussite" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationReussiteAll" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationReussiteNote" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationScolarite" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationScolariteAngalis" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationScolariteAngalisLaz" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationScolariteLaz" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationSiuvi" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestation_bonne_conduite" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestation_cursus" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestation_hebergement" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::attestationcerificat" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::evaluationAnneeAvc" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::findAnnee" type="service_closure" id=".service_locator.2dGTN8Q"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController::recherche" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController::factureInscription" type="service_closure" id=".service_locator.Tpx2.fL"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController::getFraisByFormation" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController::getFraisByInscription" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController::inscriptionAddFrais" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController::inscriptionStatut" type="service_closure" id=".service_locator.KdQC4yG"/>
         <argument key="App\Controller\Facture\BordereauController::extraction_borderaux" type="service_closure" id=".service_locator.hCwiHiU"/>
         <argument key="App\Controller\Facture\BordereauController::printborderaux" type="service_closure" id=".service_locator.eP3ATxI"/>
         <argument key="App\Controller\Facture\BordereauController::supprimerborderau" type="service_closure" id=".service_locator.hCwiHiU"/>
@@ -7170,12 +7111,6 @@
         <argument key="App\Controller\Facture\GestionReglementsController::printborderaux" type="service_closure" id=".service_locator.eP3ATxI"/>
         <argument key="App\Controller\Facture\GestionReglementsController::reglement_borderaux" type="service_closure" id=".service_locator.jKYHEsm"/>
         <argument key="App\Controller\IndexController::index" type="service_closure" id=".service_locator.GQZbvNR"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController::factureInscription" type="service_closure" id=".service_locator.Tpx2.fL"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController::getFraisByFormation" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController::getFraisByInscription" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController::inscriptionAddFrais" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController::inscriptionStatut" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController::inscriptionStatutUpdate" type="service_closure" id=".service_locator.KdQC4yG"/>
         <argument key="App\Controller\Parametre\AcademieController::delete" type="service_closure" id=".service_locator.eRrHXf6"/>
         <argument key="App\Controller\Parametre\AcademieController::details" type="service_closure" id=".service_locator.mxTFQut"/>
         <argument key="App\Controller\Parametre\AcademieController::update" type="service_closure" id=".service_locator.g2C49JA"/>
@@ -7210,6 +7145,9 @@
         <argument key="App\Controller\Parametre\LanguesController::delete" type="service_closure" id=".service_locator.JZQeeEU"/>
         <argument key="App\Controller\Parametre\LanguesController::details" type="service_closure" id=".service_locator.bZPSQ22"/>
         <argument key="App\Controller\Parametre\LanguesController::update" type="service_closure" id=".service_locator.HkRSzPh"/>
+        <argument key="App\Controller\Parametre\LitController::delete" type="service_closure" id=".service_locator.cKgdrPx"/>
+        <argument key="App\Controller\Parametre\LitController::details" type="service_closure" id=".service_locator.cKgdrPx"/>
+        <argument key="App\Controller\Parametre\LitController::update" type="service_closure" id=".service_locator.cKgdrPx"/>
         <argument key="App\Controller\Parametre\ModalitesController::delete" type="service_closure" id=".service_locator.RqS8q2t"/>
         <argument key="App\Controller\Parametre\ModalitesController::details" type="service_closure" id=".service_locator.RqS8q2t"/>
         <argument key="App\Controller\Parametre\ModalitesController::update" type="service_closure" id=".service_locator.RqS8q2t"/>
@@ -7221,9 +7159,6 @@
         <argument key="App\Controller\Parametre\SallesController::delete" type="service_closure" id=".service_locator.Ngei3M."/>
         <argument key="App\Controller\Parametre\SallesController::details" type="service_closure" id=".service_locator.vMtaKs5"/>
         <argument key="App\Controller\Parametre\SallesController::update" type="service_closure" id=".service_locator.PzEWOcy"/>
-        <argument key="App\Controller\Parametre\SemestreController::delete" type="service_closure" id=".service_locator.KjKYqyJ"/>
-        <argument key="App\Controller\Parametre\SemestreController::details" type="service_closure" id=".service_locator.KjKYqyJ"/>
-        <argument key="App\Controller\Parametre\SemestreController::update" type="service_closure" id=".service_locator.KjKYqyJ"/>
         <argument key="App\Controller\Parametre\SerieBacController::delete" type="service_closure" id=".service_locator.EULgxcg"/>
         <argument key="App\Controller\Parametre\SerieBacController::details" type="service_closure" id=".service_locator.MnL_ofq"/>
         <argument key="App\Controller\Parametre\SerieBacController::update" type="service_closure" id=".service_locator.uevTPJu"/>
@@ -7250,39 +7185,11 @@
         <argument key="App\Controller\ApiController:getFraisByFormation" type="service_closure" id=".service_locator.2dGTN8Q"/>
         <argument key="App\Controller\ApiController:getNatureEtudiant" type="service_closure" id=".service_locator.2dGTN8Q"/>
         <argument key="App\Controller\ApiController:getPromotion" type="service_closure" id=".service_locator.Q3TXFYb"/>
-        <argument key="App\Controller\Etudiant\CentreDappelController:getAppelRdv_appel" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\CentreDappelController:rdvappel" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:addMatiere" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:dateDernierAppele" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:edit_infos" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:etudiantImport" type="service_closure" id=".service_locator.qH9NJFW"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:etudiant_valider" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:getAppelRdv" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:getEtudiantInfos" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:getMatiere" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:listPreinscription" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:persistStatutEtudiant" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:removeMatiere" type="service_closure" id=".service_locator.kcTRyyk"/>
-        <argument key="App\Controller\Etudiant\EtudiantController:statutEtudiant" type="service_closure" id=".service_locator.XsMPLre"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationInscription" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationReleveAllAnnee" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationReleveAnnee" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationReleveModule" type="service_closure" id=".service_locator.GCYAGow"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationReussite" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationReussiteAll" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationReussiteNote" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationScolarite" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationScolariteAngalis" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationScolariteAngalisLaz" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationScolariteLaz" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationSiuvi" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestation_bonne_conduite" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestation_cursus" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestation_hebergement" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:attestationcerificat" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:evaluationAnneeAvc" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:findAnnee" type="service_closure" id=".service_locator.2dGTN8Q"/>
-        <argument key="App\Controller\Etudiant\RechercheAvanceController:recherche" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController:factureInscription" type="service_closure" id=".service_locator.Tpx2.fL"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController:getFraisByFormation" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController:getFraisByInscription" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController:inscriptionAddFrais" type="service_closure" id=".service_locator.KdQC4yG"/>
+        <argument key="App\Controller\Etudiant\GestionInscriptionController:inscriptionStatut" type="service_closure" id=".service_locator.KdQC4yG"/>
         <argument key="App\Controller\Facture\BordereauController:extraction_borderaux" type="service_closure" id=".service_locator.hCwiHiU"/>
         <argument key="App\Controller\Facture\BordereauController:printborderaux" type="service_closure" id=".service_locator.eP3ATxI"/>
         <argument key="App\Controller\Facture\BordereauController:supprimerborderau" type="service_closure" id=".service_locator.hCwiHiU"/>
@@ -7306,12 +7213,6 @@
         <argument key="App\Controller\Facture\GestionReglementsController:printborderaux" type="service_closure" id=".service_locator.eP3ATxI"/>
         <argument key="App\Controller\Facture\GestionReglementsController:reglement_borderaux" type="service_closure" id=".service_locator.jKYHEsm"/>
         <argument key="App\Controller\IndexController:index" type="service_closure" id=".service_locator.GQZbvNR"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController:factureInscription" type="service_closure" id=".service_locator.Tpx2.fL"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController:getFraisByFormation" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController:getFraisByInscription" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController:inscriptionAddFrais" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController:inscriptionStatut" type="service_closure" id=".service_locator.KdQC4yG"/>
-        <argument key="App\Controller\Inscription\GestionInscriptionController:inscriptionStatutUpdate" type="service_closure" id=".service_locator.KdQC4yG"/>
         <argument key="App\Controller\Parametre\AcademieController:delete" type="service_closure" id=".service_locator.eRrHXf6"/>
         <argument key="App\Controller\Parametre\AcademieController:details" type="service_closure" id=".service_locator.mxTFQut"/>
         <argument key="App\Controller\Parametre\AcademieController:update" type="service_closure" id=".service_locator.g2C49JA"/>
@@ -7346,6 +7247,9 @@
         <argument key="App\Controller\Parametre\LanguesController:delete" type="service_closure" id=".service_locator.JZQeeEU"/>
         <argument key="App\Controller\Parametre\LanguesController:details" type="service_closure" id=".service_locator.bZPSQ22"/>
         <argument key="App\Controller\Parametre\LanguesController:update" type="service_closure" id=".service_locator.HkRSzPh"/>
+        <argument key="App\Controller\Parametre\LitController:delete" type="service_closure" id=".service_locator.cKgdrPx"/>
+        <argument key="App\Controller\Parametre\LitController:details" type="service_closure" id=".service_locator.cKgdrPx"/>
+        <argument key="App\Controller\Parametre\LitController:update" type="service_closure" id=".service_locator.cKgdrPx"/>
         <argument key="App\Controller\Parametre\ModalitesController:delete" type="service_closure" id=".service_locator.RqS8q2t"/>
         <argument key="App\Controller\Parametre\ModalitesController:details" type="service_closure" id=".service_locator.RqS8q2t"/>
         <argument key="App\Controller\Parametre\ModalitesController:update" type="service_closure" id=".service_locator.RqS8q2t"/>
@@ -7357,9 +7261,6 @@
         <argument key="App\Controller\Parametre\SallesController:delete" type="service_closure" id=".service_locator.Ngei3M."/>
         <argument key="App\Controller\Parametre\SallesController:details" type="service_closure" id=".service_locator.vMtaKs5"/>
         <argument key="App\Controller\Parametre\SallesController:update" type="service_closure" id=".service_locator.PzEWOcy"/>
-        <argument key="App\Controller\Parametre\SemestreController:delete" type="service_closure" id=".service_locator.KjKYqyJ"/>
-        <argument key="App\Controller\Parametre\SemestreController:details" type="service_closure" id=".service_locator.KjKYqyJ"/>
-        <argument key="App\Controller\Parametre\SemestreController:update" type="service_closure" id=".service_locator.KjKYqyJ"/>
         <argument key="App\Controller\Parametre\SerieBacController:delete" type="service_closure" id=".service_locator.EULgxcg"/>
         <argument key="App\Controller\Parametre\SerieBacController:details" type="service_closure" id=".service_locator.MnL_ofq"/>
         <argument key="App\Controller\Parametre\SerieBacController:update" type="service_closure" id=".service_locator.uevTPJu"/>
@@ -7596,7 +7497,7 @@
         <argument key="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber"/>
       </argument>
     </service>
-    <service id=".service_locator.JBvQhoJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.7fRm4Z." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\AcAnneeRepository" type="service_closure" id="App\Repository\AcAnneeRepository"/>
@@ -7606,6 +7507,8 @@
         <argument key="App\Repository\AcPromotionRepository" type="service_closure" id="App\Repository\AcPromotionRepository"/>
         <argument key="App\Repository\AcSemestreRepository" type="service_closure" id="App\Repository\AcSemestreRepository"/>
         <argument key="App\Repository\GrilleRepository" type="service_closure" id="App\Repository\GrilleRepository"/>
+        <argument key="App\Repository\LitInscriptionRepository" type="service_closure" id="App\Repository\LitInscriptionRepository"/>
+        <argument key="App\Repository\LitRepository" type="service_closure" id="App\Repository\LitRepository"/>
         <argument key="App\Repository\MouchardRepository" type="service_closure" id="App\Repository\MouchardRepository"/>
         <argument key="App\Repository\NatureDemandeRepository" type="service_closure" id="App\Repository\NatureDemandeRepository"/>
         <argument key="App\Repository\PBatimentsRepository" type="service_closure" id="App\Repository\PBatimentsRepository"/>
@@ -7721,21 +7624,15 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\Etudiant\CentreDappelController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Etudiant\CentreDappelController"/>
-      <argument>App\Controller\Etudiant\CentreDappelController</argument>
+    <service id=".service_locator.jIxfAsi.App\Controller\Etudiant\GestionHebergementController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Etudiant\GestionHebergementController"/>
+      <argument>App\Controller\Etudiant\GestionHebergementController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\Etudiant\EtudiantController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Etudiant\EtudiantController"/>
-      <argument>App\Controller\Etudiant\EtudiantController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.jIxfAsi" method="withContext"/>
-    </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\Etudiant\RechercheAvanceController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Etudiant\RechercheAvanceController"/>
-      <argument>App\Controller\Etudiant\RechercheAvanceController</argument>
+    <service id=".service_locator.jIxfAsi.App\Controller\Etudiant\GestionInscriptionController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Etudiant\GestionInscriptionController"/>
+      <argument>App\Controller\Etudiant\GestionInscriptionController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
@@ -7760,12 +7657,6 @@
     <service id=".service_locator.jIxfAsi.App\Controller\IndexController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\IndexController"/>
       <argument>App\Controller\IndexController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.jIxfAsi" method="withContext"/>
-    </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\Inscription\GestionInscriptionController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Inscription\GestionInscriptionController"/>
-      <argument>App\Controller\Inscription\GestionInscriptionController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
@@ -7841,6 +7732,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
+    <service id=".service_locator.jIxfAsi.App\Controller\Parametre\LitController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Parametre\LitController"/>
+      <argument>App\Controller\Parametre\LitController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.jIxfAsi" method="withContext"/>
+    </service>
     <service id=".service_locator.jIxfAsi.App\Controller\Parametre\ModalitesController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Parametre\ModalitesController"/>
       <argument>App\Controller\Parametre\ModalitesController</argument>
@@ -7868,12 +7765,6 @@
     <service id=".service_locator.jIxfAsi.App\Controller\Parametre\SemainesController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Parametre\SemainesController"/>
       <argument>App\Controller\Parametre\SemainesController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.jIxfAsi" method="withContext"/>
-    </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\Parametre\SemestreController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\Parametre\SemestreController"/>
-      <argument>App\Controller\Parametre\SemestreController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
@@ -8093,12 +7984,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.9pMdHHH"/>
+      <argument type="service" id=".service_locator.k3FVfsL"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.9pMdHHH"/>
+      <argument type="service" id=".service_locator.k3FVfsL"/>
     </service>
     <service id=".doctrine.orm.default_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
       <call method="addDriver">
@@ -8110,13 +8001,10 @@
     <service id=".errored..service_locator.Q3TXFYb.App\Entity\AcFormation" class="App\Entity\AcFormation"/>
     <service id=".errored..service_locator.LGLKc08.App\Entity\AcDepartement" class="App\Entity\AcDepartement"/>
     <service id=".errored..service_locator.2dGTN8Q.App\Entity\TAdmission" class="App\Entity\TAdmission"/>
-    <service id=".errored..service_locator.XsMPLre.App\Entity\TEtudiant" class="App\Entity\TEtudiant"/>
     <service id=".errored..service_locator.KdQC4yG.App\Entity\TInscription" class="App\Entity\TInscription"/>
-    <service id=".errored..service_locator.GCYAGow.App\Entity\TInscription" class="App\Entity\TInscription"/>
-    <service id=".errored..service_locator.GCYAGow.App\Entity\AcSemestre" class="App\Entity\AcSemestre"/>
+    <service id=".errored..service_locator.Tpx2.fL.App\Entity\TOperationcab" class="App\Entity\TOperationcab"/>
     <service id=".errored..service_locator.eP3ATxI.App\Entity\TBrdpaiement" class="App\Entity\TBrdpaiement"/>
     <service id=".errored..service_locator.hCwiHiU.App\Entity\TBrdpaiement" class="App\Entity\TBrdpaiement"/>
-    <service id=".errored..service_locator.Tpx2.fL.App\Entity\TOperationcab" class="App\Entity\TOperationcab"/>
     <service id=".errored..service_locator.xJHEfkR.App\Entity\TOperationcab" class="App\Entity\TOperationcab"/>
     <service id=".errored..service_locator.xJHEfkR.App\Entity\TReglement" class="App\Entity\TReglement"/>
     <service id=".errored..service_locator.qNiIFJB.App\Entity\TOperationdet" class="App\Entity\TOperationdet"/>
@@ -8129,8 +8017,8 @@
     <service id=".errored..service_locator.LesPpO5.App\Entity\TChambre" class="App\Entity\TChambre"/>
     <service id=".errored..service_locator.EqwgwxF.App\Entity\PEtages" class="App\Entity\PEtages"/>
     <service id=".errored..service_locator.kbeyOkT.App\Entity\PFrais" class="App\Entity\PFrais"/>
+    <service id=".errored..service_locator.cKgdrPx.App\Entity\Lit" class="App\Entity\Lit"/>
     <service id=".errored..service_locator.RqS8q2t.App\Entity\XModalites" class="App\Entity\XModalites"/>
-    <service id=".errored..service_locator.KjKYqyJ.App\Entity\AcSemestre" class="App\Entity\AcSemestre"/>
     <service id=".errored..service_locator.4T4EJFR.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.NxvMxSh.App\Entity\UsSousModule" class="App\Entity\UsSousModule"/>
     <service id=".errored..service_locator.NxvMxSh.App\Entity\User" class="App\Entity\User"/>
@@ -9074,7 +8962,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.9pMdHHH"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.k3FVfsL"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>
@@ -9094,7 +8982,7 @@
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.dQsEc8u" alias=".service_locator.paN13u7"/>
     <service id=".service_locator.bRs2PTA" alias=".service_locator.K9AuB6p"/>
-    <service id=".service_locator.QxC7Ckg" alias=".service_locator.9pMdHHH"/>
+    <service id=".service_locator.SGLDNji" alias=".service_locator.k3FVfsL"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.i2UnAhx" alias=".service_locator.cEhBhXG"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
@@ -9125,15 +9013,13 @@
     <service id=".service_locator.U88W2pf" alias=".service_locator.Q3TXFYb"/>
     <service id=".service_locator.Fk7EU3j" alias=".service_locator.LGLKc08"/>
     <service id=".service_locator.geWYi39" alias=".service_locator.2dGTN8Q"/>
-    <service id=".service_locator.TKpy8vX" alias=".service_locator.XsMPLre"/>
-    <service id=".service_locator.XUMg4qf" alias=".service_locator.qH9NJFW"/>
     <service id=".service_locator.FfFqYb." alias=".service_locator.KdQC4yG"/>
-    <service id=".service_locator.sir.Muk" alias=".service_locator.GCYAGow"/>
+    <service id=".service_locator.VhMTy2N" alias=".service_locator.Tpx2.fL"/>
     <service id=".service_locator.hHVNtPc" alias=".service_locator.eP3ATxI"/>
     <service id=".service_locator.EJ1RebW" alias=".service_locator.hCwiHiU"/>
-    <service id=".service_locator.VhMTy2N" alias=".service_locator.Tpx2.fL"/>
     <service id=".service_locator.jfH.eQc" alias=".service_locator.xJHEfkR"/>
     <service id=".service_locator.1BwDp_." alias=".service_locator.qNiIFJB"/>
+    <service id=".service_locator.XUMg4qf" alias=".service_locator.qH9NJFW"/>
     <service id=".service_locator.0opvjY2" alias=".service_locator.Moow_pu"/>
     <service id=".service_locator.vMFo2lI" alias=".service_locator.rWCAyGJ"/>
     <service id=".service_locator.Ffwvorh" alias=".service_locator.jKYHEsm"/>
@@ -9143,8 +9029,8 @@
     <service id=".service_locator.zYLEpzr" alias=".service_locator.LesPpO5"/>
     <service id=".service_locator.FIwKG_O" alias=".service_locator.EqwgwxF"/>
     <service id=".service_locator.om8poVu" alias=".service_locator.kbeyOkT"/>
+    <service id=".service_locator.TYVeeIN" alias=".service_locator.cKgdrPx"/>
     <service id=".service_locator.qtFUIjw" alias=".service_locator.RqS8q2t"/>
-    <service id=".service_locator..Hke63e" alias=".service_locator.KjKYqyJ"/>
     <service id=".service_locator.Zp0NSXM" alias=".service_locator.4T4EJFR"/>
     <service id=".service_locator.XcV8eMm" alias=".service_locator.NxvMxSh"/>
     <service id=".service_locator.A9OuD9F" alias=".service_locator.aHd0olU"/>

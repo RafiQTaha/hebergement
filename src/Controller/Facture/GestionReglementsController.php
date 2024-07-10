@@ -232,7 +232,7 @@ class GestionReglementsController extends AbstractController
                 }
             }
         }
-        $borderaux->setCode($etablissement->getAbreviation().'-BRD'.str_pad($borderaux->getId(), 6, '0', STR_PAD_LEFT).'/'.date('Y'));
+        $borderaux->setCode('HEB-BRD'.str_pad($borderaux->getId(), 6, '0', STR_PAD_LEFT).'/'.date('Y'));
         $borderaux->setMontant($total);
         $this->em->flush();
         return new Response($borderaux->getId());
@@ -309,8 +309,7 @@ class GestionReglementsController extends AbstractController
             $nreglement->setCreated(new DateTime('now'));
             $this->em->persist($nreglement);
             $this->em->flush();
-            $etablissement = $reglement->getOperation()->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
-            $reglement->setCode($etablissement.'-REG'.str_pad($nreglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+            $reglement->setCode('HEB-REG'.str_pad($nreglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
             $this->em->flush();
             return new JsonResponse('Reglement Bien Annuler',200);
         }
@@ -463,7 +462,7 @@ class GestionReglementsController extends AbstractController
             $this->em->persist($nreglement);
             $this->em->flush();
             $etablissement = $reglement->getOperation()->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
-            $reglement->setCode($etablissement.'-REG'.str_pad($nreglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+            $reglement->setCode('HEB-REG'.str_pad($nreglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
             $this->em->flush();
             $count++;
         }
@@ -482,7 +481,7 @@ class GestionReglementsController extends AbstractController
         //     $this->em->persist($nreglement);
         //     $this->em->flush();
         //     $etablissement = $reglement->getOperation()->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
-        //     $reglement->setCode($etablissement.'-REG'.str_pad($nreglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+        //     $reglement->setCode('HEB-REG'.str_pad($nreglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
         //     $this->em->flush();
         //     return new JsonResponse('Reglement Bien Annuler',200);
         // }

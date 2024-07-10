@@ -56,6 +56,7 @@ class SynchronisationController extends AbstractController
     public function api_formation()
     {
         // dd('tt');
+        // return $this->InsertOrUpdateMydatabase('ac_formation', 'formation');
         try {
             return $this->InsertOrUpdateMydatabase('ac_formation', 'formation');
         } catch (\Throwable $th) {
@@ -91,6 +92,44 @@ class SynchronisationController extends AbstractController
             return new JsonResponse('Erreur de connection..!!', 500);
         }
     }
+    #[Route('/api_organisme', name: 'api_organisme', options: ['expose' => true])]
+    public function api_organisme()
+    {
+        // return $this->InsertOrUpdateMydatabase('porganisme', 'organisme');
+        try {
+            return $this->InsertOrUpdateMydatabase('porganisme', 'organisme');
+        } catch (\Throwable $th) {
+            return new JsonResponse('Erreur de connection..!!', 500);
+        }
+    }
+    #[Route('/api_banque', name: 'api_banque', options: ['expose' => true])]
+    public function api_banque()
+    {
+        // return $this->InsertOrUpdateMydatabase('xbanque', 'banque');
+        try {
+            return $this->InsertOrUpdateMydatabase('xbanque', 'banque');
+        } catch (\Throwable $th) {
+            return new JsonResponse('Erreur de connection..!!', 500);
+        }
+    }
+    #[Route('/api_modalite', name: 'api_modalite', options: ['expose' => true])]
+    public function api_modalite()
+    {
+        try {
+            return $this->InsertOrUpdateMydatabase('xmodalites', 'modalite');
+        } catch (\Throwable $th) {
+            return new JsonResponse('Erreur de connection..!!', 500);
+        }
+    }
+    #[Route('/api_naturedemande', name: 'api_naturedemande', options: ['expose' => true])]
+    public function api_naturedemande()
+    {
+        try {
+            return $this->InsertOrUpdateMydatabase('nature_demande', 'naturedemande');
+        } catch (\Throwable $th) {
+            return new JsonResponse('Erreur de connection..!!', 500);
+        }
+    }
     #[Route('/api_etudiant', name: 'api_etudiant', options: ['expose' => true])]
     public function api_etudiant()
     {
@@ -105,6 +144,7 @@ class SynchronisationController extends AbstractController
     #[Route('/api_preinscription', name: 'api_preinscription', options: ['expose' => true])]
     public function api_preinscription()
     {
+        // return $this->InsertOrUpdateMydatabase('tpreinscription', 'preinscription');
         try {
             return $this->InsertOrUpdateMydatabase('tpreinscription', 'preinscription');
         } catch (\Throwable $th) {
@@ -114,6 +154,7 @@ class SynchronisationController extends AbstractController
     #[Route('/api_admission', name: 'api_admission', options: ['expose' => true])]
     public function api_admission()
     {
+        // return $this->InsertOrUpdateMydatabase('tadmission', 'admission');
         try {
             return $this->InsertOrUpdateMydatabase('tadmission', 'admission');
         } catch (\Throwable $th) {
@@ -132,7 +173,7 @@ class SynchronisationController extends AbstractController
     #[Route('/api_groupe', name: 'api_groupe', options: ['expose' => true])]
     public function api_groupe()
     {
-        return $this->InsertOrUpdateMydatabase('pgroupe','groupe');
+        // return $this->InsertOrUpdateMydatabase('pgroupe','groupe');
         try {
             return $this->InsertOrUpdateMydatabase('pgroupe', 'groupe');
         } catch (\Throwable $th) {
@@ -142,7 +183,7 @@ class SynchronisationController extends AbstractController
     #[Route('/api_inscription', name: 'api_inscription', options: ['expose' => true])]
     public function api_inscription()
     {
-        return $this->InsertOrUpdateMydatabase('tinscription','inscription');
+        // return $this->InsertOrUpdateMydatabase('tinscription','inscription');
         try {
             return $this->InsertOrUpdateMydatabase('tinscription', 'inscription');
         } catch (\Throwable $th) {

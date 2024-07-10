@@ -69,6 +69,9 @@ class TOperationcab
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $npec;
 
+    #[ORM\ManyToOne(inversedBy: 'tOperationcabs')]
+    private ?litInscription $litInscription = null;
+
     public function __construct()
     {
         $this->reglements = new ArrayCollection();
@@ -328,6 +331,18 @@ class TOperationcab
     public function setNpec(?string $npec): self
     {
         $this->npec = $npec;
+
+        return $this;
+    }
+
+    public function getLitInscription(): ?litInscription
+    {
+        return $this->litInscription;
+    }
+
+    public function setLitInscription(?litInscription $litInscription): static
+    {
+        $this->litInscription = $litInscription;
 
         return $this;
     }

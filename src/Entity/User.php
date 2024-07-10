@@ -79,6 +79,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'UserUpdated', targetEntity: Grille::class)]
     private Collection $updategrilles;
 
+    #[ORM\OneToMany(mappedBy: 'userCreated', targetEntity: Lit::class)]
+    private Collection $lits;
+
+    #[ORM\OneToMany(mappedBy: 'userUpdated', targetEntity: Lit::class)]
+    private Collection $litsUserUpdated;
+
+    #[ORM\OneToMany(mappedBy: 'userCreated', targetEntity: LitInscription::class)]
+    private Collection $litInscriptions;
+
+    #[ORM\OneToMany(mappedBy: 'UserUpdated', targetEntity: LitInscription::class)]
+    private Collection $litInscriptionsUserUpdated;
+
 
     public function __construct()
     {
@@ -95,6 +107,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tChambres = new ArrayCollection();
         $this->grilles = new ArrayCollection();
         $this->updategrilles = new ArrayCollection();
+        $this->lits = new ArrayCollection();
+        $this->litsUserUpdated = new ArrayCollection();
+        $this->litInscriptions = new ArrayCollection();
+        $this->litInscriptionsUserUpdated = new ArrayCollection();
     }
 
     
@@ -577,6 +593,126 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($updategrille->getUserUpdated() === $this) {
                 $updategrille->setUserUpdated(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lit>
+     */
+    public function getLits(): Collection
+    {
+        return $this->lits;
+    }
+
+    public function addLit(Lit $lit): static
+    {
+        if (!$this->lits->contains($lit)) {
+            $this->lits->add($lit);
+            $lit->setUserCreated($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLit(Lit $lit): static
+    {
+        if ($this->lits->removeElement($lit)) {
+            // set the owning side to null (unless already changed)
+            if ($lit->getUserCreated() === $this) {
+                $lit->setUserCreated(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lit>
+     */
+    public function getLitsUserUpdated(): Collection
+    {
+        return $this->litsUserUpdated;
+    }
+
+    public function addLitsUserUpdated(Lit $litsUserUpdated): static
+    {
+        if (!$this->litsUserUpdated->contains($litsUserUpdated)) {
+            $this->litsUserUpdated->add($litsUserUpdated);
+            $litsUserUpdated->setUserUpdated($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLitsUserUpdated(Lit $litsUserUpdated): static
+    {
+        if ($this->litsUserUpdated->removeElement($litsUserUpdated)) {
+            // set the owning side to null (unless already changed)
+            if ($litsUserUpdated->getUserUpdated() === $this) {
+                $litsUserUpdated->setUserUpdated(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LitInscription>
+     */
+    public function getLitInscriptions(): Collection
+    {
+        return $this->litInscriptions;
+    }
+
+    public function addLitInscription(LitInscription $litInscription): static
+    {
+        if (!$this->litInscriptions->contains($litInscription)) {
+            $this->litInscriptions->add($litInscription);
+            $litInscription->setUserCreated($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLitInscription(LitInscription $litInscription): static
+    {
+        if ($this->litInscriptions->removeElement($litInscription)) {
+            // set the owning side to null (unless already changed)
+            if ($litInscription->getUserCreated() === $this) {
+                $litInscription->setUserCreated(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LitInscription>
+     */
+    public function getLitInscriptionsUserUpdated(): Collection
+    {
+        return $this->litInscriptionsUserUpdated;
+    }
+
+    public function addLitInscriptionsUserUpdated(LitInscription $litInscriptionsUserUpdated): static
+    {
+        if (!$this->litInscriptionsUserUpdated->contains($litInscriptionsUserUpdated)) {
+            $this->litInscriptionsUserUpdated->add($litInscriptionsUserUpdated);
+            $litInscriptionsUserUpdated->setUserUpdated($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLitInscriptionsUserUpdated(LitInscription $litInscriptionsUserUpdated): static
+    {
+        if ($this->litInscriptionsUserUpdated->removeElement($litInscriptionsUserUpdated)) {
+            // set the owning side to null (unless already changed)
+            if ($litInscriptionsUserUpdated->getUserUpdated() === $this) {
+                $litInscriptionsUserUpdated->setUserUpdated(null);
             }
         }
 

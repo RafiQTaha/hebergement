@@ -91,34 +91,31 @@ class __TwigTemplate_0aaadf451cfc78157761ca94e1b6e7dd extends Template
         yield "<div class=\"main-content\">
     <section class=\"section\">
         <div class=\"section-header\">
-          <h1>Etablissements</h1>
+          <h1>Départements</h1>
           <div class=\"section-header-breadcrumb\">
               ";
-        // line 14
-        yield "              ";
-        // line 15
-        yield "              ";
+        // line 12
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["operations"]) || array_key_exists("operations", $context) ? $context["operations"] : (function () { throw new RuntimeError('Variable "operations" does not exist.', 15, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["operations"]) || array_key_exists("operations", $context) ? $context["operations"] : (function () { throw new RuntimeError('Variable "operations" does not exist.', 12, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["operation"]) {
-            // line 16
+            // line 13
             yield "                <a href=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "link", [], "any", false, false, false, 16), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "link", [], "any", false, false, false, 13), "html", null, true);
             yield "\" class=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "classTag", [], "any", false, false, false, 16), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "classTag", [], "any", false, false, false, 13), "html", null, true);
             yield "\" id=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "idTag", [], "any", false, false, false, 16), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "idTag", [], "any", false, false, false, 13), "html", null, true);
             yield "\"><i class=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "icon", [], "any", false, false, false, 16), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "icon", [], "any", false, false, false, 13), "html", null, true);
             yield "\"></i>  ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "designation", [], "any", false, false, false, 16), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["operation"], "designation", [], "any", false, false, false, 13), "html", null, true);
             yield "</a>
               ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['operation'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 18
+        // line 15
         yield "          </div>
         </div>
 
@@ -160,11 +157,11 @@ class __TwigTemplate_0aaadf451cfc78157761ca94e1b6e7dd extends Template
 
 <!--Modal Import Group-->
 ";
-        // line 58
-        yield from         $this->loadTemplate("parametre/departement/modals/ajouter.html.twig", "parametre/departement/index.html.twig", 58)->unwrap()->yield($context);
-        // line 59
-        yield from         $this->loadTemplate("parametre/departement/modals/modifier.html.twig", "parametre/departement/index.html.twig", 59)->unwrap()->yield($context);
-        // line 60
+        // line 55
+        yield from         $this->loadTemplate("parametre/departement/modals/ajouter.html.twig", "parametre/departement/index.html.twig", 55)->unwrap()->yield($context);
+        // line 56
+        yield from         $this->loadTemplate("parametre/departement/modals/modifier.html.twig", "parametre/departement/index.html.twig", 56)->unwrap()->yield($context);
+        // line 57
         yield "
 ";
         
@@ -176,7 +173,7 @@ class __TwigTemplate_0aaadf451cfc78157761ca94e1b6e7dd extends Template
         return; yield '';
     }
 
-    // line 63
+    // line 60
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -186,11 +183,11 @@ class __TwigTemplate_0aaadf451cfc78157761ca94e1b6e7dd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 64
+        // line 61
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
 ";
-        // line 65
+        // line 62
         yield $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("departement");
         yield "
 
@@ -225,7 +222,7 @@ class __TwigTemplate_0aaadf451cfc78157761ca94e1b6e7dd extends Template
      */
     public function getDebugInfo()
     {
-        return array (  194 => 65,  190 => 64,  180 => 63,  168 => 60,  166 => 59,  164 => 58,  122 => 18,  105 => 16,  100 => 15,  98 => 14,  91 => 7,  81 => 6,  61 => 3,  38 => 1,);
+        return array (  191 => 62,  187 => 61,  177 => 60,  165 => 57,  163 => 56,  161 => 55,  119 => 15,  102 => 13,  98 => 12,  91 => 7,  81 => 6,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -239,11 +236,8 @@ class __TwigTemplate_0aaadf451cfc78157761ca94e1b6e7dd extends Template
 <div class=\"main-content\">
     <section class=\"section\">
         <div class=\"section-header\">
-          <h1>Etablissements</h1>
+          <h1>Départements</h1>
           <div class=\"section-header-breadcrumb\">
-              {# <a href=\"#\" class=\"btn btn-success ml-1\" id=\"modifier\"><i class=\"fas fa-edit\"></i>  Modifier</a>
-              <a href=\"#\" class=\"btn btn-success ml-1\" id=\"ajouter\"><i class=\"fas fa-plus\"></i>  Aouter</a> #}
-              {# <a href=\"#\" class=\"btn btn-success ml-1\" id=\"ajouter\"><i class=\"fas fa-plus\"></i>  Aouter</a> #}
               {% for operation in operations %}
                 <a href=\"{{operation.link}}\" class=\"{{operation.classTag}}\" id=\"{{operation.idTag}}\"><i class=\"{{operation.icon}}\"></i>  {{operation.designation}}</a>
               {% endfor %}

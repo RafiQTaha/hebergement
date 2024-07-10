@@ -63,8 +63,15 @@
         "/build/runtime.c3e9a731.js",
         "/build/755.5a8586e9.js",
         "/build/29.ac17dd24.js",
-        "/build/515.caf3cc39.js",
-        "/build/inscription.32b93234.js"
+        "/build/inscription.94c7402e.js"
+      ]
+    },
+    "hebergement": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/hebergement.fb3fc3d3.js"
       ]
     },
     "facture": {
@@ -73,7 +80,7 @@
         "/build/755.5a8586e9.js",
         "/build/29.ac17dd24.js",
         "/build/515.caf3cc39.js",
-        "/build/facture.84466640.js"
+        "/build/facture.ea7b292f.js"
       ]
     },
     "bordereau": {
@@ -122,7 +129,15 @@
         "/build/runtime.c3e9a731.js",
         "/build/755.5a8586e9.js",
         "/build/29.ac17dd24.js",
-        "/build/synchronisation.e7be5f75.js"
+        "/build/synchronisation.f997daac.js"
+      ]
+    },
+    "lit": {
+      "js": [
+        "/build/runtime.c3e9a731.js",
+        "/build/755.5a8586e9.js",
+        "/build/29.ac17dd24.js",
+        "/build/lit.ac4fec06.js"
       ]
     },
     "user": {

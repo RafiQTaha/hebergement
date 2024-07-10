@@ -40,6 +40,7 @@ class __TwigTemplate_82ed71e87e6484c97216ea14cc7ae16d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "facture/modals/detail_facture.html.twig"));
 
+        // line 1
         yield "<div class=\"modal\" role=\"dialog\" id=\"detail_facture_modal\" aria-modal=\"true\"> 
 <div class=\"modal-dialog modal-md modal-facture\" role=\"document\">
     <div class=\"modal-content\">
@@ -52,15 +53,9 @@ class __TwigTemplate_82ed71e87e6484c97216ea14cc7ae16d extends Template
       </div>
       <div class=\"modal-body\">
             <div class=\"row mb-4 \" id=\"add\">
-                <div class=\"col-md-4\" id=\"orgDiv\">
-                    <label for=\"organismeType\">Organisme (*):</label>
-                    <select class=\"form-control\" name=\"organismeType\" id=\"organismeType\">
-                      <option value=\"\">Choix Organisme</option>
-                      <option value=\"Payant\">Payant</option>
-                      <option value=\"Organisme\">Organisme</option>
-                    </select>
-                </div>
-                <div class=\"col-md-4\">
+                ";
+        // line 21
+        yield "                <div class=\"col-md-4\">
                     <label for=\"frais\">Frais (*):</label>
                     <select class=\"form-control\" name=\"frais\" id=\"frais\">
                     </select>
@@ -73,7 +68,31 @@ class __TwigTemplate_82ed71e87e6484c97216ea14cc7ae16d extends Template
                     <label for=\"ice\">ICE:</label>
                     <input type=\"number\" class=\"form-control\" id=\"ice\" maxlength=\"15\" placeholder=\"15 Chiffres\">
                 </div>
-                            </div>
+                ";
+        // line 41
+        yield "                <div class=\"col-md-6 select-organ\">
+                  <label for=\"org\">Organisme (*)</label>
+                  <select class=\"form-control\" name=\"org\" id=\"org\">
+                      ";
+        // line 44
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["organismes"]) || array_key_exists("organismes", $context) ? $context["organismes"] : (function () { throw new RuntimeError('Variable "organismes" does not exist.', 44, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["organisme"]) {
+            // line 45
+            yield "                          <option val=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["organisme"], "id", [], "any", false, false, false, 45), "html", null, true);
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["organisme"], "designation", [], "any", false, false, false, 45), "html", null, true);
+            yield "</option>
+                      ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['organisme'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 47
+        yield "                  </select>
+                </div> 
+            </div>
             <button class=\"btn btn-primary mb-4 float-right \" id=\"add_detaille\"><i class=\"fas fa-plus\"></i> Ajouter</button>
             <button class=\"btn btn-danger mb-4 mr-4 float-right\" id=\"delete_detaille\"><i class=\"fas fa-window-close\"></i> Desactiver Tout</button>
             <table class=\"table table-fee table_detaille_facture\">
@@ -118,9 +137,17 @@ class __TwigTemplate_82ed71e87e6484c97216ea14cc7ae16d extends Template
     /**
      * @codeCoverageIgnore
      */
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
     public function getDebugInfo()
     {
-        return array ();
+        return array (  93 => 47,  82 => 45,  78 => 44,  73 => 41,  58 => 21,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -137,14 +164,14 @@ class __TwigTemplate_82ed71e87e6484c97216ea14cc7ae16d extends Template
       </div>
       <div class=\"modal-body\">
             <div class=\"row mb-4 \" id=\"add\">
-                <div class=\"col-md-4\" id=\"orgDiv\">
+                {# <div class=\"col-md-4\" id=\"orgDiv\">
                     <label for=\"organismeType\">Organisme (*):</label>
                     <select class=\"form-control\" name=\"organismeType\" id=\"organismeType\">
                       <option value=\"\">Choix Organisme</option>
                       <option value=\"Payant\">Payant</option>
                       <option value=\"Organisme\">Organisme</option>
                     </select>
-                </div>
+                </div> #}
                 <div class=\"col-md-4\">
                     <label for=\"frais\">Frais (*):</label>
                     <select class=\"form-control\" name=\"frais\" id=\"frais\">
@@ -164,12 +191,15 @@ class __TwigTemplate_82ed71e87e6484c97216ea14cc7ae16d extends Template
                     <label style=\"margin:5px\" for=\"organ\"> Payant </label>  
                     <input type=\"radio\" name=\"organ\" id=\"norgan\" value=\"0\"> 
                     <label style=\"margin: 0px 5px 0px 0px;\"  for=\"norgan\"> Organisme </label>  
-                </div>
+                </div>#}
                 <div class=\"col-md-6 select-organ\">
                   <label for=\"org\">Organisme (*)</label>
                   <select class=\"form-control\" name=\"org\" id=\"org\">
+                      {% for organisme in organismes %}
+                          <option val=\"{{organisme.id}}\">{{organisme.designation}}</option>
+                      {% endfor %}
                   </select>
-                </div> #}
+                </div> 
             </div>
             <button class=\"btn btn-primary mb-4 float-right \" id=\"add_detaille\"><i class=\"fas fa-plus\"></i> Ajouter</button>
             <button class=\"btn btn-danger mb-4 mr-4 float-right\" id=\"delete_detaille\"><i class=\"fas fa-window-close\"></i> Desactiver Tout</button>

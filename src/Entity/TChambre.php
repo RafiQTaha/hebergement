@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TChambreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -46,6 +48,14 @@ class TChambre
 
     #[ORM\ManyToOne(inversedBy: 'chambres')]
     private ?StatutChambre $statutChambre = null;
+
+    #[ORM\OneToMany(mappedBy: 'chambre', targetEntity: Lit::class)]
+    private Collection $lits;
+
+    public function __construct()
+    {
+        $this->lits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -180,6 +190,36 @@ class TChambre
     public function setStatutChambre(?StatutChambre $statutChambre): static
     {
         $this->statutChambre = $statutChambre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lit>
+     */
+    public function getLits(): Collection
+    {
+        return $this->lits;
+    }
+
+    public function addLit(Lit $lit): static
+    {
+        if (!$this->lits->contains($lit)) {
+            $this->lits->add($lit);
+            $lit->setChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLit(Lit $lit): static
+    {
+        if ($this->lits->removeElement($lit)) {
+            // set the owning side to null (unless already changed)
+            if ($lit->getChambre() === $this) {
+                $lit->setChambre(null);
+            }
+        }
 
         return $this;
     }

@@ -6,14 +6,9 @@ use DateTime;
 use App\Entity\PFrais;
 use App\Entity\AcAnnee;
 use App\Entity\AcDepartement;
-use App\Entity\PGroupe;
 use App\Entity\XBanque;
-use App\Entity\AcModule;
 use App\Entity\Mouchard;
-use App\Entity\Sanction;
 use App\Entity\UsModule;
-use App\Entity\AcElement;
-use App\Entity\Agression;
 use App\Entity\AcSemestre;
 use App\Entity\POrganisme;
 use App\Entity\TAdmission;
@@ -23,13 +18,11 @@ use App\Entity\UsOperation;
 use App\Entity\TInscription;
 use App\Entity\UsSousModule;
 use App\Entity\NatureDemande;
-use App\Entity\SousAgression;
 use App\Entity\TOperationcab;
-use App\Entity\PNatureEpreuve;
 use App\Entity\AcEtablissement;
-use App\Entity\PAnonymatActuel;
 use App\Entity\PEtages;
-use App\Entity\PrProgrammation;
+use App\Entity\TChambre;
+use App\Entity\Lit;
 use App\Entity\XModalites;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,6 +86,23 @@ class ApiController extends AbstractController
         $data = self::dropdown($etages,'etage');
         return new JsonResponse($data);
     }
+    #[Route('/chambre/{id}', name: 'getchambre')]
+    public function getChambre($id): Response
+    {   
+        $chambre = $this->em->getRepository(TChambre::class)->findBy(['etage'=>$id, 'active' => 1],['designation'=>'ASC']);
+        $data = self::dropdown($chambre,'chambre');
+        return new JsonResponse($data);
+    }
+    #[Route('/lit/{id}', name: 'getlit')]
+    public function getLit($id)
+    {   
+        $lits = $this->em->getRepository(Lit::class)->findBy(['chambre'=>$id, 'active' => 1],['position'=>'ASC']);
+        $data = "<option selected enabled value=''>Choix de Lit</option>";
+        foreach ($lits as $lit) {
+            $data .="<option value=".$lit->getId().">".$lit->getPosition()."</option>";
+        }
+        return new JsonResponse($data);
+    }
     
     #[Route('/nature_demande', name: 'nature_demande')]
     public function getnature_demande(): Response
@@ -122,7 +132,6 @@ class ApiController extends AbstractController
             $data = self::dropdown($annee,'Annee');
             return new JsonResponse($data);
         }
-        
     }
 
     #[Route('/organisme', name: 'getorganisme')]
@@ -136,9 +145,7 @@ class ApiController extends AbstractController
     #[Route('/getorganismepasPayant', name: 'getorganismepasPayant')]
     public function getOrganismepasPayant(): Response
     {  
-        //  dd('test');
         $organisme = $this->em->getRepository(POrganisme::class)->getorganismepasPayant();
-        // dd($organisme);
         $data = self::dropdown($organisme,'organisme');
         return new JsonResponse($data);        
     }
@@ -147,7 +154,6 @@ class ApiController extends AbstractController
     public function getNatureEtudiant(TAdmission $admission): Response
     {   
         $nature = $admission->getPreinscription()->getEtudiant()->getNatureDemande()->getDesignation();
-        // dd($nature);
         if ($nature !== 'Payant') {
             $organisme = $this->em->getRepository(POrganisme::class)->findAll();
         }else {

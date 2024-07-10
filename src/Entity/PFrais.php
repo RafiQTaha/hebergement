@@ -57,6 +57,9 @@ class PFrais
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $updated;
 
+    #[ORM\ManyToOne(inversedBy: 'pfrais')]
+    private ?TypeChambre $typeChambre = null;
+
    
     public function __construct()
     {
@@ -250,6 +253,18 @@ class PFrais
     public function setUpdated(?\DateTimeInterface $updated): self
     {
         $this->updated = $updated;
+
+        return $this;
+    }
+
+    public function getTypeChambre(): ?TypeChambre
+    {
+        return $this->typeChambre;
+    }
+
+    public function setTypeChambre(?TypeChambre $typeChambre): static
+    {
+        $this->typeChambre = $typeChambre;
 
         return $this;
     }

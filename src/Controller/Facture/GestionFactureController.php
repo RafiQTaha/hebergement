@@ -22,6 +22,7 @@ use App\Entity\AcEtablissement;
 use App\Entity\TPreinscription;
 use App\Controller\ApiController;
 use App\Controller\DatatablesController;
+// use App\Entity\Grille;
 use App\Entity\Pec;
 use Doctrine\Persistence\ManagerRegistry;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -52,7 +53,7 @@ class GestionFactureController extends AbstractController
             return $this->render("errors/403.html.twig");
         }
         $etablissements = $this->em->getRepository(AcEtablissement::class)->findBy(['active'=>1]);
-        $organismes = $this->em->getRepository(POrganisme::class)->findAll();
+        $organismes = $this->em->getRepository(POrganisme::class)->findBy(['active'=>1]);
         $banques = $this->em->getRepository(XBanque::class)->findAll();
         $paiements = $this->em->getRepository(XModalites::class)->findBy(['active'=>1]);
         $reglements = $this->em->getRepository(TReglement::class)->findAll();
@@ -255,7 +256,7 @@ class GestionFactureController extends AbstractController
         $reglement->setUserCreated($this->getUser());
         $this->em->persist($reglement);
         $this->em->flush();
-        $reglement->setCode($etablissement.'-REG'.str_pad($reglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+        $reglement->setCode('HEB-REG'.str_pad($reglement->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
         $this->em->flush();
         return new JsonResponse($reglement->getId(), 200);        
     }
@@ -448,22 +449,13 @@ class GestionFactureController extends AbstractController
     #[Route('/article_frais/{id}', name: 'article_frais_facture')]
     public function article_frais(Request $request,TOperationCab $operationcab): Response
     {   
-        $formation = $operationcab->getAnnee()->getFormation();
-        $categorie = $operationcab->getCategorie();
-        // if ($categorie == 'hors inscription' || $categorie == 'inscription') {
-        //     $frais = $this->em->getRepository(PFrais::class)->findBy(['formation'=>$formation,'active'=>1]);
-        // }elseif($formation->getEtablissement()->getAbreviation() == 'CFC'){
-        //     $frais = $this->em->getRepository(PFrais::class)->findBy(['formation'=>$formation,'active'=>1]);
-        // }else{
-        //     $frais = $this->em->getRepository(PFrais::class)->findBy(['formation'=>$formation,'active'=>1]);
-        //     // $frais = $this->em->getRepository(PFrais::class)->findBy(['formation'=>$formation,'categorie'=>$categorie,'active'=>1]);
-        // }
-        $frais = $this->em->getRepository(PFrais::class)->findBy(['formation'=>$formation,'active'=>1]);
+        $typeChambre = $operationcab->getLitInscription()->getLit()->getChambre()->getTypeChambre();
+        $frais = $this->em->getRepository(PFrais::class)->findBy(['typeChambre'=>$typeChambre,'active'=>1]);
         $data = "<option selected enabled value=''>Choix Fraix</option>";
         foreach ($frais as $frs) {
             $data .="<option value=".$frs->getId()." data-id=".$frs->getmontant().">".$frs->getDesignation()."</option>";
         }
-        $check = $operationcab->getOrganisme() == null ? 0 : 1;
+        $check = $operationcab->getOrganisme() == "Organisme" ? 0 : 1;
         return new JsonResponse([$check,$data], 200);
     }
     
@@ -508,28 +500,19 @@ class GestionFactureController extends AbstractController
             return new JsonResponse('Cette Facture Est Cloture', 500);  
         }
         // dd($request);
-        if(empty($request->get('montant'))  || $request->get('montant') == ' ' || empty($request->get('frais')) || $request->get('frais') == "" || ($operationcab->getOrganisme() == null and empty($request->get('organismeType')))){
+        if(empty($request->get('montant'))  || $request->get('montant') == ' ' || empty($request->get('frais')) || $request->get('frais') == "" || ($operationcab->getOrganisme() == "Organisme" and empty($request->get('organisme_id')))){
             return new JsonResponse('Merci de renseigner tous les champs!', 500);            
         }
-        if ($operationcab->getOrganisme() == null ) {
-            $operationcab->setOrganisme($request->get('organismeType'));
-            $this->em->flush();
-        }
-        // if (empty($request->get('organisme_id'))) {
-        //     return new JsonResponse('Merci de choisir une Organisme!', 500);
-        // }
-        // if ($operationcab->getOrganisme() == null ) {
-        //     return new JsonResponse('Organisme Introuvable!', 500);
+        // if ($operationcab->getOrganisme() == "Organisme" && empty($request->get('organisme_id')) ) {
+        //     return new JsonResponse('Merci de choisir une Organisme!', 500);    
         // }
         $frais =  $this->em->getRepository(PFrais::class)->find($request->get('frais'));
         if ($frais == null) {
             return new JsonResponse('Merci de verifier le frais!', 500);  
         }
-        if ($operationcab->getOrganisme() == 'Payant' ) {
-            $org = $this->em->getRepository(POrganisme::class)->find(7);
-        }else {
-            $org = $this->em->getRepository(POrganisme::class)->find(1);
-        }
+        $org = $operationcab->getOrganisme() == 'Payant' ? 7 : $request->get('organisme_id');
+        $org = $this->em->getRepository(POrganisme::class)->find($org);
+
         $operationDet = new TOperationdet();
         $operationDet->setOperationcab($operationcab);
         $operationDet->setFrais($frais);
@@ -946,7 +929,7 @@ class GestionFactureController extends AbstractController
         $this->em->persist($OrganismeOrganisme);
         $this->em->flush();
         $etab = $OrganismeOrganisme->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
-        $OrganismeOrganisme->setCode($etab.'-FAC'.str_pad($OrganismeOrganisme->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+        $OrganismeOrganisme->setCode('HEB-FAC'.str_pad($OrganismeOrganisme->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
         $this->em->flush();
         // dd($OrganismeOrganisme);
         return new JsonResponse('La facture organisme est bien Cree!', 200);    
@@ -991,7 +974,7 @@ class GestionFactureController extends AbstractController
         $this->em->persist($OrganismePayant);
         $this->em->flush();
         $etab = $OrganismePayant->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
-        $OrganismePayant->setCode($etab.'-FAC'.str_pad($OrganismePayant->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+        $OrganismePayant->setCode('HEB-FAC'.str_pad($OrganismePayant->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
         $this->em->flush();
         // dd($OrganismePayant);
         return new JsonResponse('La facture payant est bien Cree!', 200);    
@@ -1123,8 +1106,7 @@ class GestionFactureController extends AbstractController
         $operationcabN->setFacAnnuler($operationcab->getId()); 
         $this->em->persist($operationcabN);
         $this->em->flush();
-        $etab = $operationcab->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
-        $operationcabN->setCode($etab.'-FAC'.str_pad($operationcabN->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+        $operationcabN->setCode('HEB-FAC'.str_pad($operationcabN->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
 
         foreach ($operationcab->getOperationDets() as $det) {
             // dd($det);
@@ -1187,8 +1169,8 @@ class GestionFactureController extends AbstractController
             $operationcabN->setOrganisme('Payant'); 
             $this->em->persist($operationcabN);
             $this->em->flush();
-            $etab = $operationcab->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
-            $operationcabN->setCode($etab.'-FAC'.str_pad($operationcabN->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
+            // $etab = $operationcab->getAnnee()->getFormation()->getEtablissement()->getAbreviation();
+            $operationcabN->setCode('HEB-FAC'.str_pad($operationcabN->getId(), 8, '0', STR_PAD_LEFT).'/'.date('Y'));
             $this->em->flush();
             
         //     foreach ($operationcab->getOperationDets() as $det) {

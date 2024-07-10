@@ -156,9 +156,9 @@ $(document).ready(function () {
         .then((success) => {
           console.log(success.data[0]);
           if (success.data[0] == 0) {
-            $("#detail_facture_modal #orgDiv").css("display", "block");
+            $("#detail_facture_modal #select-organ").css("display", "block");
           } else {
-            $("#detail_facture_modal #orgDiv").css("display", "none");
+            $("#detail_facture_modal #select-organ").css("display", "none");
           }
           $("#detail_facture_modal #frais").html(success.data[1]).select2();
           $("#detail_facture_modal #montantt").val("");
@@ -182,7 +182,7 @@ $(document).ready(function () {
       $("#datables_facture tbody tr").removeClass("active_databales");
       $(this).addClass("active_databales");
       id_facture = $(this).attr("id");
-      console.log(id_facture);
+      // console.log(id_facture);
       // getOrganismeByFacture()
       getMontant();
       getFacture();
@@ -202,18 +202,18 @@ $(document).ready(function () {
     $("#detail_facture_modal").modal("show");
   });
 
-  $("input[type=radio][name=organ]").on("change", async function (e) {
-    e.preventDefault();
-    if (this.value == 0) {
-      const request = await axios.get("/api/getorganismepasPayant");
-      response = request.data;
-      $(".select-organ #org").html(response).select2();
-      $(".select-organ").css("display", "block");
-    } else {
-      $(".select-organ #org").html("");
-      $(".select-organ").css("display", "none");
-    }
-  });
+  // $("input[type=radio][name=organ]").on("change", async function (e) {
+  //   e.preventDefault();
+  //   if (this.value == 0) {
+  //     const request = await axios.get("/api/getorganismepasPayant");
+  //     response = request.data;
+  //     $(".select-organ #org").html(response).select2();
+  //     $(".select-organ").css("display", "block");
+  //   } else {
+  //     $(".select-organ #org").html("");
+  //     $(".select-organ").css("display", "none");
+  //   }
+  // });
   $("body").on("change", ".modal-facture #frais", function (e) {
     e.preventDefault();
     let frais = $(this).find(":selected").attr("data-id");
@@ -226,7 +226,7 @@ $(document).ready(function () {
     e.preventDefault();
     const icon = $(this).find("i");
     icon.removeClass("fa-plus").addClass("fa-spinner fa-spin");
-    // let organisme_id  = $('.select-organ #org').val();
+    let organisme_id  = $('.select-organ #org').val();
     // if ($("input[name='organ']:checked").val() == 1) {
     //     organisme_id = 7
     // }
@@ -235,7 +235,8 @@ $(document).ready(function () {
     formData.append("frais", $("#frais").val());
     formData.append("montant", $("#montantt").val());
     formData.append("ice", $("#ice").val());
-    formData.append("organismeType", $("#organismeType").val());
+    // formData.append("organismeType", $("#organismeType").val());
+    formData.append("organisme_id", organisme_id);
 
     let modalAlert = $(".modal-facture .modal-body .alert");
     modalAlert.remove();

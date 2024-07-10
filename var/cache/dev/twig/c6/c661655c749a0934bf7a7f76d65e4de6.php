@@ -218,9 +218,9 @@ class __TwigTemplate_74b5884076a92c603a5c01c55833e084 extends Template
         // line 99
         yield from         $this->loadTemplate("inscription/modals/statut.html.twig", "inscription/gestion_inscription.html.twig", 99)->unwrap()->yield($context);
         // line 100
-        yield from         $this->loadTemplate("inscription/modals/frais.html.twig", "inscription/gestion_inscription.html.twig", 100)->unwrap()->yield($context);
+        yield from         $this->loadTemplate("inscription/modals/annee_extraction.html.twig", "inscription/gestion_inscription.html.twig", 100)->unwrap()->yield($context);
         // line 101
-        yield from         $this->loadTemplate("inscription/modals/annee_extraction.html.twig", "inscription/gestion_inscription.html.twig", 101)->unwrap()->yield($context);
+        yield from         $this->loadTemplate("inscription/modals/affectation.html.twig", "inscription/gestion_inscription.html.twig", 101)->unwrap()->yield($context);
         // line 102
         yield "
 ";
@@ -389,8 +389,8 @@ class __TwigTemplate_74b5884076a92c603a5c01c55833e084 extends Template
 
 <!--Modal Import Group-->
 {% include 'inscription/modals/statut.html.twig' %}
-{% include 'inscription/modals/frais.html.twig' %}
 {% include 'inscription/modals/annee_extraction.html.twig' %}
+{% include 'inscription/modals/affectation.html.twig' %}
 
 {% endblock %}
 

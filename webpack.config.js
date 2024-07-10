@@ -29,7 +29,8 @@ Encore
     .addEntry('admission', './assets/components/admission/admissions.js')
     .addEntry('gestionadmission', './assets/components/admission/gestionadmission.js')
 
-    .addEntry('inscription', './assets/components/inscription/gestioninscription.js')
+    .addEntry('inscription', './assets/components/etudiant/gestioninscription.js')
+    .addEntry('hebergement', './assets/components/etudiant/gestionhebergement.js')
 
     .addEntry('facture', './assets/components/facture/facture.js')
     .addEntry('bordereau', './assets/components/facture/bordereau.js')
@@ -43,7 +44,7 @@ Encore
     .addEntry('chambre', './assets/components/parametre/chambre.js')
     .addEntry('synchronisation', './assets/components/parametre/synchronisation.js')
     // .addEntry('annee', './assets/components/parametre/annee.js')
-    // .addEntry('semestre', './assets/components/parametre/semestre.js')
+    .addEntry('lit', './assets/components/parametre/lit.js')
     .addEntry('user', './assets/components/parametre/user.js')
     // .addEntry('enseignant', './assets/components/parametre/enseignant.js')
     // .addEntry('salles', './assets/components/parametre/salles.js')

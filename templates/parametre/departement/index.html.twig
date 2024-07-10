@@ -7,11 +7,8 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-          <h1>Etablissements</h1>
+          <h1>Départements</h1>
           <div class="section-header-breadcrumb">
-              {# <a href="#" class="btn btn-success ml-1" id="modifier"><i class="fas fa-edit"></i>  Modifier</a>
-              <a href="#" class="btn btn-success ml-1" id="ajouter"><i class="fas fa-plus"></i>  Aouter</a> #}
-              {# <a href="#" class="btn btn-success ml-1" id="ajouter"><i class="fas fa-plus"></i>  Aouter</a> #}
               {% for operation in operations %}
                 <a href="{{operation.link}}" class="{{operation.classTag}}" id="{{operation.idTag}}"><i class="{{operation.icon}}"></i>  {{operation.designation}}</a>
               {% endfor %}
