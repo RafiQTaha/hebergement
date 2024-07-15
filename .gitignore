@@ -4,7 +4,4 @@
 /vendor/
 /migrations
 /node_modules/
-/.env.local
-/.env.local.php
-/.env.*.local
 /uploads/
