@@ -38,11 +38,28 @@ class LitInscriptionRepository extends ServiceEntityRepository
 
 //    public function findOneBySomeField($value): ?LitInscription
 //    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //        return $this->createQueryBuilder('l')
+    //            ->andWhere('l.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+    
+    public function FindAffectationByPeriode($inscription,$dateDebut,$dateFin): array
+    {
+        return $this->createQueryBuilder('affectation')
+            ->innerjoin('affectation.inscription','inscription')
+            ->andWhere('inscription = :inscription')
+            ->andWhere(':dateDebut BETWEEN affectation.start AND affectation.end OR :dateFin BETWEEN affectation.start AND affectation.end')
+            ->setParameter('inscription', $inscription)
+            ->setParameter('dateDebut', $dateDebut)
+            ->setParameter('dateFin', $dateFin)
+            // ->orderBy('l.id', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            // ->getOneOrNullResult()
+            ->getResult()
+        ;
+    }
 }

@@ -168,10 +168,20 @@ class GestionInscriptionController extends AbstractController
     public function affectation(Request $request)
     {
         
+        $dateDebut = new DateTime($request->get('date_debut'));
+        $dateFin = new DateTime($request->get('date_fin'));
         // dd($request->get('inscription_id'));
         
-        $inscription = $this->em->getRepository(TInscription::class)->find($request->get('inscription_id'));
         // dd($inscription->getStatut()->getId());
+        $inscription = $this->em->getRepository(TInscription::class)->find($request->get('inscription_id'));
+        if ($inscription->getStatut()->getId() != 13) {
+            return new JsonResponse("Cet Etudiant n'est plus inscrit sur systeme !");
+        }
+        $exist = $this->em->getRepository(LitInscription::class)->FindAffectationByPeriode($inscription,$dateDebut,$dateFin);
+        if ($exist) {
+            return new JsonResponse("Cet étudiant a déjà une réservation pour cette période !");
+        }
+        dd($exist);
         $lit = $this->em->getRepository(Lit::class)->find($request->get('lit'));
         if (!$inscription || !$lit) {
             return new JsonResponse('inscription ou Lit Introuvable !', 500);
@@ -179,14 +189,13 @@ class GestionInscriptionController extends AbstractController
         if ($request->get('date_debut') == "" or $request->get('date_fin') == "") {
             return new JsonResponse('Merci de remplir tout les champs!!', 500);
         }
-        if ($inscription->getStatut()->getId() != 13) {
-            return new JsonResponse("Cet Etudiant n'est plus inscrit sur systeme !");
-        }
         $dateDebut = new DateTime($request->get('date_debut'));
         $dateFin = new DateTime($request->get('date_fin'));
         if ($dateDebut >= $dateFin) {
             return new JsonResponse('La date Fin doit etre superieur au Date Debut!!', 500);
         }
+        
+
         
         $litInscription = new LitInscription();
         $litInscription->setLit($lit);
@@ -227,113 +236,113 @@ class GestionInscriptionController extends AbstractController
         return new JsonResponse("Bien Enregistre", 200);
     }
 
-    #[Route('/frais/{inscription}', name: 'getFraisByInscription')]
-    public function getFraisByInscription(TInscription $inscription): Response
-    {   
-        $operationcab = $this->em->getRepository(TOperationcab::class)->findOneBy(['preinscription'=>$inscription->getAdmission()->getPreinscription(),'categorie'=>'inscription']);
-        // dd($operationcab);
-        if (!$operationcab) {
-            return new JsonResponse('Facture Introuvable!', 500); 
-        }
-        $frais = $this->em->getRepository(PFrais::class)->findBy(["formation" => $inscription->getAnnee()->getFormation(), "categorie" => "inscription",'active'=>1]);
-        $data = ApiController::dropdownData($frais,'frais');
-        return new JsonResponse(['list' => $data, 'codefacture' => $operationcab->getCode()], 200); 
-    }
-    #[Route('/info/{inscription}', name: 'getInformationByInscription')]
-    public function getFraisByFormation(TInscription $inscription): Response
-    {   
-        $admission = $inscription->getAdmission();
-        $etudiant = $admission->getPreinscription()->getEtudiant();
-        $natutre = $admission->getPreinscription()->getNature();
-        $annee = $admission->getPreinscription()->getAnnee();
-        $formation =$annee->getFormation();
-        $etablissement=$formation->getEtablissement();
-        $donnee_frais = "<p><span>Etablissement</span> : ".$etablissement->getDesignation()."</p>
-                        <p><span>Formation</span> : ".$formation->getDesignation()."</p>
-                        <p><span>Categorie</span> : ".$natutre->getDesignation()."</p>
-                        <p><span>Nom</span> : ".$etudiant->getNom()."</p>
-                        <p><span>Prenom</span> : ".$etudiant->getPrenom()."</p>
-                        <p><span>Cin</span> : ".$etudiant->getCin()."</p>
-                        <p><span>Cne</span> : ".$etudiant->getCne()."</p>";
-        return new JsonResponse($donnee_frais, 200);       
-    }
-    #[Route('/addfrais/{inscription}', name: 'inscription_addfrais')]
-    public function inscriptionAddFrais(Request $request, TInscription $inscription): Response
-    {
-        $arrayOfFrais = json_decode($request->get('frais'));
-        $preinscription = $inscription->getAdmission()->getPreinscription();
-        $operationCab = $this->em->getRepository(TOperationcab::class)->findOneBy(['preinscription'=>$preinscription,'categorie'=>'inscription']);
-        if ($operationCab->getActive() == 0) {
-            return new JsonResponse('Facture Cloturée', 500);
-        }
-        foreach ($arrayOfFrais as $fraisObject) {
-            $frais =  $this->em->getRepository(PFrais::class)->find($fraisObject->id);
-            $operationDet = new TOperationdet();
-            $operationDet->setOperationcab($operationCab);
-            $operationDet->setFrais($frais);
-            $operationDet->setMontant($fraisObject->montant);
-            $operationDet->setIce($fraisObject->ice);
-            $operationDet->setCreated(new \DateTime("now"));
-            $operationDet->setUpdated(new \DateTime("now"));
-            $operationDet->setOrganisme($this->em->getRepository(POrganisme::class)->find($fraisObject->organisme_id));
-            $operationDet->setRemise(0);
-            $operationDet->setActive(1);
-            $this->em->persist($operationDet);
-            $this->em->flush();
-            $operationDet->setCode(
-                "OPD".str_pad($operationDet->getId(), 8, '0', STR_PAD_LEFT)
-            );
-            $this->em->flush();
-        }
+    // #[Route('/frais/{inscription}', name: 'getFraisByInscription')]
+    // public function getFraisByInscription(TInscription $inscription): Response
+    // {   
+    //     $operationcab = $this->em->getRepository(TOperationcab::class)->findOneBy(['preinscription'=>$inscription->getAdmission()->getPreinscription(),'categorie'=>'inscription']);
+    //     // dd($operationcab);
+    //     if (!$operationcab) {
+    //         return new JsonResponse('Facture Introuvable!', 500); 
+    //     }
+    //     $frais = $this->em->getRepository(PFrais::class)->findBy(["formation" => $inscription->getAnnee()->getFormation(), "categorie" => "inscription",'active'=>1]);
+    //     $data = ApiController::dropdownData($frais,'frais');
+    //     return new JsonResponse(['list' => $data, 'codefacture' => $operationcab->getCode()], 200); 
+    // }
+    // #[Route('/info/{inscription}', name: 'getInformationByInscription')]
+    // public function getFraisByFormation(TInscription $inscription): Response
+    // {   
+    //     $admission = $inscription->getAdmission();
+    //     $etudiant = $admission->getPreinscription()->getEtudiant();
+    //     $natutre = $admission->getPreinscription()->getNature();
+    //     $annee = $admission->getPreinscription()->getAnnee();
+    //     $formation =$annee->getFormation();
+    //     $etablissement=$formation->getEtablissement();
+    //     $donnee_frais = "<p><span>Etablissement</span> : ".$etablissement->getDesignation()."</p>
+    //                     <p><span>Formation</span> : ".$formation->getDesignation()."</p>
+    //                     <p><span>Categorie</span> : ".$natutre->getDesignation()."</p>
+    //                     <p><span>Nom</span> : ".$etudiant->getNom()."</p>
+    //                     <p><span>Prenom</span> : ".$etudiant->getPrenom()."</p>
+    //                     <p><span>Cin</span> : ".$etudiant->getCin()."</p>
+    //                     <p><span>Cne</span> : ".$etudiant->getCne()."</p>";
+    //     return new JsonResponse($donnee_frais, 200);       
+    // }
+    // #[Route('/addfrais/{inscription}', name: 'inscription_addfrais')]
+    // public function inscriptionAddFrais(Request $request, TInscription $inscription): Response
+    // {
+    //     $arrayOfFrais = json_decode($request->get('frais'));
+    //     $preinscription = $inscription->getAdmission()->getPreinscription();
+    //     $operationCab = $this->em->getRepository(TOperationcab::class)->findOneBy(['preinscription'=>$preinscription,'categorie'=>'inscription']);
+    //     if ($operationCab->getActive() == 0) {
+    //         return new JsonResponse('Facture Cloturée', 500);
+    //     }
+    //     foreach ($arrayOfFrais as $fraisObject) {
+    //         $frais =  $this->em->getRepository(PFrais::class)->find($fraisObject->id);
+    //         $operationDet = new TOperationdet();
+    //         $operationDet->setOperationcab($operationCab);
+    //         $operationDet->setFrais($frais);
+    //         $operationDet->setMontant($fraisObject->montant);
+    //         $operationDet->setIce($fraisObject->ice);
+    //         $operationDet->setCreated(new \DateTime("now"));
+    //         $operationDet->setUpdated(new \DateTime("now"));
+    //         $operationDet->setOrganisme($this->em->getRepository(POrganisme::class)->find($fraisObject->organisme_id));
+    //         $operationDet->setRemise(0);
+    //         $operationDet->setActive(1);
+    //         $this->em->persist($operationDet);
+    //         $this->em->flush();
+    //         $operationDet->setCode(
+    //             "OPD".str_pad($operationDet->getId(), 8, '0', STR_PAD_LEFT)
+    //         );
+    //         $this->em->flush();
+    //     }
 
-        return new JsonResponse($operationCab->getId(), 200);
-    }
-    #[Route('/facture/{operationcab}', name: 'inscription_facture')]
-    public function factureInscription(Request $request, TOperationcab $operationcab)
-    {
-        $operationdets = $this->em->getRepository(TOperationdet::class)->FindDetGroupByFrais($operationcab);
-        $operationdetslist = [];
-        foreach ($operationdets as $operationdet) {
-            $frais = $operationdet->getFrais();
-            $SumByOrg = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndOrganisme($operationcab,$frais);
-            $SumByOrgPyt = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndOrganismePayant($operationcab,$frais);
-            $SumByPayant = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndPayant($operationcab,$frais);
-            $list['dateOperation'] = $this->em->getRepository(TOperationdet::class)->findOneBy(['operationcab'=>$operationcab,'frais'=>$frais],['created'=>'DESC'])->getCreated()->format('d/m/Y');
-            $list['designation'] = $operationdet->getFrais()->getDesignation();
-            $list['SumByOrg'] = $SumByOrg;
-            $list['SumByOrgPyt'] = $SumByOrgPyt;
-            $list['SumByPayant'] = $SumByPayant;
-            $list['total'] = $SumByPayant + $SumByOrg;
-            array_push($operationdetslist,$list);
-        }
-        $inscription = $this->em->getRepository(TInscription::class)->findOneBy([
-            'admission'=>$this->em->getRepository(TAdmission::class)->findBy([
-                'preinscription'=>$operationcab->getPreinscription()]),
-            'annee' => $operationcab->getAnnee()]);
-        $promotion = $inscription == NULL ? "" : $inscription->getPromotion()->getDesignation();
+    //     return new JsonResponse($operationCab->getId(), 200);
+    // }
+    // #[Route('/facture/{operationcab}', name: 'inscription_facture')]
+    // public function factureInscription(Request $request, TOperationcab $operationcab)
+    // {
+    //     $operationdets = $this->em->getRepository(TOperationdet::class)->FindDetGroupByFrais($operationcab);
+    //     $operationdetslist = [];
+    //     foreach ($operationdets as $operationdet) {
+    //         $frais = $operationdet->getFrais();
+    //         $SumByOrg = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndOrganisme($operationcab,$frais);
+    //         $SumByOrgPyt = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndOrganismePayant($operationcab,$frais);
+    //         $SumByPayant = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndPayant($operationcab,$frais);
+    //         $list['dateOperation'] = $this->em->getRepository(TOperationdet::class)->findOneBy(['operationcab'=>$operationcab,'frais'=>$frais],['created'=>'DESC'])->getCreated()->format('d/m/Y');
+    //         $list['designation'] = $operationdet->getFrais()->getDesignation();
+    //         $list['SumByOrg'] = $SumByOrg;
+    //         $list['SumByOrgPyt'] = $SumByOrgPyt;
+    //         $list['SumByPayant'] = $SumByPayant;
+    //         $list['total'] = $SumByPayant + $SumByOrg;
+    //         array_push($operationdetslist,$list);
+    //     }
+    //     $inscription = $this->em->getRepository(TInscription::class)->findOneBy([
+    //         'admission'=>$this->em->getRepository(TAdmission::class)->findBy([
+    //             'preinscription'=>$operationcab->getPreinscription()]),
+    //         'annee' => $operationcab->getAnnee()]);
+    //     $promotion = $inscription == NULL ? "" : $inscription->getPromotion()->getDesignation();
         
-        $reglementOrg = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByOrganisme($operationcab)['total'];
-        $reglementPyt = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByPayant($operationcab)['total'];
+    //     $reglementOrg = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByOrganisme($operationcab)['total'];
+    //     $reglementPyt = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByPayant($operationcab)['total'];
         
-        $html = $this->render("facture/pdfs/facture_facture.html.twig", [
-            'reglementOrg' => $reglementOrg,
-            'reglementPyt' => $reglementPyt,
-            'operationcab' => $operationcab,
-            'promotion' => $promotion,
-            'operationdets' => $operationdetslist
-        ])->getContent();
-        $mpdf = new Mpdf([
-            'mode' => 'utf-8',
-            'margin_top' => 5,
-        ]);        
-        $mpdf->SetTitle('Facture');
-        $mpdf->SetHTMLFooter(
-            $this->render("facture/pdfs/footer.html.twig")->getContent()
-        );
-        $mpdf->showImageErrors = true;
-        $mpdf->WriteHTML($html);
-        $mpdf->Output("facture.pdf", "I");
-    }
+    //     $html = $this->render("facture/pdfs/facture_facture.html.twig", [
+    //         'reglementOrg' => $reglementOrg,
+    //         'reglementPyt' => $reglementPyt,
+    //         'operationcab' => $operationcab,
+    //         'promotion' => $promotion,
+    //         'operationdets' => $operationdetslist
+    //     ])->getContent();
+    //     $mpdf = new Mpdf([
+    //         'mode' => 'utf-8',
+    //         'margin_top' => 5,
+    //     ]);        
+    //     $mpdf->SetTitle('Facture');
+    //     $mpdf->SetHTMLFooter(
+    //         $this->render("facture/pdfs/footer.html.twig")->getContent()
+    //     );
+    //     $mpdf->showImageErrors = true;
+    //     $mpdf->WriteHTML($html);
+    //     $mpdf->Output("facture.pdf", "I");
+    // }
     
     #[Route('/extraction_ins', name: 'extraction_ins')]
     public function extraction_ins()

@@ -48,41 +48,6 @@ const Toast = Swal.mixin({
         language: datatablesFrench,
     });
 
-    const getStatutInscription = async () => {
-        const icon = $('#statut-modal i')
-        try {
-            icon.removeClass('fa-check').addClass('fa-spinner fa-spin')
-            const request = await axios.get("/etudiant/inscription/getstatut/"+id_inscription);
-            const data = await request.data;
-            $('#statut_inscription').html(data).select2();
-        } catch (error) {
-            const message = error.response.data;
-            console.log(error, error.response);
-            Toast.fire({
-                icon: 'error',
-                title: "Some Error",
-            })    
-        }
-        icon.addClass('fa-check').removeClass('fa-spinner fa-spin')
-    }
-    $("#frais").on("change", () => {
-        $("#montant").val($("#frais").find(":selected").data('frais'))
-    })
-    const getOrganisme = async () => {
-        try {
-            const request = await axios.get("/api/organisme");
-            const data = await request.data;
-            $('#organisme').html(data).select2();
-          } catch (error) {
-            const message = error.response.data;
-            console.log(error, error.response);
-            Toast.fire({
-                icon: 'error',
-                title: 'Some Error',
-            })    
-        }
-    }
-    // getOrganisme();
     $("body select").select2()
     $("#etablissement").on('change', async function (){
         const id_etab = $(this).val();
@@ -136,17 +101,17 @@ const Toast = Swal.mixin({
         table.columns(2).search($("#promotion").val()).draw();
     })
 
-    $('body').on('click','#datatables_gestion_inscription tbody tr',function () {
-        const input = $(this).find("input");
-        if(input.is(":checked")){
-            input.prop("checked",false);
-            const index = idInscription.indexOf(input.attr("id"));
-            idInscription.splice(index,1);
-        }else{
-            input.prop("checked",true);
-            idInscription.push(input.attr("id"));
-        }
-    })
+    // $('body').on('click','#datatables_gestion_inscription tbody tr',function () {
+    //     const input = $(this).find("input");
+    //     if(input.is(":checked")){
+    //         input.prop("checked",false);
+    //         const index = idInscription.indexOf(input.attr("id"));
+    //         idInscription.splice(index,1);
+    //     }else{
+    //         input.prop("checked",true);
+    //         idInscription.push(input.attr("id"));
+    //     }
+    // })
     $('body').on('dblclick','#datatables_gestion_inscription tbody tr',function () {
         // const input = $(this).find("input");
         

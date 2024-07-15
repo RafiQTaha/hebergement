@@ -173,204 +173,198 @@ return [
                 .')'
                 .'|/etudiant/inscription/(?'
                     .'|getstatut/([^/]++)(*:482)'
-                    .'|f(?'
-                        .'|rais/([^/]++)(*:507)'
-                        .'|acture/([^/]++)(*:530)'
-                    .')'
-                    .'|info/([^/]++)(*:552)'
-                    .'|addfrais/([^/]++)(*:577)'
-                    .'|extraction_ins_annee/([^/]++)(*:614)'
+                    .'|extraction_ins_annee/([^/]++)(*:519)'
                 .')'
                 .'|/facture/(?'
                     .'|bordereau/(?'
-                        .'|print_borderaux/([^/]++)(*:672)'
-                        .'|supprimer_borderaux/([^/]++)(*:708)'
-                        .'|extraction_borderaux/([^/]++)(*:745)'
+                        .'|print_borderaux/([^/]++)(*:577)'
+                        .'|supprimer_borderaux/([^/]++)(*:613)'
+                        .'|extraction_borderaux/([^/]++)(*:650)'
                     .')'
                     .'|factures/(?'
                         .'|a(?'
                             .'|jouter_(?'
-                                .'|reglement/([^/]++)(*:798)'
-                                .'|pec/([^/]++)(*:818)'
+                                .'|reglement/([^/]++)(*:703)'
+                                .'|pec/([^/]++)(*:723)'
                             .')'
-                            .'|rticle_frais/([^/]++)(*:848)'
-                            .'|dd_detaille/([^/]++)(*:876)'
+                            .'|rticle_frais/([^/]++)(*:753)'
+                            .'|dd_detaille/([^/]++)(*:781)'
                         .')'
                         .'|get(?'
-                            .'|Montant/([^/]++)(*:907)'
-                            .'|FacturePec/([^/]++)(*:934)'
+                            .'|Montant/([^/]++)(*:812)'
+                            .'|FacturePec/([^/]++)(*:839)'
                         .')'
-                        .'|facture/([^/]++)/([^/]++)(*:968)'
-                        .'|printfacture/([^/]++)(*:997)'
-                        .'|releve/([^/]++)(*:1020)'
-                        .'|detaille_facture/([^/]++)(*:1054)'
+                        .'|facture/([^/]++)/([^/]++)(*:873)'
+                        .'|printfacture/([^/]++)(*:902)'
+                        .'|releve/([^/]++)(*:925)'
+                        .'|detaille_facture/([^/]++)(*:958)'
                         .'|cloture_(?'
-                            .'|detaille/([^/]++)(*:1091)'
-                            .'|all_detaille/([^/]++)(*:1121)'
+                            .'|detaille/([^/]++)(*:994)'
+                            .'|all_detaille/([^/]++)(*:1023)'
                         .')'
                         .'|extraction_factures_(?'
-                            .'|by_annee/([^/]++)(*:1171)'
-                            .'|nonInscrits/([^/]++)(*:1200)'
+                            .'|by_annee/([^/]++)(*:1073)'
+                            .'|nonInscrits/([^/]++)(*:1102)'
                         .')'
                     .')'
                     .'|reglements/(?'
-                        .'|reglementprint/([^/]++)(*:1248)'
-                        .'|borderaux/([^/]++)/([^/]++)(*:1284)'
-                        .'|printborderaux/([^/]++)(*:1316)'
-                        .'|annuler_reglement/([^/]++)(*:1351)'
-                        .'|getReglementInfos/([^/]++)(*:1386)'
-                        .'|modifier_reglement/([^/]++)(*:1422)'
+                        .'|reglementprint/([^/]++)(*:1150)'
+                        .'|borderaux/([^/]++)/([^/]++)(*:1186)'
+                        .'|printborderaux/([^/]++)(*:1218)'
+                        .'|annuler_reglement/([^/]++)(*:1253)'
+                        .'|getReglementInfos/([^/]++)(*:1288)'
+                        .'|modifier_reglement/([^/]++)(*:1324)'
                     .')'
                 .')'
                 .'|/parametre/(?'
                     .'|a(?'
                         .'|cademie/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:1481)'
-                                .'|lete/([^/]++)(*:1503)'
+                                .'|tails/([^/]++)(*:1383)'
+                                .'|lete/([^/]++)(*:1405)'
                             .')'
-                            .'|update/([^/]++)(*:1528)'
+                            .'|update/([^/]++)(*:1430)'
                         .')'
                         .'|nnee/(?'
-                            .'|active_annee/([^/]++)(*:1567)'
+                            .'|active_annee/([^/]++)(*:1469)'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:1595)'
-                                .'|lete/([^/]++)(*:1617)'
+                                .'|tails/([^/]++)(*:1497)'
+                                .'|lete/([^/]++)(*:1519)'
                             .')'
-                            .'|update/([^/]++)(*:1642)'
+                            .'|update/([^/]++)(*:1544)'
                         .')'
                     .')'
                     .'|banque/(?'
                         .'|de(?'
-                            .'|tails/([^/]++)(*:1682)'
-                            .'|lete/([^/]++)(*:1704)'
+                            .'|tails/([^/]++)(*:1584)'
+                            .'|lete/([^/]++)(*:1606)'
                         .')'
-                        .'|update/([^/]++)(*:1729)'
+                        .'|update/([^/]++)(*:1631)'
                     .')'
                     .'|chambre/(?'
                         .'|de(?'
-                            .'|tails/([^/]++)(*:1769)'
-                            .'|lete/([^/]++)(*:1791)'
+                            .'|tails/([^/]++)(*:1671)'
+                            .'|lete/([^/]++)(*:1693)'
                         .')'
-                        .'|update/([^/]++)(*:1816)'
+                        .'|update/([^/]++)(*:1718)'
                     .')'
                     .'|departement/(?'
                         .'|de(?'
-                            .'|tails/([^/]++)(*:1860)'
-                            .'|lete/([^/]++)(*:1882)'
+                            .'|tails/([^/]++)(*:1762)'
+                            .'|lete/([^/]++)(*:1784)'
                         .')'
-                        .'|update/([^/]++)(*:1907)'
+                        .'|update/([^/]++)(*:1809)'
                     .')'
                     .'|e(?'
                         .'|lement/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:1950)'
-                                .'|lete/([^/]++)(*:1972)'
+                                .'|tails/([^/]++)(*:1852)'
+                                .'|lete/([^/]++)(*:1874)'
                             .')'
-                            .'|update/([^/]++)(*:1997)'
+                            .'|update/([^/]++)(*:1899)'
                         .')'
                         .'|nseignant/(?'
                             .'|de(?'
-                                .'|tailles/([^/]++)(*:2041)'
-                                .'|lete/([^/]++)(*:2063)'
+                                .'|tailles/([^/]++)(*:1943)'
+                                .'|lete/([^/]++)(*:1965)'
                             .')'
-                            .'|update/([^/]++)(*:2088)'
+                            .'|update/([^/]++)(*:1990)'
                         .')'
                         .'|tage/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2125)'
-                                .'|lete/([^/]++)(*:2147)'
+                                .'|tails/([^/]++)(*:2027)'
+                                .'|lete/([^/]++)(*:2049)'
                             .')'
-                            .'|update/([^/]++)(*:2172)'
+                            .'|update/([^/]++)(*:2074)'
                         .')'
                     .')'
                     .'|f(?'
                         .'|iliere/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2216)'
-                                .'|lete/([^/]++)(*:2238)'
+                                .'|tails/([^/]++)(*:2118)'
+                                .'|lete/([^/]++)(*:2140)'
                             .')'
-                            .'|update/([^/]++)(*:2263)'
+                            .'|update/([^/]++)(*:2165)'
                         .')'
                         .'|rais/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2300)'
-                                .'|lete/([^/]++)(*:2322)'
+                                .'|tails/([^/]++)(*:2202)'
+                                .'|lete/([^/]++)(*:2224)'
                             .')'
-                            .'|update/([^/]++)(*:2347)'
+                            .'|update/([^/]++)(*:2249)'
                         .')'
                     .')'
                     .'|l(?'
                         .'|angues/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2391)'
-                                .'|lete/([^/]++)(*:2413)'
+                                .'|tails/([^/]++)(*:2293)'
+                                .'|lete/([^/]++)(*:2315)'
                             .')'
-                            .'|update/([^/]++)(*:2438)'
+                            .'|update/([^/]++)(*:2340)'
                         .')'
                         .'|it/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2473)'
-                                .'|lete/([^/]++)(*:2495)'
+                                .'|tails/([^/]++)(*:2375)'
+                                .'|lete/([^/]++)(*:2397)'
                             .')'
-                            .'|update/([^/]++)(*:2520)'
+                            .'|update/([^/]++)(*:2422)'
                         .')'
                     .')'
                     .'|mod(?'
                         .'|alites/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2566)'
-                                .'|lete/([^/]++)(*:2588)'
+                                .'|tails/([^/]++)(*:2468)'
+                                .'|lete/([^/]++)(*:2490)'
                             .')'
-                            .'|update/([^/]++)(*:2613)'
+                            .'|update/([^/]++)(*:2515)'
                         .')'
                         .'|ule/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2649)'
-                                .'|lete/([^/]++)(*:2671)'
+                                .'|tails/([^/]++)(*:2551)'
+                                .'|lete/([^/]++)(*:2573)'
                             .')'
-                            .'|update/([^/]++)(*:2696)'
+                            .'|update/([^/]++)(*:2598)'
                         .')'
                     .')'
                     .'|programmation/(?'
-                        .'|details/([^/]++)(*:2740)'
-                        .'|update/([^/]++)(*:2764)'
+                        .'|details/([^/]++)(*:2642)'
+                        .'|update/([^/]++)(*:2666)'
                     .')'
                     .'|s(?'
                         .'|alles/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2806)'
-                                .'|lete/([^/]++)(*:2828)'
+                                .'|tails/([^/]++)(*:2708)'
+                                .'|lete/([^/]++)(*:2730)'
                             .')'
-                            .'|update/([^/]++)(*:2853)'
+                            .'|update/([^/]++)(*:2755)'
                         .')'
                         .'|eriebac/(?'
                             .'|de(?'
-                                .'|tails/([^/]++)(*:2893)'
-                                .'|lete/([^/]++)(*:2915)'
+                                .'|tails/([^/]++)(*:2795)'
+                                .'|lete/([^/]++)(*:2817)'
                             .')'
-                            .'|update/([^/]++)(*:2940)'
+                            .'|update/([^/]++)(*:2842)'
                         .')'
                     .')'
                     .'|typebac/(?'
                         .'|de(?'
-                            .'|tails/([^/]++)(*:2981)'
-                            .'|lete/([^/]++)(*:3003)'
+                            .'|tails/([^/]++)(*:2883)'
+                            .'|lete/([^/]++)(*:2905)'
                         .')'
-                        .'|update/([^/]++)(*:3028)'
+                        .'|update/([^/]++)(*:2930)'
                     .')'
                     .'|user/(?'
-                        .'|getoperations/([^/]++)(*:3068)'
+                        .'|getoperations/([^/]++)(*:2970)'
                         .'|a(?'
-                            .'|ll/([^/]++)/([^/]++)(*:3101)'
-                            .'|ctive/([^/]++)/([^/]++)(*:3133)'
+                            .'|ll/([^/]++)/([^/]++)(*:3003)'
+                            .'|ctive/([^/]++)/([^/]++)(*:3035)'
                         .')'
-                        .'|sousmodule/([^/]++)/([^/]++)/([^/]++)(*:3180)'
-                        .'|module/([^/]++)/([^/]++)/([^/]++)(*:3222)'
-                        .'|operation/([^/]++)/([^/]++)/([^/]++)(*:3267)'
+                        .'|sousmodule/([^/]++)/([^/]++)/([^/]++)(*:3082)'
+                        .'|module/([^/]++)/([^/]++)/([^/]++)(*:3124)'
+                        .'|operation/([^/]++)/([^/]++)/([^/]++)(*:3169)'
                     .')'
                 .')'
-                .'|/reinitialiser/([^/]++)(*:3301)'
+                .'|/reinitialiser/([^/]++)(*:3203)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -392,95 +386,91 @@ return [
         398 => [[['_route' => 'getlit', '_controller' => 'App\\Controller\\ApiController::getLit'], ['id'], null, null, false, true, null]],
         430 => [[['_route' => 'getnatureetudiant', '_controller' => 'App\\Controller\\ApiController::getNatureEtudiant'], ['admission'], null, null, false, true, null]],
         482 => [[['_route' => 'gestion_statut', '_controller' => 'App\\Controller\\Etudiant\\GestionInscriptionController::inscriptionStatut'], ['inscription'], null, null, false, true, null]],
-        507 => [[['_route' => 'getFraisByInscription', '_controller' => 'App\\Controller\\Etudiant\\GestionInscriptionController::getFraisByInscription'], ['inscription'], null, null, false, true, null]],
-        530 => [[['_route' => 'inscription_facture', '_controller' => 'App\\Controller\\Etudiant\\GestionInscriptionController::factureInscription'], ['operationcab'], null, null, false, true, null]],
-        552 => [[['_route' => 'getInformationByInscription', '_controller' => 'App\\Controller\\Etudiant\\GestionInscriptionController::getFraisByFormation'], ['inscription'], null, null, false, true, null]],
-        577 => [[['_route' => 'inscription_addfrais', '_controller' => 'App\\Controller\\Etudiant\\GestionInscriptionController::inscriptionAddFrais'], ['inscription'], null, null, false, true, null]],
-        614 => [[['_route' => 'extraction_ins_annee', '_controller' => 'App\\Controller\\Etudiant\\GestionInscriptionController::extraction_ins_annee'], ['annee'], null, null, false, true, null]],
-        672 => [[['_route' => 'print_borderaux', '_controller' => 'App\\Controller\\Facture\\BordereauController::printborderaux'], ['borderaux'], null, null, false, true, null]],
-        708 => [[['_route' => 'supprimer_borderau', '_controller' => 'App\\Controller\\Facture\\BordereauController::supprimerborderau'], ['bordereau'], null, null, false, true, null]],
-        745 => [[['_route' => 'extraction_borderaux', '_controller' => 'App\\Controller\\Facture\\BordereauController::extraction_borderaux'], ['bordereau'], null, null, false, true, null]],
-        798 => [[['_route' => 'facture_ajouter_reglement', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::ajouter_reglement'], ['id'], null, null, false, true, null]],
-        818 => [[['_route' => 'ajouter_pec', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::ajouter_pec'], ['id'], null, null, false, true, null]],
-        848 => [[['_route' => 'article_frais_facture', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::article_frais'], ['id'], null, null, false, true, null]],
-        876 => [[['_route' => 'add_detaille', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::add_detaille'], ['id'], null, null, false, true, null]],
-        907 => [[['_route' => 'getMontant', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::getMontant'], ['id'], null, null, false, true, null]],
-        934 => [[['_route' => 'getFacturePec', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::getFacturePec'], ['id'], null, null, false, true, null]],
-        968 => [[['_route' => 'imprimer_facture_reglement', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::imprimer_facture_reglement'], ['operationcab', 'reglement'], null, null, false, true, null]],
-        997 => [[['_route' => 'imprimerfacture', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::imprimerfacture'], ['operationcab'], null, null, false, true, null]],
-        1020 => [[['_route' => 'imprimerreleve', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::imprimerreleve'], ['operationcab'], null, null, false, true, null]],
-        1054 => [[['_route' => 'detaille_facture', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::detaille_facture'], ['id'], null, null, false, true, null]],
-        1091 => [[['_route' => 'cloture_detaille', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::cloture_detaille'], ['id'], null, null, false, true, null]],
-        1121 => [[['_route' => 'cloture_all_detaille', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::cloture_all_detaille'], ['id'], null, null, false, true, null]],
-        1171 => [[['_route' => 'extraction_factures_by_annee', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::extraction_factures_by_annee'], ['annee'], null, null, false, true, null]],
-        1200 => [[['_route' => 'extraction_factures_nonInscrits', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::extraction_factures_nonInscrits'], ['annee'], null, null, false, true, null]],
-        1248 => [[['_route' => 'imprimer_reglement_reglement', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::imprimer_reglement_reglement'], ['reglement'], null, null, false, true, null]],
-        1284 => [[['_route' => 'reglement_borderaux', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::reglement_borderaux'], ['formation', 'paiement'], null, null, false, true, null]],
-        1316 => [[['_route' => 'printborderaux', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::printborderaux'], ['borderaux'], null, null, false, true, null]],
-        1351 => [[['_route' => 'annuler_reglement', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::annuler_reglement'], ['reglement'], null, null, false, true, null]],
-        1386 => [[['_route' => 'getReglementInfos', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::getReglementInfos'], ['reglement'], null, null, false, true, null]],
-        1422 => [[['_route' => 'modifier_reglement', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::ajouter_reglement'], ['id'], null, null, false, true, null]],
-        1481 => [[['_route' => 'parametre_academie_details', '_controller' => 'App\\Controller\\Parametre\\AcademieController::details'], ['academie'], null, null, false, true, null]],
-        1503 => [[['_route' => 'parametre_academie_delete', '_controller' => 'App\\Controller\\Parametre\\AcademieController::delete'], ['academie'], null, null, false, true, null]],
-        1528 => [[['_route' => 'parametre_academie_update', '_controller' => 'App\\Controller\\Parametre\\AcademieController::update'], ['academie'], null, null, false, true, null]],
-        1567 => [[['_route' => 'parametre_active_annee', '_controller' => 'App\\Controller\\Parametre\\AnneeController::parametre_active_annee'], ['annee'], null, null, false, true, null]],
-        1595 => [[['_route' => 'parametre_annee_details', '_controller' => 'App\\Controller\\Parametre\\AnneeController::details'], ['annee'], null, null, false, true, null]],
-        1617 => [[['_route' => 'parametre_annee_delete', '_controller' => 'App\\Controller\\Parametre\\AnneeController::delete'], ['annee'], null, null, false, true, null]],
-        1642 => [[['_route' => 'parametre_annee_update', '_controller' => 'App\\Controller\\Parametre\\AnneeController::update'], ['annee'], null, null, false, true, null]],
-        1682 => [[['_route' => 'parametre_banque_details', '_controller' => 'App\\Controller\\Parametre\\BanqueController::details'], ['banque'], null, null, false, true, null]],
-        1704 => [[['_route' => 'parametre_banque_delete', '_controller' => 'App\\Controller\\Parametre\\BanqueController::delete'], ['banque'], null, null, false, true, null]],
-        1729 => [[['_route' => 'parametre_banque_update', '_controller' => 'App\\Controller\\Parametre\\BanqueController::update'], ['banque'], null, null, false, true, null]],
-        1769 => [[['_route' => 'parametre_chambre_details', '_controller' => 'App\\Controller\\Parametre\\ChambreController::details'], ['chambre'], null, null, false, true, null]],
-        1791 => [[['_route' => 'parametre_chambre_delete', '_controller' => 'App\\Controller\\Parametre\\ChambreController::delete'], ['chambre'], null, null, false, true, null]],
-        1816 => [[['_route' => 'parametre_chambre_update', '_controller' => 'App\\Controller\\Parametre\\ChambreController::update'], ['chambre'], null, null, false, true, null]],
-        1860 => [[['_route' => 'parametre_departement_details', '_controller' => 'App\\Controller\\Parametre\\DepartementController::details'], ['departement'], null, null, false, true, null]],
-        1882 => [[['_route' => 'parametre_departement_delete', '_controller' => 'App\\Controller\\Parametre\\DepartementController::delete'], ['departement'], null, null, false, true, null]],
-        1907 => [[['_route' => 'parametre_departement_update', '_controller' => 'App\\Controller\\Parametre\\DepartementController::update'], ['departement'], null, null, false, true, null]],
-        1950 => [[['_route' => 'parametre_element_details', '_controller' => 'App\\Controller\\Parametre\\ElementController::details'], ['element'], null, null, false, true, null]],
-        1972 => [[['_route' => 'parametre_element_delete', '_controller' => 'App\\Controller\\Parametre\\ElementController::delete'], ['element'], null, null, false, true, null]],
-        1997 => [[['_route' => 'parametre_element_update', '_controller' => 'App\\Controller\\Parametre\\ElementController::update'], ['element'], null, null, false, true, null]],
-        2041 => [[['_route' => 'parametre_enseignant_detailles', '_controller' => 'App\\Controller\\Parametre\\EnseignantController::detailles'], ['enseignant'], null, null, false, true, null]],
-        2063 => [[['_route' => 'parametre_enseignant_delete', '_controller' => 'App\\Controller\\Parametre\\EnseignantController::delete'], ['enseignant'], null, null, false, true, null]],
-        2088 => [[['_route' => 'parametre_enseignant_update', '_controller' => 'App\\Controller\\Parametre\\EnseignantController::update'], ['enseignant'], null, null, false, true, null]],
-        2125 => [[['_route' => 'parametre_etage_details', '_controller' => 'App\\Controller\\Parametre\\EtageController::details'], ['etage'], null, null, false, true, null]],
-        2147 => [[['_route' => 'parametre_etage_delete', '_controller' => 'App\\Controller\\Parametre\\EtageController::delete'], ['etage'], null, null, false, true, null]],
-        2172 => [[['_route' => 'parametre_etage_update', '_controller' => 'App\\Controller\\Parametre\\EtageController::update'], ['etage'], null, null, false, true, null]],
-        2216 => [[['_route' => 'parametre_filiere_details', '_controller' => 'App\\Controller\\Parametre\\FiliereController::details'], ['filiere'], null, null, false, true, null]],
-        2238 => [[['_route' => 'parametre_filiere_delete', '_controller' => 'App\\Controller\\Parametre\\FiliereController::delete'], ['filiere'], null, null, false, true, null]],
-        2263 => [[['_route' => 'parametre_filiere_update', '_controller' => 'App\\Controller\\Parametre\\FiliereController::update'], ['filiere'], null, null, false, true, null]],
-        2300 => [[['_route' => 'parametre_frais_details', '_controller' => 'App\\Controller\\Parametre\\FraisController::details'], ['frais'], null, null, false, true, null]],
-        2322 => [[['_route' => 'parametre_frais_delete', '_controller' => 'App\\Controller\\Parametre\\FraisController::delete'], ['frais'], null, null, false, true, null]],
-        2347 => [[['_route' => 'parametre_frais_update', '_controller' => 'App\\Controller\\Parametre\\FraisController::update'], ['frais'], null, null, false, true, null]],
-        2391 => [[['_route' => 'parametre_langue_details', '_controller' => 'App\\Controller\\Parametre\\LanguesController::details'], ['langue'], null, null, false, true, null]],
-        2413 => [[['_route' => 'parametre_langue_delete', '_controller' => 'App\\Controller\\Parametre\\LanguesController::delete'], ['langue'], null, null, false, true, null]],
-        2438 => [[['_route' => 'parametre_langue_update', '_controller' => 'App\\Controller\\Parametre\\LanguesController::update'], ['langue'], null, null, false, true, null]],
-        2473 => [[['_route' => 'parametre_lit_details', '_controller' => 'App\\Controller\\Parametre\\LitController::details'], ['lit'], null, null, false, true, null]],
-        2495 => [[['_route' => 'parametre_lit_delete', '_controller' => 'App\\Controller\\Parametre\\LitController::delete'], ['lit'], null, null, false, true, null]],
-        2520 => [[['_route' => 'parametre_lit_update', '_controller' => 'App\\Controller\\Parametre\\LitController::update'], ['lit'], null, null, false, true, null]],
-        2566 => [[['_route' => 'parametre_modalites_details', '_controller' => 'App\\Controller\\Parametre\\ModalitesController::details'], ['modalites'], null, null, false, true, null]],
-        2588 => [[['_route' => 'parametre_modalites_delete', '_controller' => 'App\\Controller\\Parametre\\ModalitesController::delete'], ['modalites'], null, null, false, true, null]],
-        2613 => [[['_route' => 'parametre_modalites_update', '_controller' => 'App\\Controller\\Parametre\\ModalitesController::update'], ['modalites'], null, null, false, true, null]],
-        2649 => [[['_route' => 'parametre_module_details', '_controller' => 'App\\Controller\\Parametre\\ModuleController::details'], ['module'], null, null, false, true, null]],
-        2671 => [[['_route' => 'parametre_module_delete', '_controller' => 'App\\Controller\\Parametre\\ModuleController::delete'], ['module'], null, null, false, true, null]],
-        2696 => [[['_route' => 'parametre_module_update', '_controller' => 'App\\Controller\\Parametre\\ModuleController::update'], ['module'], null, null, false, true, null]],
-        2740 => [[['_route' => 'parametre_programmation_details', '_controller' => 'App\\Controller\\Parametre\\ProgrammationController::details'], ['programmation'], null, null, false, true, null]],
-        2764 => [[['_route' => 'parametre_programmation_update', '_controller' => 'App\\Controller\\Parametre\\ProgrammationController::update'], ['programmation'], null, null, false, true, null]],
-        2806 => [[['_route' => 'parametre_salle_details', '_controller' => 'App\\Controller\\Parametre\\SallesController::details'], ['salle'], null, null, false, true, null]],
-        2828 => [[['_route' => 'parametre_salle_delete', '_controller' => 'App\\Controller\\Parametre\\SallesController::delete'], ['salle'], null, null, false, true, null]],
-        2853 => [[['_route' => 'parametre_salle_update', '_controller' => 'App\\Controller\\Parametre\\SallesController::update'], ['salle'], null, null, false, true, null]],
-        2893 => [[['_route' => 'parametre_seriebac_details', '_controller' => 'App\\Controller\\Parametre\\SerieBacController::details'], ['seriebac'], null, null, false, true, null]],
-        2915 => [[['_route' => 'parametre_seriebac_delete', '_controller' => 'App\\Controller\\Parametre\\SerieBacController::delete'], ['seriebac'], null, null, false, true, null]],
-        2940 => [[['_route' => 'parametre_seriebac_update', '_controller' => 'App\\Controller\\Parametre\\SerieBacController::update'], ['seriebac'], null, null, false, true, null]],
-        2981 => [[['_route' => 'parametre_typebac_details', '_controller' => 'App\\Controller\\Parametre\\TypeBacController::details'], ['typebac'], null, null, false, true, null]],
-        3003 => [[['_route' => 'parametre_typebac_delete', '_controller' => 'App\\Controller\\Parametre\\TypeBacController::delete'], ['typebac'], null, null, false, true, null]],
-        3028 => [[['_route' => 'parametre_typebac_update', '_controller' => 'App\\Controller\\Parametre\\TypeBacController::update'], ['typebac'], null, null, false, true, null]],
-        3068 => [[['_route' => 'parametre_user_operations', '_controller' => 'App\\Controller\\Parametre\\UserController::operations'], ['user'], null, null, false, true, null]],
-        3101 => [[['_route' => 'parametre_user_all', '_controller' => 'App\\Controller\\Parametre\\UserController::all'], ['user', 'type'], null, null, false, true, null]],
-        3133 => [[['_route' => 'parametre_user_active', '_controller' => 'App\\Controller\\Parametre\\UserController::active'], ['user', 'type'], null, null, false, true, null]],
-        3180 => [[['_route' => 'parametre_user_sousmodule', '_controller' => 'App\\Controller\\Parametre\\UserController::sousmodule'], ['sousModule', 'user', 'type'], null, null, false, true, null]],
-        3222 => [[['_route' => 'parametre_user_module', '_controller' => 'App\\Controller\\Parametre\\UserController::module'], ['module', 'user', 'type'], null, null, false, true, null]],
-        3267 => [[['_route' => 'parametre_user_operation', '_controller' => 'App\\Controller\\Parametre\\UserController::operation'], ['operation', 'user', 'type'], null, null, false, true, null]],
-        3301 => [
+        519 => [[['_route' => 'extraction_ins_annee', '_controller' => 'App\\Controller\\Etudiant\\GestionInscriptionController::extraction_ins_annee'], ['annee'], null, null, false, true, null]],
+        577 => [[['_route' => 'print_borderaux', '_controller' => 'App\\Controller\\Facture\\BordereauController::printborderaux'], ['borderaux'], null, null, false, true, null]],
+        613 => [[['_route' => 'supprimer_borderau', '_controller' => 'App\\Controller\\Facture\\BordereauController::supprimerborderau'], ['bordereau'], null, null, false, true, null]],
+        650 => [[['_route' => 'extraction_borderaux', '_controller' => 'App\\Controller\\Facture\\BordereauController::extraction_borderaux'], ['bordereau'], null, null, false, true, null]],
+        703 => [[['_route' => 'facture_ajouter_reglement', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::ajouter_reglement'], ['id'], null, null, false, true, null]],
+        723 => [[['_route' => 'ajouter_pec', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::ajouter_pec'], ['id'], null, null, false, true, null]],
+        753 => [[['_route' => 'article_frais_facture', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::article_frais'], ['id'], null, null, false, true, null]],
+        781 => [[['_route' => 'add_detaille', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::add_detaille'], ['id'], null, null, false, true, null]],
+        812 => [[['_route' => 'getMontant', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::getMontant'], ['id'], null, null, false, true, null]],
+        839 => [[['_route' => 'getFacturePec', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::getFacturePec'], ['id'], null, null, false, true, null]],
+        873 => [[['_route' => 'imprimer_facture_reglement', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::imprimer_facture_reglement'], ['operationcab', 'reglement'], null, null, false, true, null]],
+        902 => [[['_route' => 'imprimerfacture', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::imprimerfacture'], ['operationcab'], null, null, false, true, null]],
+        925 => [[['_route' => 'imprimerreleve', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::imprimerreleve'], ['operationcab'], null, null, false, true, null]],
+        958 => [[['_route' => 'detaille_facture', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::detaille_facture'], ['id'], null, null, false, true, null]],
+        994 => [[['_route' => 'cloture_detaille', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::cloture_detaille'], ['id'], null, null, false, true, null]],
+        1023 => [[['_route' => 'cloture_all_detaille', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::cloture_all_detaille'], ['id'], null, null, false, true, null]],
+        1073 => [[['_route' => 'extraction_factures_by_annee', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::extraction_factures_by_annee'], ['annee'], null, null, false, true, null]],
+        1102 => [[['_route' => 'extraction_factures_nonInscrits', '_controller' => 'App\\Controller\\Facture\\GestionFactureController::extraction_factures_nonInscrits'], ['annee'], null, null, false, true, null]],
+        1150 => [[['_route' => 'imprimer_reglement_reglement', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::imprimer_reglement_reglement'], ['reglement'], null, null, false, true, null]],
+        1186 => [[['_route' => 'reglement_borderaux', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::reglement_borderaux'], ['formation', 'paiement'], null, null, false, true, null]],
+        1218 => [[['_route' => 'printborderaux', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::printborderaux'], ['borderaux'], null, null, false, true, null]],
+        1253 => [[['_route' => 'annuler_reglement', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::annuler_reglement'], ['reglement'], null, null, false, true, null]],
+        1288 => [[['_route' => 'getReglementInfos', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::getReglementInfos'], ['reglement'], null, null, false, true, null]],
+        1324 => [[['_route' => 'modifier_reglement', '_controller' => 'App\\Controller\\Facture\\GestionReglementsController::ajouter_reglement'], ['id'], null, null, false, true, null]],
+        1383 => [[['_route' => 'parametre_academie_details', '_controller' => 'App\\Controller\\Parametre\\AcademieController::details'], ['academie'], null, null, false, true, null]],
+        1405 => [[['_route' => 'parametre_academie_delete', '_controller' => 'App\\Controller\\Parametre\\AcademieController::delete'], ['academie'], null, null, false, true, null]],
+        1430 => [[['_route' => 'parametre_academie_update', '_controller' => 'App\\Controller\\Parametre\\AcademieController::update'], ['academie'], null, null, false, true, null]],
+        1469 => [[['_route' => 'parametre_active_annee', '_controller' => 'App\\Controller\\Parametre\\AnneeController::parametre_active_annee'], ['annee'], null, null, false, true, null]],
+        1497 => [[['_route' => 'parametre_annee_details', '_controller' => 'App\\Controller\\Parametre\\AnneeController::details'], ['annee'], null, null, false, true, null]],
+        1519 => [[['_route' => 'parametre_annee_delete', '_controller' => 'App\\Controller\\Parametre\\AnneeController::delete'], ['annee'], null, null, false, true, null]],
+        1544 => [[['_route' => 'parametre_annee_update', '_controller' => 'App\\Controller\\Parametre\\AnneeController::update'], ['annee'], null, null, false, true, null]],
+        1584 => [[['_route' => 'parametre_banque_details', '_controller' => 'App\\Controller\\Parametre\\BanqueController::details'], ['banque'], null, null, false, true, null]],
+        1606 => [[['_route' => 'parametre_banque_delete', '_controller' => 'App\\Controller\\Parametre\\BanqueController::delete'], ['banque'], null, null, false, true, null]],
+        1631 => [[['_route' => 'parametre_banque_update', '_controller' => 'App\\Controller\\Parametre\\BanqueController::update'], ['banque'], null, null, false, true, null]],
+        1671 => [[['_route' => 'parametre_chambre_details', '_controller' => 'App\\Controller\\Parametre\\ChambreController::details'], ['chambre'], null, null, false, true, null]],
+        1693 => [[['_route' => 'parametre_chambre_delete', '_controller' => 'App\\Controller\\Parametre\\ChambreController::delete'], ['chambre'], null, null, false, true, null]],
+        1718 => [[['_route' => 'parametre_chambre_update', '_controller' => 'App\\Controller\\Parametre\\ChambreController::update'], ['chambre'], null, null, false, true, null]],
+        1762 => [[['_route' => 'parametre_departement_details', '_controller' => 'App\\Controller\\Parametre\\DepartementController::details'], ['departement'], null, null, false, true, null]],
+        1784 => [[['_route' => 'parametre_departement_delete', '_controller' => 'App\\Controller\\Parametre\\DepartementController::delete'], ['departement'], null, null, false, true, null]],
+        1809 => [[['_route' => 'parametre_departement_update', '_controller' => 'App\\Controller\\Parametre\\DepartementController::update'], ['departement'], null, null, false, true, null]],
+        1852 => [[['_route' => 'parametre_element_details', '_controller' => 'App\\Controller\\Parametre\\ElementController::details'], ['element'], null, null, false, true, null]],
+        1874 => [[['_route' => 'parametre_element_delete', '_controller' => 'App\\Controller\\Parametre\\ElementController::delete'], ['element'], null, null, false, true, null]],
+        1899 => [[['_route' => 'parametre_element_update', '_controller' => 'App\\Controller\\Parametre\\ElementController::update'], ['element'], null, null, false, true, null]],
+        1943 => [[['_route' => 'parametre_enseignant_detailles', '_controller' => 'App\\Controller\\Parametre\\EnseignantController::detailles'], ['enseignant'], null, null, false, true, null]],
+        1965 => [[['_route' => 'parametre_enseignant_delete', '_controller' => 'App\\Controller\\Parametre\\EnseignantController::delete'], ['enseignant'], null, null, false, true, null]],
+        1990 => [[['_route' => 'parametre_enseignant_update', '_controller' => 'App\\Controller\\Parametre\\EnseignantController::update'], ['enseignant'], null, null, false, true, null]],
+        2027 => [[['_route' => 'parametre_etage_details', '_controller' => 'App\\Controller\\Parametre\\EtageController::details'], ['etage'], null, null, false, true, null]],
+        2049 => [[['_route' => 'parametre_etage_delete', '_controller' => 'App\\Controller\\Parametre\\EtageController::delete'], ['etage'], null, null, false, true, null]],
+        2074 => [[['_route' => 'parametre_etage_update', '_controller' => 'App\\Controller\\Parametre\\EtageController::update'], ['etage'], null, null, false, true, null]],
+        2118 => [[['_route' => 'parametre_filiere_details', '_controller' => 'App\\Controller\\Parametre\\FiliereController::details'], ['filiere'], null, null, false, true, null]],
+        2140 => [[['_route' => 'parametre_filiere_delete', '_controller' => 'App\\Controller\\Parametre\\FiliereController::delete'], ['filiere'], null, null, false, true, null]],
+        2165 => [[['_route' => 'parametre_filiere_update', '_controller' => 'App\\Controller\\Parametre\\FiliereController::update'], ['filiere'], null, null, false, true, null]],
+        2202 => [[['_route' => 'parametre_frais_details', '_controller' => 'App\\Controller\\Parametre\\FraisController::details'], ['frais'], null, null, false, true, null]],
+        2224 => [[['_route' => 'parametre_frais_delete', '_controller' => 'App\\Controller\\Parametre\\FraisController::delete'], ['frais'], null, null, false, true, null]],
+        2249 => [[['_route' => 'parametre_frais_update', '_controller' => 'App\\Controller\\Parametre\\FraisController::update'], ['frais'], null, null, false, true, null]],
+        2293 => [[['_route' => 'parametre_langue_details', '_controller' => 'App\\Controller\\Parametre\\LanguesController::details'], ['langue'], null, null, false, true, null]],
+        2315 => [[['_route' => 'parametre_langue_delete', '_controller' => 'App\\Controller\\Parametre\\LanguesController::delete'], ['langue'], null, null, false, true, null]],
+        2340 => [[['_route' => 'parametre_langue_update', '_controller' => 'App\\Controller\\Parametre\\LanguesController::update'], ['langue'], null, null, false, true, null]],
+        2375 => [[['_route' => 'parametre_lit_details', '_controller' => 'App\\Controller\\Parametre\\LitController::details'], ['lit'], null, null, false, true, null]],
+        2397 => [[['_route' => 'parametre_lit_delete', '_controller' => 'App\\Controller\\Parametre\\LitController::delete'], ['lit'], null, null, false, true, null]],
+        2422 => [[['_route' => 'parametre_lit_update', '_controller' => 'App\\Controller\\Parametre\\LitController::update'], ['lit'], null, null, false, true, null]],
+        2468 => [[['_route' => 'parametre_modalites_details', '_controller' => 'App\\Controller\\Parametre\\ModalitesController::details'], ['modalites'], null, null, false, true, null]],
+        2490 => [[['_route' => 'parametre_modalites_delete', '_controller' => 'App\\Controller\\Parametre\\ModalitesController::delete'], ['modalites'], null, null, false, true, null]],
+        2515 => [[['_route' => 'parametre_modalites_update', '_controller' => 'App\\Controller\\Parametre\\ModalitesController::update'], ['modalites'], null, null, false, true, null]],
+        2551 => [[['_route' => 'parametre_module_details', '_controller' => 'App\\Controller\\Parametre\\ModuleController::details'], ['module'], null, null, false, true, null]],
+        2573 => [[['_route' => 'parametre_module_delete', '_controller' => 'App\\Controller\\Parametre\\ModuleController::delete'], ['module'], null, null, false, true, null]],
+        2598 => [[['_route' => 'parametre_module_update', '_controller' => 'App\\Controller\\Parametre\\ModuleController::update'], ['module'], null, null, false, true, null]],
+        2642 => [[['_route' => 'parametre_programmation_details', '_controller' => 'App\\Controller\\Parametre\\ProgrammationController::details'], ['programmation'], null, null, false, true, null]],
+        2666 => [[['_route' => 'parametre_programmation_update', '_controller' => 'App\\Controller\\Parametre\\ProgrammationController::update'], ['programmation'], null, null, false, true, null]],
+        2708 => [[['_route' => 'parametre_salle_details', '_controller' => 'App\\Controller\\Parametre\\SallesController::details'], ['salle'], null, null, false, true, null]],
+        2730 => [[['_route' => 'parametre_salle_delete', '_controller' => 'App\\Controller\\Parametre\\SallesController::delete'], ['salle'], null, null, false, true, null]],
+        2755 => [[['_route' => 'parametre_salle_update', '_controller' => 'App\\Controller\\Parametre\\SallesController::update'], ['salle'], null, null, false, true, null]],
+        2795 => [[['_route' => 'parametre_seriebac_details', '_controller' => 'App\\Controller\\Parametre\\SerieBacController::details'], ['seriebac'], null, null, false, true, null]],
+        2817 => [[['_route' => 'parametre_seriebac_delete', '_controller' => 'App\\Controller\\Parametre\\SerieBacController::delete'], ['seriebac'], null, null, false, true, null]],
+        2842 => [[['_route' => 'parametre_seriebac_update', '_controller' => 'App\\Controller\\Parametre\\SerieBacController::update'], ['seriebac'], null, null, false, true, null]],
+        2883 => [[['_route' => 'parametre_typebac_details', '_controller' => 'App\\Controller\\Parametre\\TypeBacController::details'], ['typebac'], null, null, false, true, null]],
+        2905 => [[['_route' => 'parametre_typebac_delete', '_controller' => 'App\\Controller\\Parametre\\TypeBacController::delete'], ['typebac'], null, null, false, true, null]],
+        2930 => [[['_route' => 'parametre_typebac_update', '_controller' => 'App\\Controller\\Parametre\\TypeBacController::update'], ['typebac'], null, null, false, true, null]],
+        2970 => [[['_route' => 'parametre_user_operations', '_controller' => 'App\\Controller\\Parametre\\UserController::operations'], ['user'], null, null, false, true, null]],
+        3003 => [[['_route' => 'parametre_user_all', '_controller' => 'App\\Controller\\Parametre\\UserController::all'], ['user', 'type'], null, null, false, true, null]],
+        3035 => [[['_route' => 'parametre_user_active', '_controller' => 'App\\Controller\\Parametre\\UserController::active'], ['user', 'type'], null, null, false, true, null]],
+        3082 => [[['_route' => 'parametre_user_sousmodule', '_controller' => 'App\\Controller\\Parametre\\UserController::sousmodule'], ['sousModule', 'user', 'type'], null, null, false, true, null]],
+        3124 => [[['_route' => 'parametre_user_module', '_controller' => 'App\\Controller\\Parametre\\UserController::module'], ['module', 'user', 'type'], null, null, false, true, null]],
+        3169 => [[['_route' => 'parametre_user_operation', '_controller' => 'App\\Controller\\Parametre\\UserController::operation'], ['operation', 'user', 'type'], null, null, false, true, null]],
+        3203 => [
             [['_route' => 'app_reinitialiser', '_controller' => 'App\\Controller\\SecurityController::reinitialiser'], ['user'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
