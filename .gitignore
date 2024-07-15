@@ -1,7 +1,2 @@
 
 .env
-/var/
-/vendor/
-/migrations
-/node_modules/
-/uploads/
