@@ -170,9 +170,7 @@ class GestionInscriptionController extends AbstractController
         
         $dateDebut = new DateTime($request->get('date_debut'));
         $dateFin = new DateTime($request->get('date_fin'));
-        // dd($request->get('inscription_id'));
         
-        // dd($inscription->getStatut()->getId());
         $inscription = $this->em->getRepository(TInscription::class)->find($request->get('inscription_id'));
         if ($inscription->getStatut()->getId() != 13) {
             return new JsonResponse("Cet Etudiant n'est plus inscrit sur systeme !");
@@ -181,7 +179,7 @@ class GestionInscriptionController extends AbstractController
         if ($exist) {
             return new JsonResponse("Cet étudiant a déjà une réservation pour cette période !");
         }
-        dd($exist);
+        // dd($exist);
         $lit = $this->em->getRepository(Lit::class)->find($request->get('lit'));
         if (!$inscription || !$lit) {
             return new JsonResponse('inscription ou Lit Introuvable !', 500);
