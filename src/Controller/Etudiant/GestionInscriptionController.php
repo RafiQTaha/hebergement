@@ -173,11 +173,11 @@ class GestionInscriptionController extends AbstractController
         
         $inscription = $this->em->getRepository(TInscription::class)->find($request->get('inscription_id'));
         if ($inscription->getStatut()->getId() != 13) {
-            return new JsonResponse("Cet Etudiant n'est plus inscrit sur systeme !");
+            return new JsonResponse("Cet Etudiant n'est plus inscrit sur systeme !", 500);
         }
         $exist = $this->em->getRepository(LitInscription::class)->FindAffectationByPeriode($inscription,$dateDebut,$dateFin);
         if ($exist) {
-            return new JsonResponse("Cet étudiant a déjà une réservation pour cette période !");
+            return new JsonResponse("Cet étudiant a déjà une réservation pour cette période !", 500);
         }
         // dd($exist);
         $lit = $this->em->getRepository(Lit::class)->find($request->get('lit'));
@@ -211,6 +211,24 @@ class GestionInscriptionController extends AbstractController
             $isBoursier = 1;
         }
         $k = $isBoursier == 0 ? 1 : 2 ;
+        $operationCab = new TOperationcab();
+        $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
+        $operationCab->setUserCreated($this->getUser());
+        $operationCab->setAnnee($inscription->getAnnee());
+        $operationCab->setLitInscription($litInscription);
+        $operationCab->setActive(1);
+        $operationCab->setDateContable(date('Y'));
+        $categorie = $k == 1 ? 'caution' : 'caution organisme';
+        $organisme = $k == 1 ? 'Payant' : 'Organisme';
+        $operationCab->setCategorie($categorie);
+        $operationCab->setOrganisme($organisme);
+        $operationCab->setCreated(new \DateTime("now"));
+        $this->em->persist($operationCab);
+        $this->em->flush();
+        $operationCab->setCode(
+            "HEB-FAC".str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT)."/".date('Y')
+        );
+        $this->em->flush();
         for ($i=1; $i <= $k; $i++) { 
             $operationCab = new TOperationcab();
             $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
