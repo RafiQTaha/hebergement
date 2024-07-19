@@ -52,6 +52,7 @@ class LitInscriptionRepository extends ServiceEntityRepository
             ->innerjoin('affectation.inscription','inscription')
             ->andWhere('inscription = :inscription')
             ->andWhere(':dateDebut BETWEEN affectation.start AND affectation.end OR :dateFin BETWEEN affectation.start AND affectation.end')
+            ->andWhere('affectation.active = 1')
             ->setParameter('inscription', $inscription)
             ->setParameter('dateDebut', $dateDebut)
             ->setParameter('dateFin', $dateFin)
