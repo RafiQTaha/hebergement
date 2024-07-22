@@ -197,16 +197,16 @@
                     <td style="width: 100% ;padding:15px 2px 2px 30px ">NB : EN CAS DE DEPASSEMENT DES DELAIS DE PAIEMENT,UNE PENALITE DE RETARD EST APPLIQUEE. </td> 
                 </tr>
                 <tr>
-                    {% if operationcab.preinscription.annee.formation.etablissement.id == 28 or operationcab.preinscription.annee.formation.etablissement.id == 5 %}
-                        <td style="width: 100% ;padding:40px 2px 2px 30px;"><b>RIB UIASS - LEZ : 007 810 0012405000301617 32</b></td>
-                        {% else %}
-                        <td style="width: 100% ;padding:40px 2px 2px 30px;"><b>RIB UIASS : 007 810 0012404000300234 15</b></td>
-                    {% endif %}
+                    {# {% if operationcab.preinscription.annee.formation.etablissement.id == 28 or operationcab.preinscription.annee.formation.etablissement.id == 5 %} #}
+                        {# <td style="width: 100% ;padding:40px 2px 2px 30px;"><b>RIB UIASS - LEZ : 007 810 0012405000301617 32</b></td> #}
+                        {# {% else %} #}
+                        <td style="width: 100% ;padding:40px 2px 2px 30px;"><b>RIB FONDATION CHEIKH ZAID-HEB : 007 810 0012405000301566 88</b></td>
+                    {# {% endif %} #}
                 </tr>
                 <tr>
-                    {% if operationcab.preinscription.annee.formation.etablissement.id != 28 and operationcab.preinscription.annee.formation.etablissement.id != 5 %}
+                    {# {% if operationcab.preinscription.annee.formation.etablissement.id != 28 and operationcab.preinscription.annee.formation.etablissement.id != 5 %}
                         <td style="width: 100% ;padding:2px 2px 2px 30px;"><b>RIB UIASS - EAS : 007 810 0012405000301616 35</b></td> 
-                    {% endif %}
+                    {% endif %} #}
                 </tr>
             {% endif %}
         </table>
