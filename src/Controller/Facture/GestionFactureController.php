@@ -608,8 +608,16 @@ class GestionFactureController extends AbstractController
         $sheet->setCellValue('Q1', 'MT REGLE');
         $sheet->setCellValue('R1', 'REST');
         $sheet->setCellValue('S1', 'ORG');
-        $sheet->setCellValue('T1', 'statut');
-        $sheet->setCellValue('U1', 'D-CREATION');
+        $sheet->setCellValue('T1', 'Statut');
+        $sheet->setCellValue('U1', 'D-Created');
+        $sheet->setCellValue('V1', 'Departement');
+        $sheet->setCellValue('W1', 'Etage');
+        $sheet->setCellValue('X1', 'Chambre');
+        $sheet->setCellValue('Y1', 'T-Chambre');
+        $sheet->setCellValue('Z1', 'Position');
+        $sheet->setCellValue('AA1', 'Debut');
+        $sheet->setCellValue('AB1', 'Fin');
+        $sheet->setCellValue('AC1', 'Etat');
         $i = 2;
         $j = 1;
         // $currentyear = '2022/2023';
@@ -617,6 +625,7 @@ class GestionFactureController extends AbstractController
         $operationcabs = $this->em->getRepository(TOperationcab::class)->getFacturesByCurrentYear($currentyear);
         // dd($operationcabs);
         foreach ($operationcabs as $operationcab) {
+            // dd($operationcab);
             $montant = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFacture($operationcab['id']);
             $montant_reglement = $this->em->getRepository(TReglement::class)->getSumMontantByCodeFacture($operationcab['id']);
             $sheet->setCellValue('A' . $i, $j);
@@ -664,11 +673,19 @@ class GestionFactureController extends AbstractController
             if ($operationcab['created'] != "") {
                 $sheet->setCellValue('U' . $i, $operationcab['created']->format('d-m-Y'));
             }
+            $sheet->setCellValue('V' . $i, $operationcab['departement']);
+            $sheet->setCellValue('W' . $i, $operationcab['etage']);
+            $sheet->setCellValue('X' . $i, $operationcab['nchambre']);
+            $sheet->setCellValue('Y' . $i, $operationcab['tchambre']);
+            $sheet->setCellValue('Z' . $i, $operationcab['position']);
+            $sheet->setCellValue('AA' . $i, $operationcab['debut']->format('d-m-Y'));
+            $sheet->setCellValue('AB' . $i, $operationcab['fin']->format('d-m-Y'));
+            $sheet->setCellValue('AC' . $i, $operationcab['etat'] == 1 ? "En Cours" : "Annulée");
             $i++;
             $j++;
         }
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Extraction Facture.xlsx';
+        $fileName = 'Extraction Facture Hebergement.xlsx';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $writer->save($temp_file);
         return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
