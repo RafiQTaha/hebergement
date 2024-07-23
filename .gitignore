@@ -3,6 +3,9 @@
 /var/
 /migrations/
 
+var/
+migrations/
+
 
 # ###> symfony/framework-bundle ###
 # /.env.local
