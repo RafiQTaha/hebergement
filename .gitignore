@@ -1,38 +1,37 @@
 
 .env
-var/
-vendor/
-migrations/
-
-
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-.env
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/public/uploads/
-# /public/build/
 /var/
-/vender/
-/vendor/
 /migrations/
-/.env
-/migrations/
-###< symfony/framework-bundle ###
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
+# ###> symfony/framework-bundle ###
+# /.env.local
+# /.env.local.php
+# /.env.*.local
+# .env
+# /config/secrets/prod/prod.decrypt.private.php
+# /public/bundles/
+# /public/uploads/
+# # /public/build/
+# /var/
+# /vender/
+# /vendor/
+# /migrations/
+# /.env
+# /migrations/
+# ###< symfony/framework-bundle ###
 
-###> symfony/webpack-encore-bundle ###
-npm-debug.log
-yarn-error.log
+# ###> symfony/phpunit-bridge ###
+# .phpunit.result.cache
+# /phpunit.xml
+# ###< symfony/phpunit-bridge ###
+
+# ###> phpunit/phpunit ###
+# /phpunit.xml
+# .phpunit.result.cache
+# ###< phpunit/phpunit ###
+
+# ###> symfony/webpack-encore-bundle ###
+# npm-debug.log
+# yarn-error.log
 ###< symfony/webpack-encore-bundle ###
