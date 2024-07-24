@@ -173,18 +173,19 @@ $(document).ready(function () {
         let modalAlert =  $("#modifier_org-modal .modal-body .alert");
         modalAlert.remove();
         const icon = $("#borderaux i");
-        if(ids_reglement.length === 0|| $("#etablissement").val() == "" || $('#formation').val() == "" || $("#paiement").val() == ""){
+        if(ids_reglement.length === 0 || $("#paiement").val() == ""){
             Toast.fire({
             icon: 'error',
-            title: 'Merci de Choisir l\'etablissement, la formation, mode de paiement et au moins une ligne, ',
+            title: 'Merci de Choisir le mode de paiement et au moins une ligne.',
             })
             return;
         }
         icon.removeClass('fa-folder').addClass("fa-spinner fa-spin");
         var formData = new FormData();
         formData.append('ids_reglement', JSON.stringify(ids_reglement));
+        formData.append('paiement', $("#paiement").val());
         try {
-            const request = await axios.post("/facture/reglements/borderaux/"+$('#formation').val()+'/'+$("#paiement").val(), formData);
+            const request = await axios.post("/facture/reglements/borderaux", formData);
             const data = request.data;
             icon.addClass('fa-folder').removeClass("fa-spinner fa-spin");
             Toast.fire({

@@ -208,15 +208,14 @@ class GestionReglementsController extends AbstractController
         $mpdf->Output("Reglement-" . $reglement->getCode() . ".pdf", "I");
     }
 
-    #[Route('/borderaux/{formation}/{paiement}', name: 'reglement_borderaux')]
-    public function reglement_borderaux(AcFormation $formation, XModalites $paiement, Request $request): Response
+    #[Route('/borderaux', name: 'reglement_borderaux')]
+    public function reglement_borderaux(Request $request): Response
     {
         $ids = json_decode($request->get('ids_reglement'));
-        $etablissement = $formation->getEtablissement();
-        $modalite = $this->em->getRepository(XModalites::class)->find($paiement);
+        $paiement = $this->em->getRepository(XModalites::class)->find($request->get('paiement'));
         $borderaux = new TBrdpaiement();
-        $borderaux->setModalite($this->em->getRepository(XModalites::class)->find($paiement));
-        $borderaux->setEtablissement($etablissement);
+        $borderaux->setModalite($paiement);
+        // $borderaux->setEtablissement($etablissement);
         // $borderaux->setMontant(Null);
         $borderaux->setCreated(new DateTime('now'));
         $borderaux->setUserCreated($this->getUser());
