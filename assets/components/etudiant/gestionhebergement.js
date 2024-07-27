@@ -1,19 +1,19 @@
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
-    let idHebergement = null;
-    let ids_hebergement = [];
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+})
+let idHebergement = null;
+let ids_hebergement = [];
 
-    
-    $(document).ready(function  () {
+
+$(document).ready(function () {
     var table = $("#datatables_gestion_hebergement").DataTable({
         lengthMenu: [
             [10, 15, 25, 50, 100, 20000000000000],
@@ -34,10 +34,13 @@
         //     });
         //     $("body tr#" + idHebergement).addClass('active_databales')
         // },
-        preDrawCallback: function(settings) {
+        drawCallback: function () {
+            $("body tr#" + idHebergement).addClass('active_databales')
+        },
+        preDrawCallback: function (settings) {
             if ($.fn.DataTable.isDataTable('#datatables_gestion_hebergement')) {
                 var dt = $('#datatables_gestion_hebergement').DataTable();
-    
+
                 //Abort previous ajax request if it is still in process.
                 var settings = dt.settings();
                 if (settings[0].jqXHR) {
@@ -47,14 +50,30 @@
         },
         language: datatablesFrench,
     });
+
+    $('body').on('dblclick', '#datatables_gestion_hebergement tbody tr', function () {
+        // const input = $(this).find("input");
+
+        if ($(this).hasClass('active_databales')) {
+            $(this).removeClass('active_databales');
+            idHebergement = null;
+        } else {
+            $("#datatables_gestion_hebergement tbody tr").removeClass('active_databales');
+            $(this).addClass('active_databales');
+            idHebergement = $(this).attr('id');
+            // getStatutInscription();
+        }
+
+    })
+
     $("select").select2()
-    $("#etablissement").on('change', async function (){
+    $("#etablissement").on('change', async function () {
         const id_etab = $(this).val();
         table.columns().search("");
         table.columns(0).search(id_etab).draw();
         let response = ""
-        if(id_etab != "") {
-            const request = await axios.get('/api/formation/'+id_etab);
+        if (id_etab != "") {
+            const request = await axios.get('/api/formation/' + id_etab);
             response = request.data
         } else {
             $('#annee').html("").select2();
@@ -62,16 +81,16 @@
         }
         $('#formation').html(response).select2();
     })
-    $("#formation").on('change', async function (){
+    $("#formation").on('change', async function () {
         const id_formation = $(this).val();
         table.columns().search("");
         let responseAnnee = ""
         let responsePromotion = ""
-        if(id_formation != "") {
+        if (id_formation != "") {
             table.columns(1).search(id_formation).draw();
-            const requestPromotion = await axios.get('/api/promotion/'+id_formation);
+            const requestPromotion = await axios.get('/api/promotion/' + id_formation);
             responsePromotion = requestPromotion.data
-            const requestAnnee = await axios.get('/api/annee/'+id_formation);
+            const requestAnnee = await axios.get('/api/annee/' + id_formation);
             responseAnnee = requestAnnee.data
         } else {
             table.columns(0).search($("#etablissement").val()).draw();
@@ -79,11 +98,11 @@
         $('#annee').html(responseAnnee).select2();
         $('#promotion').html(responsePromotion).select2();
     })
-    
-    $("#promotion").on('change', async function (){
+
+    $("#promotion").on('change', async function () {
         table.columns().search("");
-        if($(this).val() != "") {
-            if($("#annee").val() != "") {
+        if ($(this).val() != "") {
+            if ($("#annee").val() != "") {
                 table.columns(3).search($("#annee").val());
             }
             table.columns(2).search($(this).val()).draw();
@@ -92,140 +111,127 @@
         }
 
     })
-    $("#annee").on('change', async function (){
+    $("#annee").on('change', async function () {
         table.columns().search("");
-        if($(this).val() != "") {
+        if ($(this).val() != "") {
             table.columns(3).search($(this).val());
-        } 
+        }
         table.columns(2).search($("#promotion").val()).draw();
     })
 
-    $('body').on('click','#datatables_gestion_hebergement tbody tr',function () {
+    $('body').on('click', '#datatables_gestion_hebergement tbody tr', function () {
         const input = $(this).find("input");
-        if(input.is(":checked")){
-            input.prop("checked",false);
+        if (input.is(":checked")) {
+            input.prop("checked", false);
             const index = ids_hebergement.indexOf(input.attr("id"));
-            ids_hebergement.splice(index,1);
-        }else{
-            input.prop("checked",true);
+            ids_hebergement.splice(index, 1);
+        } else {
+            input.prop("checked", true);
             ids_hebergement.push(input.attr("id"));
         }
     })
 
-    $('body').on('click','#supprimer', async function (e) {
+    $('body').on('click', '#supprimer', async function (e) {
         e.preventDefault();
-        if(ids_hebergement.length === 0 ){
+        if (ids_hebergement.length === 0) {
             Toast.fire({
-            icon: 'error',
-            title: 'Merci de Choisir au moins une ligne',
+                icon: 'error',
+                title: 'Merci de Choisir au moins une ligne',
             })
             return;
         }
         var res = confirm('Vous voulez vraiment supprimer cette enregistrement ?');
-        if(res == 1){
+        if (res == 1) {
             const icon = $("#supprimer i");
             icon.removeClass('fa-trash').addClass("fa-spinner fa-spin");
             var formData = new FormData();
-            formData.append('ids_hebergement', JSON.stringify(ids_hebergement)); 
+            formData.append('ids_hebergement', JSON.stringify(ids_hebergement));
             try {
-                const request = await axios.post('/etudiant/hebergement/supprimer',formData);
+                const request = await axios.post('/etudiant/hebergement/supprimer', formData);
                 const response = request.data;
                 Toast.fire({
                     icon: 'success',
                     title: response,
                 })
                 ids_hebergement = []
-                table.ajax.reload(null,false);
+                table.ajax.reload(null, false);
                 icon.addClass('fa-trash').removeClass("fa-spinner fa-spin");
             } catch (error) {
                 const message = error.response.data;
                 icon.addClass('fa-trash').removeClass("fa-spinner fa-spin");
             }
-        }  
+        }
     })
 
-    // $('body').on('dblclick','#datatables_gestion_hebergement tbody tr',function () {
-    //     // const input = $(this).find("input");
-        
-    //     if($(this).hasClass('active_databales')) {
-    //         $(this).removeClass('active_databales');
-    //         idHebergement = null;
-    //     } else {
-    //         $("#datatables_gestion_hebergement tbody tr").removeClass('active_databales');
-    //         $(this).addClass('active_databales');
-    //         idHebergement = $(this).attr('id');
-    //         getStatutInscription();
-    //         getInscriptionInfos();
-    //         getFrais();
-    //     }
-        
-    // })
+    $("body #departement").on("change", async function () {
+        const id_etab = $(this).val();
+        let response = ""
+        if (id_etab != "") {
+            const request = await axios.get('/api/etage/' + id_etab);
+            response = request.data
+        }
+        $('#etage').html(response).select2();
+    })
+    $("body #etage").on('change', async function () {
+        const id_etage = $(this).val();
+        let response = ""
 
-    // $("body").on('click','#import', async function (e){
-    //     e.preventDefault();
-    //     $('#import_affectation').modal("show");
-    // })
-    
-    // $('body').on('click','#affectation_canvas', function (){
-    //     window.open('/etudiant/hebergement/affectation_canvas', '_blank');
-    // })
+        if (id_etage != "") {
+            const request = await axios.get('/api/chambre/' + id_etage);
+            response = request.data
+        }
+        $('#chambre').html(response).select2();
 
-    // $('body').on('click','#groupes_canvas', function (){
-    //     window.open('/etudiant/hebergement/groupes_canvas', '_blank');
-    // })
+    })
+    $("body #chambre").on('change', async function () {
+        const id_chambre = $(this).val();
+        let response = ""
 
-    // $("#import_groupes_save").on("submit", async function(e) {
-    //     e.preventDefault();
-    //     let formData = new FormData($(this)[0]);
-    //     let modalAlert = $("#import_affectation .modal-body .alert")
-    //     modalAlert.remove();
-    //     const icon = $("#affectation_enregistre i");
-    //     icon.removeClass('fa-check-circle').addClass("fa-spinner fa-spin");
-    //     try {
-    //         const request = await axios.post('/etudiant/hebergement/import_groupe', formData);
-    //         const response = request.data;
-    //         $("#import_affectation .modal-body").prepend(
-    //             `<div class="alert alert-success">
-    //                 <p>${response}</p>
-    //             </div>`
-    //         );
-    //         table.ajax.reload(null,false);
-    //         icon.addClass('fa-check-circle').removeClass("fa-spinner fa-spin ");
-    //     } catch (error) {
-    //         const message = error.response.data;
-    //         console.log(error, error.response);
-    //         modalAlert.remove();
-    //         $("#import_affectation .modal-body").prepend(
-    //             `<div class="alert alert-danger">${message}</div>`
-    //         );
-    //         icon.addClass('fa-check-circle').removeClass("fa-spinner fa-spin ");
-    //     }
-    //     setTimeout(() => {
-    //         $("#import_affectation .modal-body .alert").remove();
-    //     }, 4000);
-    // })
-    
-    // $("#export").on("click", function(e) {
-    //     e.preventDefault();
-    //     // if($("#promotion").val() == "" || $("#annee").val() == ""){
-    //     //     Toast.fire({
-    //     //         icon: 'error',
-    //     //         title: 'Merci de Choisir une Promotion, Une Année!',
-    //     //     })
-    //     //     return;
-    //     // }
-    //     // if($("#formation").val() == "" || $("#annee").val() == ""){
-    //     //     Toast.fire({
-    //     //         icon: 'error',
-    //     //         title: 'Merci de Choisir une formation, Une Année!',
-    //     //     })
-    //     //     return;
-    //     // }
-    //     window.open('/etudiant/hebergement/exportAllgroupes', '_blank');
-    //     // window.open('/etudiant/hebergement/exportbyformation/'+$("#annee").val(), '_blank');
-    //     // window.open('/etudiant/hebergement/exportbypromotion/'+$("#promotion").val()+'/'+$("#annee").val(), '_blank');
-    // })
-    // })
+        if (id_chambre != "") {
+            const request = await axios.get('/api/lit/' + id_chambre);
+            response = request.data
+        }
+        $('#lit').html(response).select2();
 
+    })
+
+    $("#modifier").on("click", () => {
+        if (!idHebergement) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Veuillez selection une inscription !',
+            })
+            return;
+        }
+        // console.log('test')
+        $("#modification_modal").modal('show');
+    })
+
+    $("body #mdification_save").on("submit", async (e) => {
+        e.preventDefault();
+        var formData = new FormData($("#mdification_save")[0])
+        formData.append("hebergement_id", idHebergement);
+        const icon = $("#mdification_save i");
+        try {
+            icon.remove('fa-check-circle').addClass("fa-spinner fa-spin ");
+            const request = await axios.post('/etudiant/hebergement/modifier', formData);
+            const response = request.data;
+            icon.addClass('fa-check-circle').removeClass("fa-spinner fa-spin ");
+            table.ajax.reload();
+            Toast.fire({
+                icon: 'success',
+                title: response,
+            })
+            idHebergement = false;
+            $("#modification_modal").modal("hide")
+        } catch (error) {
+            const message = error.response.data;
+            Toast.fire({
+                icon: 'error',
+                title: message,
+            })
+            icon.addClass('fa-check-circle').removeClass("fa-spinner fa-spin ");
+        }
+    })
 })
 

@@ -39,56 +39,55 @@ class GestionHebergementController extends AbstractController
     #[Route('/', name: 'gestion_hebergement')]
     public function index(Request $request): Response
     {
-         //check if user has access to this page
+        //check if user has access to this page
         $operations = ApiController::check($this->getUser(), 'gestion_hebergement', $this->em, $request);
-        if(!$operations) {
+        if (!$operations) {
             return $this->render("errors/403.html.twig");
-
         }
         return $this->render('etudiant/gestion_hebergement.html.twig', [
-            'etablissements' =>  $this->em->getRepository(AcEtablissement::class)->findBy(['active'=>1]),
-            'departements' =>  $this->em->getRepository(AcDepartement::class)->findBy(['active'=>1]),
+            'etablissements' =>  $this->em->getRepository(AcEtablissement::class)->findBy(['active' => 1]),
+            'departements' =>  $this->em->getRepository(AcDepartement::class)->findBy(['active' => 1]),
             'operations' => $operations
         ]);
     }
-    
+
     #[Route('/list', name: 'gestion_hebergement_list')]
     public function gestionHebergementList(Request $request): Response
     {
         $params = $request->query;
         // dd($params);
         $where = $totalRows = $sqlRequest = "";
-        $filtre = "where 1 = 1 and pre.inscription_valide = 1 ";   
+        $filtre = "where 1 = 1 and pre.inscription_valide = 1 ";
         // dd($params->all('columns')[0]);
-        
+
         if (!empty($params->all('columns')[0]['search']['value'])) {
             // dd("in");
             $filtre .= " and etab.id = '" . $params->all('columns')[0]['search']['value'] . "' ";
-        } 
+        }
         if (!empty($params->all('columns')[1]['search']['value'])) {
-                $filtre .= " and form.id = '" . $params->all('columns')[1]['search']['value'] . "' ";
-        }    
+            $filtre .= " and form.id = '" . $params->all('columns')[1]['search']['value'] . "' ";
+        }
         if (!empty($params->all('columns')[2]['search']['value'])) {
             $filtre .= " and prom.id = '" . $params->all('columns')[2]['search']['value'] . "' ";
-        }    
+        }
         if (!empty($params->all('columns')[3]['search']['value'])) {
             $filtre .= " and an.id = '" . $params->all('columns')[3]['search']['value'] . "' ";
-        }    
+        }
         $columns = array(
-            array( 'db' => 'lins.id','dt' => 0),
-            array( 'db' => 'ins.code','dt' => 1),
-            array( 'db' => 'etu.nom','dt' => 2),
-            array( 'db' => 'etu.prenom','dt' => 3),
-            array( 'db' => 'etu.cin','dt' => 4),
-            array( 'db' => 'st.designation','dt' => 5),
-            array( 'db' => 'UPPER(dep.designation)','dt' => 6),
-            array( 'db' => 'UPPER(etg.designation)','dt' => 7),
-            array( 'db' => 'upper(tc.designation)','dt' => 8),
-            array( 'db' => 'upper(stchm.designation)','dt' => 9),
-            array( 'db' => 'UPPER(chm.designation)','dt' => 10),
-            array( 'db' => 'lit.position','dt' => 11),
-            array( 'db' => 'CONCAT("DE ",lins.start," AU ",lins.end)', 'dt' => 12),
-            array( 'db' => 'lins.active','dt' => 13),
+            array('db' => 'lins.id', 'dt' => 0),
+            array('db' => 'ins.code', 'dt' => 1),
+            array('db' => 'etu.nom', 'dt' => 2),
+            array('db' => 'etu.prenom', 'dt' => 3),
+            array('db' => 'etu.cin', 'dt' => 4),
+            array('db' => 'st.designation', 'dt' => 5),
+            array('db' => 'UPPER(dep.designation)', 'dt' => 6),
+            array('db' => 'UPPER(etg.designation)', 'dt' => 7),
+            array('db' => 'upper(tc.designation)', 'dt' => 8),
+            array('db' => 'upper(stchm.designation)', 'dt' => 9),
+            array('db' => 'UPPER(chm.designation)', 'dt' => 10),
+            array('db' => 'lit.position', 'dt' => 11),
+            array('db' => 'CONCAT("DE ",lins.start," AU ",lins.end)', 'dt' => 12),
+            array('db' => 'lins.active', 'dt' => 13),
         );
         $sql = "SELECT " . implode(", ", DatatablesController::Pluck($columns, 'db')) . "
         FROM lit_inscription lins
@@ -116,26 +115,26 @@ class GestionHebergementController extends AbstractController
         $totalRecords = count($newstmt->fetchAll());
         // dd($sql);
         $my_columns = DatatablesController::Pluck($columns, 'db');
-            
+
         // search 
         $pre = [
             "db" => "pre.code",
             "dt" => 14
         ];
-        array_push($columns,$pre);
+        array_push($columns, $pre);
         $where = DatatablesController::Search($request, $columns);
         if (isset($where) && $where != '') {
             $sqlRequest .= $where;
         }
         $changed_column = $params->all('order')[0]['column'] > 0 ? $params->all('order')[0]['column'] - 1 : 0;
-        $sqlRequest .= " ORDER BY " .DatatablesController::Pluck($columns, 'db')[$changed_column] . "   " . $params->all('order')[0]['dir'] . "  LIMIT " . $params->get('start') . " ," . $params->get('length') . " ";
+        $sqlRequest .= " ORDER BY " . DatatablesController::Pluck($columns, 'db')[$changed_column] . "   " . $params->all('order')[0]['dir'] . "  LIMIT " . $params->get('start') . " ," . $params->get('length') . " ";
         // $sqlRequest .= DatatablesController::Order($request, $columns);
-        
+
         $stmt = $this->em->getConnection()->prepare($sqlRequest);
         $resultSet = $stmt->executeQuery();
         $result = $resultSet->fetchAll();
-        
-        
+
+
         $data = array();
         // dd($result);
         $i = 1;
@@ -145,9 +144,9 @@ class GestionHebergementController extends AbstractController
             $nestedData[] = "<input type ='checkbox' class='check_admissible' id ='$cd' >";
             $nestedData[] = $cd;
             // dd($row);
-            
+
             foreach (array_values($row) as $key => $value) {
-                if($key > 0) {
+                if ($key > 0) {
                     if ($key == 13) {
                         $value = $value == 1 ? "En Cours" : "Anullé";
                     }
@@ -164,7 +163,7 @@ class GestionHebergementController extends AbstractController
             "draw" => intval($params->get('draw')),
             "recordsTotal" => intval($totalRecords),
             "recordsFiltered" => intval($totalRecords),
-            "data" => $data   
+            "data" => $data
         );
         // die;
         return new Response(json_encode($json_data));
@@ -174,7 +173,7 @@ class GestionHebergementController extends AbstractController
     {
         $ids = json_decode($request->get('ids_hebergement'));
         if (count($ids) == 0) {
-            return new Response('Merci de choisir Au moins une Seance!',500);
+            return new Response('Merci de choisir Au moins une Seance!', 500);
         }
         foreach ($ids as $id) {
             $litInscripiton = $this->em->getRepository(LitInscription::class)->find($id);
@@ -185,7 +184,33 @@ class GestionHebergementController extends AbstractController
             }
         }
         $this->em->flush();
-        return new Response('Seances Bien Supprimer',200);
+        return new Response('Seances Bien Supprimer', 200);
+    }
+
+    #[Route('/modifier', name: 'modifier')]
+    public function modifier(Request $request)
+    {
+        $litInscription = $this->em->getRepository(LitInscription::class)->find($request->get('hebergement_id'));
+        // dd($litInscription);
+        // if ($inscription->getStatut()->getId() != 13) {
+        //     return new JsonResponse("Cet Etudiant n'est plus inscrit sur systeme !", 500);
+        // }
+        $oldLit = $this->em->getRepository(Lit::class)->find($litInscription->getLit());
+        $nvLit = $this->em->getRepository(Lit::class)->find($request->get('lit'));
+
+        if ($oldLit->getChambre()->getTypeChambre() != $nvLit->getChambre()->getTypeChambre()) {
+            return new JsonResponse("Le type de chambre du nouveau lit doit être du même type que l'ancien!", 500);
+        }
+
+        if (!$nvLit) {
+            return new JsonResponse('Lit Introuvable !', 500);
+        }
+
+        $litInscription->setLit($nvLit);
+        $litInscription->setUpdated(new DateTime('now'));
+        $litInscription->setUserUpdated($this->getUser());
+        $this->em->flush();
+        return new JsonResponse("Bien Modifié", 200);
     }
     // #[Route('/getstatut/{inscription}', name: 'gestion_statut')]
     // public function inscriptionStatut(TInscription $inscription): Response
@@ -198,9 +223,9 @@ class GestionHebergementController extends AbstractController
     // #[Route('/affectation', name: 'affectation')]
     // public function affectation(Request $request)
     // {
-        
+
     //     // dd($request->get('inscription_id'));
-        
+
     //     $inscription = $this->em->getRepository(TInscription::class)->find($request->get('inscription_id'));
     //     // dd($inscription->getStatut()->getId());
     //     $lit = $this->em->getRepository(Lit::class)->find($request->get('lit'));
@@ -218,7 +243,7 @@ class GestionHebergementController extends AbstractController
     //     if ($dateDebut >= $dateFin) {
     //         return new JsonResponse('La date Fin doit etre superieur au Date Debut!!', 500);
     //     }
-        
+
     //     $litInscription = new LitInscription();
     //     $litInscription->setLit($lit);
     //     $litInscription->setInscription($inscription);
@@ -342,10 +367,10 @@ class GestionHebergementController extends AbstractController
     //             'preinscription'=>$operationcab->getPreinscription()]),
     //         'annee' => $operationcab->getAnnee()]);
     //     $promotion = $inscription == NULL ? "" : $inscription->getPromotion()->getDesignation();
-        
+
     //     $reglementOrg = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByOrganisme($operationcab)['total'];
     //     $reglementPyt = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByPayant($operationcab)['total'];
-        
+
     //     $html = $this->render("facture/pdfs/facture_facture.html.twig", [
     //         'reglementOrg' => $reglementOrg,
     //         'reglementPyt' => $reglementPyt,
@@ -365,7 +390,7 @@ class GestionHebergementController extends AbstractController
     //     $mpdf->WriteHTML($html);
     //     $mpdf->Output("facture.pdf", "I");
     // }
-    
+
     // #[Route('/extraction_ins', name: 'extraction_ins')]
     // public function extraction_ins()
     // {   
@@ -430,7 +455,7 @@ class GestionHebergementController extends AbstractController
     //         $sheet->setCellValue('O'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTel1());
     //         $sheet->setCellValue('P'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
     //         $sheet->setCellValue('Q'.$i, $inscription->getAnnee()->getFormation()->getEtablissement()->getDesignation());
-            
+
     //         $sheet->setCellValue('R'.$i, $inscription->getAnnee()->getFormation()->getEtablissement()->getCode());
     //         $sheet->setCellValue('S'.$i, $inscription->getAnnee()->getFormation()->getDesignation());
     //         $sheet->setCellValue('T'.$i, $inscription->getAnnee()->getFormation()->getCode());
@@ -525,7 +550,7 @@ class GestionHebergementController extends AbstractController
     //         $sheet->setCellValue('O'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTel1());
     //         $sheet->setCellValue('P'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
     //         $sheet->setCellValue('Q'.$i, $inscription->getAnnee()->getFormation()->getEtablissement()->getDesignation());
-            
+
     //         $sheet->setCellValue('R'.$i, $inscription->getAnnee()->getFormation()->getEtablissement()->getCode());
     //         $sheet->setCellValue('S'.$i, $inscription->getAnnee()->getFormation()->getDesignation());
     //         $sheet->setCellValue('T'.$i, $inscription->getAnnee()->getFormation()->getCode());
