@@ -89,8 +89,11 @@ class ApiController extends AbstractController
     #[Route('/chambre/{id}', name: 'getchambre')]
     public function getChambre($id): Response
     {   
-        $chambre = $this->em->getRepository(TChambre::class)->findBy(['etage'=>$id, 'active' => 1],['designation'=>'ASC']);
-        $data = self::dropdown($chambre,'chambre');
+        $chambres = $this->em->getRepository(TChambre::class)->findBy(['etage'=>$id, 'active' => 1],['designation'=>'ASC']);
+        $data = "<option selected enabled value=''>Choix de Chambre</option>";
+        foreach ($chambres as $chambre) {
+            $data .="<option value=".$chambre->getId().">".$chambre->getDesignation()." - ".$chambre->getTypeChambre()->getDesignation()."</option>";
+        }
         return new JsonResponse($data);
     }
     #[Route('/lit/{id}', name: 'getlit')]

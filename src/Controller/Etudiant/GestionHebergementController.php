@@ -192,6 +192,9 @@ class GestionHebergementController extends AbstractController
     {
         $litInscription = $this->em->getRepository(LitInscription::class)->find($request->get('hebergement_id'));
         
+        if ($litInscription->getActive() == 0) {
+            return new JsonResponse('Cette affectation est déja annulée !', 500);
+        }
         $oldLit = $this->em->getRepository(Lit::class)->find($litInscription->getLit());
         $nvLit = $this->em->getRepository(Lit::class)->find($request->get('lit'));
 
