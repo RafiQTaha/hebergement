@@ -199,7 +199,7 @@ $(document).ready(function () {
         if (!idHebergement) {
             Toast.fire({
                 icon: 'error',
-                title: 'Veuillez selection une inscription !',
+                title: 'Veuillez selection une affecatation !',
             })
             return;
         }

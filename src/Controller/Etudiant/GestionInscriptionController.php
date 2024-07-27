@@ -251,113 +251,7 @@ class GestionInscriptionController extends AbstractController
         return new JsonResponse("Bien Enregistre", 200);
     }
 
-    // #[Route('/frais/{inscription}', name: 'getFraisByInscription')]
-    // public function getFraisByInscription(TInscription $inscription): Response
-    // {   
-    //     $operationcab = $this->em->getRepository(TOperationcab::class)->findOneBy(['preinscription'=>$inscription->getAdmission()->getPreinscription(),'categorie'=>'inscription']);
-    //     // dd($operationcab);
-    //     if (!$operationcab) {
-    //         return new JsonResponse('Facture Introuvable!', 500); 
-    //     }
-    //     $frais = $this->em->getRepository(PFrais::class)->findBy(["formation" => $inscription->getAnnee()->getFormation(), "categorie" => "inscription",'active'=>1]);
-    //     $data = ApiController::dropdownData($frais,'frais');
-    //     return new JsonResponse(['list' => $data, 'codefacture' => $operationcab->getCode()], 200); 
-    // }
-    // #[Route('/info/{inscription}', name: 'getInformationByInscription')]
-    // public function getFraisByFormation(TInscription $inscription): Response
-    // {   
-    //     $admission = $inscription->getAdmission();
-    //     $etudiant = $admission->getPreinscription()->getEtudiant();
-    //     $natutre = $admission->getPreinscription()->getNature();
-    //     $annee = $admission->getPreinscription()->getAnnee();
-    //     $formation =$annee->getFormation();
-    //     $etablissement=$formation->getEtablissement();
-    //     $donnee_frais = "<p><span>Etablissement</span> : ".$etablissement->getDesignation()."</p>
-    //                     <p><span>Formation</span> : ".$formation->getDesignation()."</p>
-    //                     <p><span>Categorie</span> : ".$natutre->getDesignation()."</p>
-    //                     <p><span>Nom</span> : ".$etudiant->getNom()."</p>
-    //                     <p><span>Prenom</span> : ".$etudiant->getPrenom()."</p>
-    //                     <p><span>Cin</span> : ".$etudiant->getCin()."</p>
-    //                     <p><span>Cne</span> : ".$etudiant->getCne()."</p>";
-    //     return new JsonResponse($donnee_frais, 200);       
-    // }
-    // #[Route('/addfrais/{inscription}', name: 'inscription_addfrais')]
-    // public function inscriptionAddFrais(Request $request, TInscription $inscription): Response
-    // {
-    //     $arrayOfFrais = json_decode($request->get('frais'));
-    //     $preinscription = $inscription->getAdmission()->getPreinscription();
-    //     $operationCab = $this->em->getRepository(TOperationcab::class)->findOneBy(['preinscription'=>$preinscription,'categorie'=>'inscription']);
-    //     if ($operationCab->getActive() == 0) {
-    //         return new JsonResponse('Facture Cloturée', 500);
-    //     }
-    //     foreach ($arrayOfFrais as $fraisObject) {
-    //         $frais =  $this->em->getRepository(PFrais::class)->find($fraisObject->id);
-    //         $operationDet = new TOperationdet();
-    //         $operationDet->setOperationcab($operationCab);
-    //         $operationDet->setFrais($frais);
-    //         $operationDet->setMontant($fraisObject->montant);
-    //         $operationDet->setIce($fraisObject->ice);
-    //         $operationDet->setCreated(new \DateTime("now"));
-    //         $operationDet->setUpdated(new \DateTime("now"));
-    //         $operationDet->setOrganisme($this->em->getRepository(POrganisme::class)->find($fraisObject->organisme_id));
-    //         $operationDet->setRemise(0);
-    //         $operationDet->setActive(1);
-    //         $this->em->persist($operationDet);
-    //         $this->em->flush();
-    //         $operationDet->setCode(
-    //             "OPD".str_pad($operationDet->getId(), 8, '0', STR_PAD_LEFT)
-    //         );
-    //         $this->em->flush();
-    //     }
-
-    //     return new JsonResponse($operationCab->getId(), 200);
-    // }
-    // #[Route('/facture/{operationcab}', name: 'inscription_facture')]
-    // public function factureInscription(Request $request, TOperationcab $operationcab)
-    // {
-    //     $operationdets = $this->em->getRepository(TOperationdet::class)->FindDetGroupByFrais($operationcab);
-    //     $operationdetslist = [];
-    //     foreach ($operationdets as $operationdet) {
-    //         $frais = $operationdet->getFrais();
-    //         $SumByOrg = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndOrganisme($operationcab,$frais);
-    //         $SumByOrgPyt = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndOrganismePayant($operationcab,$frais);
-    //         $SumByPayant = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFactureAndPayant($operationcab,$frais);
-    //         $list['dateOperation'] = $this->em->getRepository(TOperationdet::class)->findOneBy(['operationcab'=>$operationcab,'frais'=>$frais],['created'=>'DESC'])->getCreated()->format('d/m/Y');
-    //         $list['designation'] = $operationdet->getFrais()->getDesignation();
-    //         $list['SumByOrg'] = $SumByOrg;
-    //         $list['SumByOrgPyt'] = $SumByOrgPyt;
-    //         $list['SumByPayant'] = $SumByPayant;
-    //         $list['total'] = $SumByPayant + $SumByOrg;
-    //         array_push($operationdetslist,$list);
-    //     }
-    //     $inscription = $this->em->getRepository(TInscription::class)->findOneBy([
-    //         'admission'=>$this->em->getRepository(TAdmission::class)->findBy([
-    //             'preinscription'=>$operationcab->getPreinscription()]),
-    //         'annee' => $operationcab->getAnnee()]);
-    //     $promotion = $inscription == NULL ? "" : $inscription->getPromotion()->getDesignation();
-
-    //     $reglementOrg = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByOrganisme($operationcab)['total'];
-    //     $reglementPyt = $this->em->getRepository(TReglement::class)->getReglementSumMontantByCodeFactureByPayant($operationcab)['total'];
-
-    //     $html = $this->render("facture/pdfs/facture_facture.html.twig", [
-    //         'reglementOrg' => $reglementOrg,
-    //         'reglementPyt' => $reglementPyt,
-    //         'operationcab' => $operationcab,
-    //         'promotion' => $promotion,
-    //         'operationdets' => $operationdetslist
-    //     ])->getContent();
-    //     $mpdf = new Mpdf([
-    //         'mode' => 'utf-8',
-    //         'margin_top' => 5,
-    //     ]);        
-    //     $mpdf->SetTitle('Facture');
-    //     $mpdf->SetHTMLFooter(
-    //         $this->render("facture/pdfs/footer.html.twig")->getContent()
-    //     );
-    //     $mpdf->showImageErrors = true;
-    //     $mpdf->WriteHTML($html);
-    //     $mpdf->Output("facture.pdf", "I");
-    // }
+    
 
     #[Route('/extraction_ins', name: 'extraction_ins')]
     public function extraction_ins()
@@ -387,17 +281,15 @@ class GestionInscriptionController extends AbstractController
         $sheet->setCellValue('T1', 'CODE_FORMATION');
         $sheet->setCellValue('U1', "PROMOTION");
         $sheet->setCellValue('V1', "CODE_PROMO");
-        $sheet->setCellValue('W1', 'TYPE DE BAC');
-        $sheet->setCellValue('X1', 'ANNEE BAC');
-        $sheet->setCellValue('Y1', 'FILIERE');
-        $sheet->setCellValue('Z1', 'MOYENNE GENERALE');
-        $sheet->setCellValue('AA1', 'MOYENNE NATIONALE');
-        $sheet->setCellValue('AB1', 'MOYENNE REGIONALE');
-        $sheet->setCellValue('AC1', 'D-INSCRIPTION');
-        $sheet->setCellValue('AD1', 'STATUT');
-        $sheet->setCellValue('AE1', 'CODE ASSURANCE');
-        $sheet->setCellValue('AF1', 'CNE');
-        $sheet->setCellValue('AG1', 'EMAIL');
+        $sheet->setCellValue('W1', 'ANNEE BAC');
+        $sheet->setCellValue('X1', 'MOYENNE GENERALE');
+        $sheet->setCellValue('Y1', 'MOYENNE NATIONALE');
+        $sheet->setCellValue('Z1', 'MOYENNE REGIONALE');
+        $sheet->setCellValue('AA1', 'D-INSCRIPTION');
+        $sheet->setCellValue('AB1', 'STATUT');
+        $sheet->setCellValue('AC1', 'CODE ASSURANCE');
+        $sheet->setCellValue('AD1', 'CNE');
+        $sheet->setCellValue('AE1', 'EMAIL');
         $i = 2;
         $j = 1;
         $current_year = date('m') >= 7 ? date('Y') . '/' . date('Y') + 1 : date('Y') - 1 . '/' . date('Y');
@@ -429,18 +321,15 @@ class GestionInscriptionController extends AbstractController
             $sheet->setCellValue('T' . $i, $inscription->getAnnee()->getFormation()->getCode());
             $sheet->setCellValue('U' . $i, $inscription->getPromotion()->getDesignation());
             $sheet->setCellValue('V' . $i, $inscription->getPromotion()->getCode());
-            $sheet->setCellValue('W' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTypeBac() == Null ? "" : $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTypeBac()->getDesignation());
-            $sheet->setCellValue('X' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getAnneeBac());
-            $filiere = $inscription->getAdmission()->getPreinscription()->getEtudiant()->getFiliere();
-            $sheet->setCellValue('Y' . $i, $filiere != null ? $filiere->getDesignation() : "");
-            $sheet->setCellValue('Z' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenneBac());
-            $sheet->setCellValue('AA' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenNational());
-            $sheet->setCellValue('AB' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenRegional());
-            $sheet->setCellValue('AC' . $i, $inscription->getCreated());
-            $sheet->setCellValue('AD' . $i, $inscription->getStatut()->GetDesignation());
-            $sheet->setCellValue('AE' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCodeAssurance());
-            $sheet->setCellValue('AF' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCne());
-            $sheet->setCellValue('AG' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
+            $sheet->setCellValue('W' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getAnneeBac());
+            $sheet->setCellValue('X' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenneBac());
+            $sheet->setCellValue('Y' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenNational());
+            $sheet->setCellValue('Z' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenRegional());
+            $sheet->setCellValue('AA' . $i, $inscription->getCreated());
+            $sheet->setCellValue('AB' . $i, $inscription->getStatut()->GetDesignation());
+            $sheet->setCellValue('AC' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCodeAssurance());
+            $sheet->setCellValue('AD' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCne());
+            $sheet->setCellValue('AE' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
             $i++;
             $j++;
         }
@@ -480,16 +369,15 @@ class GestionInscriptionController extends AbstractController
         $sheet->setCellValue('T1', 'CODE_FORMATION');
         $sheet->setCellValue('U1', "PROMOTION");
         $sheet->setCellValue('V1', "CODE_PROMO");
-        $sheet->setCellValue('W1', 'TYPE DE BAC');
-        $sheet->setCellValue('X1', 'ANNEE BAC');
-        $sheet->setCellValue('Y1', 'FILIERE');
-        $sheet->setCellValue('Z1', 'MOYENNE GENERALE');
-        $sheet->setCellValue('AA1', 'MOYENNE NATIONALE');
-        $sheet->setCellValue('AB1', 'MOYENNE REGIONALE');
-        $sheet->setCellValue('AC1', 'D-INSCRIPTION');
-        $sheet->setCellValue('AD1', 'STATUT');
-        $sheet->setCellValue('AE1', 'CODE ASSURANCE');
-        $sheet->setCellValue('AF1', 'CNE');
+        $sheet->setCellValue('W1', 'ANNEE BAC');
+        $sheet->setCellValue('X1', 'FILIERE');
+        $sheet->setCellValue('Y1', 'MOYENNE GENERALE');
+        $sheet->setCellValue('Z1', 'MOYENNE NATIONALE');
+        $sheet->setCellValue('AA1', 'MOYENNE REGIONALE');
+        $sheet->setCellValue('AB1', 'D-INSCRIPTION');
+        $sheet->setCellValue('AC1', 'STATUT');
+        $sheet->setCellValue('AD1', 'CODE ASSURANCE');
+        $sheet->setCellValue('AE1', 'CNE');
         $i = 2;
         $j = 1;
         // $current_year = date('m') > 7 ? date('Y').'/'.date('Y')+1 : date('Y') - 1 .'/' .date('Y');
@@ -524,17 +412,16 @@ class GestionInscriptionController extends AbstractController
             $sheet->setCellValue('T' . $i, $inscription->getAnnee()->getFormation()->getCode());
             $sheet->setCellValue('U' . $i, $inscription->getPromotion()->getDesignation());
             $sheet->setCellValue('V' . $i, $inscription->getPromotion()->getCode());
-            $sheet->setCellValue('W' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTypeBac() == Null ? "" : $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTypeBac()->getDesignation());
-            $sheet->setCellValue('X' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getAnneeBac());
+            $sheet->setCellValue('W' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getAnneeBac());
             $filiere = $inscription->getAdmission()->getPreinscription()->getEtudiant()->getFiliere();
-            $sheet->setCellValue('Y' . $i, $filiere != null ? $filiere->getDesignation() : "");
-            $sheet->setCellValue('Z' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenneBac());
-            $sheet->setCellValue('AA' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenNational());
-            $sheet->setCellValue('AB' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenRegional());
-            $sheet->setCellValue('AC' . $i, $inscription->getCreated());
-            $sheet->setCellValue('AD' . $i, $inscription->getStatut()->GetDesignation());
-            $sheet->setCellValue('AE' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCodeAssurance());
-            $sheet->setCellValue('AF' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCne());
+            $sheet->setCellValue('X' . $i, $filiere != null ? $filiere->getDesignation() : "");
+            $sheet->setCellValue('Y' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenneBac());
+            $sheet->setCellValue('Z' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenNational());
+            $sheet->setCellValue('AA' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenRegional());
+            $sheet->setCellValue('AB' . $i, $inscription->getCreated());
+            $sheet->setCellValue('AC' . $i, $inscription->getStatut()->GetDesignation());
+            $sheet->setCellValue('AD' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCodeAssurance());
+            $sheet->setCellValue('AE' . $i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCne());
             $i++;
             $j++;
         }
