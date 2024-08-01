@@ -191,7 +191,7 @@ class GestionHebergementController extends AbstractController
     public function modifier(Request $request)
     {
         $litInscription = $this->em->getRepository(LitInscription::class)->find($request->get('hebergement_id'));
-        
+
         if ($litInscription->getActive() == 0) {
             return new JsonResponse('Cette affectation est déja annulée !', 500);
         }
@@ -216,7 +216,7 @@ class GestionHebergementController extends AbstractController
 
     #[Route('/extraction_hebergement', name: 'extraction_hebergement')]
     public function extraction_hebergement()
-    {   
+    {
         // echo('Cration en cours!!');die;
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -242,65 +242,78 @@ class GestionHebergementController extends AbstractController
         $sheet->setCellValue('T1', 'CODE_FORMATION');
         $sheet->setCellValue('U1', "PROMOTION");
         $sheet->setCellValue('V1', "CODE_PROMO");
-        $sheet->setCellValue('W1', 'TYPE DE BAC');
-        $sheet->setCellValue('X1', 'ANNEE BAC');
-        $sheet->setCellValue('Y1', 'FILIERE');
-        $sheet->setCellValue('Z1', 'MOYENNE GENERALE');
-        $sheet->setCellValue('AA1', 'MOYENNE NATIONALE');
-        $sheet->setCellValue('AB1', 'MOYENNE REGIONALE');
-        $sheet->setCellValue('AC1', 'D-INSCRIPTION');
-        $sheet->setCellValue('AD1', 'STATUT');
-        $sheet->setCellValue('AE1', 'CODE ASSURANCE');
-        $sheet->setCellValue('AF1', 'CNE');
-        $sheet->setCellValue('AG1', 'EMAIL');
-        $i=2;
-        $j=1;
-        $current_year = date('m') >= 7 ? date('Y').'/'.date('Y')+1 : date('Y') - 1 .'/' .date('Y');
-        $inscriptions = $this->em->getRepository(TInscription::class)->getActiveInscriptionByCurrentAnnee($current_year);
-        // dd($inscriptions);
-        foreach ($inscriptions as $inscription) {
-            $sheet->setCellValue('A'.$i, $j);
-            $sheet->setCellValue('B'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCode());
-            $sheet->setCellValue('C'.$i, $inscription->getAdmission()->getPreinscription()->getCode());
-            $sheet->setCellValue('D'.$i, $inscription->getAdmission()->getCode());
-            $sheet->setCellValue('E'.$i, $inscription->getId());
-            $sheet->setCellValue('F'.$i, $inscription->getCode());
-            if ($inscription->getAdmission()->getPreinscription()->getNature() != null) {
-                $sheet->setCellValue('G'.$i, $inscription->getAdmission()->getPreinscription()->getNature()->getDesignation());
+        $sheet->setCellValue('W1', 'ANNEE BAC');
+        $sheet->setCellValue('X1', 'MOYENNE GENERALE');
+        $sheet->setCellValue('Y1', 'MOYENNE NATIONALE');
+        $sheet->setCellValue('Z1', 'MOYENNE REGIONALE');
+        $sheet->setCellValue('AA1', 'D-INSCRIPTION');
+        $sheet->setCellValue('AB1', 'STATUT');
+        $sheet->setCellValue('AC1', 'CODE ASSURANCE');
+        $sheet->setCellValue('AD1', 'CNE');
+        $sheet->setCellValue('AE1', 'EMAIL');
+        $sheet->setCellValue('AF1', 'DEPARTEMENT');
+        $sheet->setCellValue('AG1', 'ETAGE');
+        $sheet->setCellValue('AH1', 'TYPE');
+        $sheet->setCellValue('AI1', 'CHAMBRE');
+        $sheet->setCellValue('AJ1', 'POSITION');
+        $sheet->setCellValue('AK1', 'DATE DEBUT');
+        $sheet->setCellValue('AL1', 'DATE FIN');
+        $sheet->setCellValue('AM1', 'ETAT');
+        $i = 2;
+        $j = 1;
+        $current_year = date('m') >= 7 ? date('Y') . '/' . date('Y') + 1 : date('Y') - 1 . '/' . date('Y');
+        // $current_year = "2023/2024";
+        // dd($current_year);
+        $listInscriptions = $this->em->getRepository(LitInscription::class)->getLitInscriptionByYear($current_year);
+        // dd($listInscriptions);
+        foreach ($listInscriptions as $litIns) {
+            $sheet->setCellValue('A' . $i, $j);
+            $sheet->setCellValue('B' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getCode());
+            $sheet->setCellValue('C' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getCode());
+            $sheet->setCellValue('D' . $i, $litIns->getInscription()->getAdmission()->getCode());
+            $sheet->setCellValue('E' . $i, $litIns->getInscription()->getId());
+            $sheet->setCellValue('F' . $i, $litIns->getInscription()->getCode());
+            if ($litIns->getInscription()->getAdmission()->getPreinscription()->getNature() != null) {
+                $sheet->setCellValue('G' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getNature()->getDesignation());
             }
-            $sheet->setCellValue('H'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getNom());
-            $sheet->setCellValue('I'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getPrenom());
-            $sheet->setCellValue('J'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getSexe());
-            $sheet->setCellValue('K'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getDateNaissance());
-            $sheet->setCellValue('L'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCin());
-            $sheet->setCellValue('M'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getPasseport());
-            $sheet->setCellValue('N'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getNationalite());
-            $sheet->setCellValue('O'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTel1());
-            $sheet->setCellValue('P'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
-            $sheet->setCellValue('Q'.$i, $inscription->getAnnee()->getFormation()->getEtablissement()->getDesignation());
+            $sheet->setCellValue('H' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getNom());
+            $sheet->setCellValue('I' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getPrenom());
+            $sheet->setCellValue('J' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getSexe());
+            $sheet->setCellValue('K' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getDateNaissance());
+            $sheet->setCellValue('L' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getCin());
+            $sheet->setCellValue('M' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getPasseport());
+            $sheet->setCellValue('N' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getNationalite());
+            $sheet->setCellValue('O' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getTel1());
+            $sheet->setCellValue('P' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
+            $sheet->setCellValue('Q' . $i, $litIns->getInscription()->getAnnee()->getFormation()->getEtablissement()->getDesignation());
 
-            $sheet->setCellValue('R'.$i, $inscription->getAnnee()->getFormation()->getEtablissement()->getCode());
-            $sheet->setCellValue('S'.$i, $inscription->getAnnee()->getFormation()->getDesignation());
-            $sheet->setCellValue('T'.$i, $inscription->getAnnee()->getFormation()->getCode());
-            $sheet->setCellValue('U'.$i, $inscription->getPromotion()->getDesignation());
-            $sheet->setCellValue('V'.$i, $inscription->getPromotion()->getCode());
-            $sheet->setCellValue('W'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTypeBac() == Null ? "" : $inscription->getAdmission()->getPreinscription()->getEtudiant()->getTypeBac()->getDesignation());
-            $sheet->setCellValue('X'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getAnneeBac());
-            $filiere = $inscription->getAdmission()->getPreinscription()->getEtudiant()->getFiliere();
-            $sheet->setCellValue('Y'.$i, $filiere != null ? $filiere->getDesignation() : "");
-            $sheet->setCellValue('Z'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenneBac());
-            $sheet->setCellValue('AA'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenNational());
-            $sheet->setCellValue('AB'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMoyenRegional());
-            $sheet->setCellValue('AC'.$i, $inscription->getCreated());
-            $sheet->setCellValue('AD'.$i, $inscription->getStatut()->GetDesignation());
-            $sheet->setCellValue('AE'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCodeAssurance());
-            $sheet->setCellValue('AF'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getCne());
-            $sheet->setCellValue('AG'.$i, $inscription->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
+            $sheet->setCellValue('R' . $i, $litIns->getInscription()->getAnnee()->getFormation()->getEtablissement()->getCode());
+            $sheet->setCellValue('S' . $i, $litIns->getInscription()->getAnnee()->getFormation()->getDesignation());
+            $sheet->setCellValue('T' . $i, $litIns->getInscription()->getAnnee()->getFormation()->getCode());
+            $sheet->setCellValue('U' . $i, $litIns->getInscription()->getPromotion()->getDesignation());
+            $sheet->setCellValue('V' . $i, $litIns->getInscription()->getPromotion()->getCode());
+            $sheet->setCellValue('W' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getAnneeBac());
+            $sheet->setCellValue('X' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getMoyenneBac());
+            $sheet->setCellValue('Y' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getMoyenNational());
+            $sheet->setCellValue('Z' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getMoyenRegional());
+            $sheet->setCellValue('AA' . $i, $litIns->getInscription()->getCreated());
+            $sheet->setCellValue('AB' . $i, $litIns->getInscription()->getStatut()->GetDesignation());
+            $sheet->setCellValue('AC' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getCodeAssurance());
+            $sheet->setCellValue('AD' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getCne());
+            $sheet->setCellValue('AE' . $i, $litIns->getInscription()->getAdmission()->getPreinscription()->getEtudiant()->getMail1());
+            $sheet->setCellValue('AF' . $i, $litIns->getLit()->getChambre()->getEtage()->getDepartement()->getDesignation());
+            $sheet->setCellValue('AG' . $i, $litIns->getLit()->getChambre()->getEtage()->getDesignation());
+            $sheet->setCellValue('AH' . $i, $litIns->getLit()->getChambre()->getTypeChambre()->getDesignation());
+            $sheet->setCellValue('AI' . $i, $litIns->getLit()->getChambre()->getDesignation());
+            $sheet->setCellValue('AJ' . $i, $litIns->getLit()->getPosition());
+            $sheet->setCellValue('AK' . $i, $litIns->getStart()->format('Y-m-d'));
+            $sheet->setCellValue('AL' . $i, $litIns->getEnd()->format('Y-m-d'));
+            $sheet->setCellValue('AM' . $i, $litIns->getActive() == 1 ? 'En cours' : 'Annulé');
             $i++;
             $j++;
         }
         $writer = new Xlsx($spreadsheet);
-        $current_year = date('m') > 7 ? date('Y').'-'.date('Y')+1 : date('Y') - 1 .'-' .date('Y');
+        $current_year = date('m') > 7 ? date('Y') . '-' . date('Y') + 1 : date('Y') - 1 . '-' . date('Y');
         $fileName = "Extraction Inscription $current_year.xlsx";
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $writer->save($temp_file);

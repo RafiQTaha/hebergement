@@ -21,23 +21,23 @@ class LitInscriptionRepository extends ServiceEntityRepository
         parent::__construct($registry, LitInscription::class);
     }
 
-//    /**
-//     * @return LitInscription[] Returns an array of LitInscription objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return LitInscription[] Returns an array of LitInscription objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('l')
+    //            ->andWhere('l.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('l.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?LitInscription
-//    {
+    //    public function findOneBySomeField($value): ?LitInscription
+    //    {
     //        return $this->createQueryBuilder('l')
     //            ->andWhere('l.exampleField = :val')
     //            ->setParameter('val', $value)
@@ -45,11 +45,23 @@ class LitInscriptionRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-    
-    public function FindAffectationByPeriode($inscription,$dateDebut,$dateFin): array
+
+    public function getLitInscriptionByYear($annee): array
+    {
+        return $this->createQueryBuilder('l')
+            ->innerJoin('l.inscription', 'ins')
+            ->innerJoin("ins.annee", "annee")
+            ->andWhere('annee.designation = :annee')
+            ->setParameter('annee', $annee)
+            ->orderBy('l.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function FindAffectationByPeriode($inscription, $dateDebut, $dateFin): array
     {
         return $this->createQueryBuilder('affectation')
-            ->innerjoin('affectation.inscription','inscription')
+            ->innerjoin('affectation.inscription', 'inscription')
             ->andWhere('inscription = :inscription')
             ->andWhere(':dateDebut BETWEEN affectation.start AND affectation.end OR :dateFin BETWEEN affectation.start AND affectation.end')
             ->andWhere('affectation.active = 1')
@@ -60,7 +72,6 @@ class LitInscriptionRepository extends ServiceEntityRepository
             // ->setMaxResults(10)
             ->getQuery()
             // ->getOneOrNullResult()
-            ->getResult()
-        ;
+            ->getResult();
     }
 }

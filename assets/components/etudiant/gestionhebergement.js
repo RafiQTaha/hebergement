@@ -233,5 +233,8 @@ $(document).ready(function () {
             icon.addClass('fa-check-circle').removeClass("fa-spinner fa-spin ");
         }
     })
+    $('body').on('click', '#extraction', function () {
+        window.open('/etudiant/hebergement/extraction_hebergement', '_blank');
+    })
 })
 
