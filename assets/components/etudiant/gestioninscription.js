@@ -189,7 +189,7 @@ $(document).ready(function () {
         $("#affectation_modal").modal('show');
     })
 
-    $("body #affectation_save").on("submit", async (e) => {
+    $("body").on("submit", "#affectation_save", async (e) => {
         e.preventDefault();
         var formData = new FormData($("#affectation_save")[0])
         formData.append("inscription_id", id_inscription);
@@ -205,7 +205,7 @@ $(document).ready(function () {
                 title: response,
             })
             id_inscription = false;
-            $("#ajout_modal").modal("hide")
+            $("#affectation_modal").modal("hide")
         } catch (error) {
             const message = error.response.data;
             Toast.fire({
