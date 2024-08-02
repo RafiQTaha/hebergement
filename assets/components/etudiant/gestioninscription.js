@@ -8,12 +8,12 @@ const Toast = Swal.mixin({
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     },
-    })
-    let id_inscription = false;
-    let idInscription = [];
-    let frais = [];
-    let facture_exist = false;
-    $(document).ready(function  () {
+})
+let id_inscription = false;
+let idInscription = [];
+let frais = [];
+let facture_exist = false;
+$(document).ready(function () {
     var table = $("#datatables_gestion_inscription").DataTable({
         lengthMenu: [
             [10, 15, 25, 50, 100, 20000000000000],
@@ -29,15 +29,15 @@ const Toast = Swal.mixin({
         drawCallback: function () {
             idInscription.forEach((e) => {
                 $("body tr#" + e)
-                .find("input")
-                .prop("checked", true);
+                    .find("input")
+                    .prop("checked", true);
             });
             $("body tr#" + id_inscription).addClass('active_databales')
         },
-        preDrawCallback: function(settings) {
+        preDrawCallback: function (settings) {
             if ($.fn.DataTable.isDataTable('#datatables_gestion_inscription')) {
                 var dt = $('#datatables_gestion_inscription').DataTable();
-    
+
                 //Abort previous ajax request if it is still in process.
                 var settings = dt.settings();
                 if (settings[0].jqXHR) {
@@ -49,13 +49,13 @@ const Toast = Swal.mixin({
     });
 
     $("body select").select2()
-    $("#etablissement").on('change', async function (){
+    $("#etablissement").on('change', async function () {
         const id_etab = $(this).val();
         table.columns().search("");
         table.columns(0).search(id_etab).draw();
         let response = ""
-        if(id_etab != "") {
-            const request = await axios.get('/api/formation/'+id_etab);
+        if (id_etab != "") {
+            const request = await axios.get('/api/formation/' + id_etab);
             response = request.data
         } else {
             $('#annee').html("").select2();
@@ -63,16 +63,16 @@ const Toast = Swal.mixin({
         }
         $('#formation').html(response).select2();
     })
-    $("#formation").on('change', async function (){
+    $("#formation").on('change', async function () {
         const id_formation = $(this).val();
         table.columns().search("");
         let responseAnnee = ""
         let responsePromotion = ""
-        if(id_formation != "") {
+        if (id_formation != "") {
             table.columns(1).search(id_formation).draw();
-            const requestPromotion = await axios.get('/api/promotion/'+id_formation);
+            const requestPromotion = await axios.get('/api/promotion/' + id_formation);
             responsePromotion = requestPromotion.data
-            const requestAnnee = await axios.get('/api/annee/'+id_formation);
+            const requestAnnee = await axios.get('/api/annee/' + id_formation);
             responseAnnee = requestAnnee.data
         } else {
             table.columns(0).search($("#etablissement").val()).draw();
@@ -80,11 +80,11 @@ const Toast = Swal.mixin({
         $('#annee').html(responseAnnee).select2();
         $('#promotion').html(responsePromotion).select2();
     })
-    
-    $("#promotion").on('change', async function (){
+
+    $("#promotion").on('change', async function () {
         table.columns().search("");
-        if($(this).val() != "") {
-            if($("#annee").val() != "") {
+        if ($(this).val() != "") {
+            if ($("#annee").val() != "") {
                 table.columns(3).search($("#annee").val());
             }
             table.columns(2).search($(this).val()).draw();
@@ -93,11 +93,11 @@ const Toast = Swal.mixin({
         }
 
     })
-    $("#annee").on('change', async function (){
+    $("#annee").on('change', async function () {
         table.columns().search("");
-        if($(this).val() != "") {
+        if ($(this).val() != "") {
             table.columns(3).search($(this).val());
-        } 
+        }
         table.columns(2).search($("#promotion").val()).draw();
     })
 
@@ -112,10 +112,10 @@ const Toast = Swal.mixin({
     //         idInscription.push(input.attr("id"));
     //     }
     // })
-    $('body').on('dblclick','#datatables_gestion_inscription tbody tr',function () {
+    $('body').on('dblclick', '#datatables_gestion_inscription tbody tr', function () {
         // const input = $(this).find("input");
-        
-        if($(this).hasClass('active_databales')) {
+
+        if ($(this).hasClass('active_databales')) {
             $(this).removeClass('active_databales');
             id_inscription = null;
         } else {
@@ -124,51 +124,68 @@ const Toast = Swal.mixin({
             id_inscription = $(this).attr('id');
             // getStatutInscription();
         }
-        
+
     })
 
-    
-    $("body #departement").on("change",async function(){
-        const id_etab = $(this).val();
-        let response = ""
-        if(id_etab != "") {
-            const request = await axios.get('/api/etage/'+id_etab);
-            response = request.data
-        }
-        $('#etage').html(response).select2();
-    })
-    $("body #etage").on('change', async function (){
+
+    // $("body #departement").on("change", async function () {
+    //     const id_etab = $(this).val();
+    //     let response = ""
+    //     if (id_etab != "") {
+    //         const request = await axios.get('/api/etage/' + id_etab);
+    //         response = request.data
+    //     }
+    //     $('#etage').html(response).select2();
+    // })
+    $("body").on('change', '#etage', async function () {
         const id_etage = $(this).val();
         let response = ""
 
-        if(id_etage != "") {
-            const request = await axios.get('/api/chambre/'+id_etage);
+        if (id_etage != "") {
+            const request = await axios.get('/api/chambre/' + id_etage);
             response = request.data
         }
         $('#chambre').html(response).select2();
-       
+
     })
-    $("body #chambre").on('change', async function (){
+    $("body").on('change', '#chambre', async function () {
         const id_chambre = $(this).val();
         let response = ""
 
-        if(id_chambre != "") {
-            const request = await axios.get('/api/lit/'+id_chambre);
+        if (id_chambre != "") {
+            const request = await axios.get('/api/lit/' + id_chambre);
             response = request.data
         }
         $('#lit').html(response).select2();
-       
+
     })
-    
+
+    const getEtudiantInfos = async () => {
+        $('#affectation_modal .modal-body').html('');
+        const icon = $("#affectation i");
+        icon.removeClass('fa-edit').addClass("fa-spinner fa-spin");
+        try {
+            const request = await axios.get('/etudiant/inscription/getEtudiantInfos/' + id_inscription);
+            const data = request.data;
+
+            $('body #affectation_infos').html(data);
+            $('select').select2();
+            icon.addClass('fa-edit').removeClass("fa-spinner fa-spin");
+        } catch (error) {
+            // console.log(error.response.data);
+        }
+    }
+
     $("#affectation").on("click", () => {
-        if(!id_inscription){
-          Toast.fire({
-            icon: 'error',
-            title: 'Veuillez selection une inscription !',
-          })
-          return;
+        if (!id_inscription) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Veuillez selection une inscription !',
+            })
+            return;
         }
         // console.log('test')
+        getEtudiantInfos();
         $("#affectation_modal").modal('show');
     })
 
@@ -195,31 +212,31 @@ const Toast = Swal.mixin({
                 icon: 'error',
                 title: message,
             })
-            icon.addClass('fa-check-circle').removeClass("fa-spinner fa-spin ");            
+            icon.addClass('fa-check-circle').removeClass("fa-spinner fa-spin ");
         }
     })
 
-    $('body').on('click','#extraction', function (){
+    $('body').on('click', '#extraction', function () {
         window.open('/etudiant/inscription/extraction_ins', '_blank');
     })
-    $('body').on('click','#extraction_annee',function (e) {
+    $('body').on('click', '#extraction_annee', function (e) {
         e.preventDefault();
         $("#annee_extraction_inscription").modal('show');
     });
-    $('body').on('click','#export_inscription',function (e) {
+    $('body').on('click', '#export_inscription', function (e) {
         e.preventDefault();
         let annee = $('#annee_export').val();
         // alert(annee);
-        window.open('/etudiant/inscription/extraction_ins_annee/'+annee, '_blank');
+        window.open('/etudiant/inscription/extraction_ins_annee/' + annee, '_blank');
     });
 
-    $('#annee_export').on('input', function() {
+    $('#annee_export').on('input', function () {
         var inputYear = parseInt($(this).val());
         var yearPlusOne = inputYear + 1;
         if (!isNaN(yearPlusOne)) {
-          $('#year_plus_one').text(yearPlusOne);
+            $('#year_plus_one').text(yearPlusOne);
         } else {
-          $('#year_plus_one').text('');
+            $('#year_plus_one').text('');
         }
     });
 })
