@@ -170,7 +170,7 @@ class GestionInscriptionController extends AbstractController
         $sexe = $inscription->getAdmission()->getPreinscription()->getEtudiant()->getSexe();
         if ($sexe == "homme") {
             $departement = $this->em->getRepository(AcDepartement::class)->find(2);
-        } else {
+        } elseif ($sexe == "femme") {
             $departement = $this->em->getRepository(AcDepartement::class)->find(1);
         }
         $affectation_infos = $this->render("etudiant/pages/affectation_infos.html.twig", [
