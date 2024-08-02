@@ -8,8 +8,8 @@
 
 	<label for="etage">Etage:</label>
 	<select class="form-control" name="etage" id="etage">
+		<option value="">Choix Etages</option>
 		{% for etage in departement.pEtages %}
-			<option value="">Choix Etages</option>
 			<option value="{{etage.id}}">{{etage.designation}}</option>
 		{% endfor %}
 	</select>
