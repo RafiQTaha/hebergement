@@ -96,7 +96,7 @@ class GestionInscriptionController extends AbstractController
         inner join ac_etablissement etab on etab.id = form.etablissement_id 
         INNER JOIN pstatut st ON st.id = ins.statut_id
         inner join ac_promotion prom on prom.id = ins.promotion_id
-        $filtre ";
+        $filtre and etu.sexe is not null";
         // dd($sql);
         $totalRows .= $sql;
         $sqlRequest .= $sql;
@@ -163,6 +163,23 @@ class GestionInscriptionController extends AbstractController
 
         return new JsonResponse($statutsHtml);
     }
+
+    #[Route('/getEtudiantInfos/{inscription}', name: 'getEtudiantInfos')]
+    public function getEtudiantInfos(Request $request, TInscription $inscription)
+    {
+        $sexe = $inscription->getAdmission()->getPreinscription()->getEtudiant()->getSexe();
+        if ($sexe == "homme") {
+            $departement = $this->em->getRepository(AcDepartement::class)->find(2);
+        } else {
+            $departement = $this->em->getRepository(AcDepartement::class)->find(1);
+        }
+        $affectation_infos = $this->render("etudiant/pages/affectation_infos.html.twig", [
+            'departement' =>  $departement,
+        ])->getContent();
+
+        return new JsonResponse($affectation_infos);
+    }
+
     #[Route('/affectation', name: 'affectation')]
     public function affectation(Request $request)
     {
@@ -251,7 +268,7 @@ class GestionInscriptionController extends AbstractController
         return new JsonResponse("Bien Enregistre", 200);
     }
 
-    
+
 
     #[Route('/extraction_ins', name: 'extraction_ins')]
     public function extraction_ins()

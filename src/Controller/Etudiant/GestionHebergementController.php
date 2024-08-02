@@ -187,6 +187,26 @@ class GestionHebergementController extends AbstractController
         return new Response('Seances Bien Supprimer', 200);
     }
 
+    #[Route('/getHebergementInfos/{hebergement}', name: 'getHebergementInfos')]
+    public function getEtudiantInfos(Request $request, LitInscription $hebergement)
+    {
+        // dd("h");
+        $departement_choisi = $hebergement->getLit()->getChambre()->getEtage()->getDepartement();
+        $etage_choisi = $hebergement->getLit()->getChambre()->getEtage();
+        $chambre_choisi = $hebergement->getLit()->getChambre();
+        $lit_choisi = $hebergement->getLit();
+        $hebergement_infos = $this->render("etudiant/pages/hebergement_infos.html.twig", [
+            'hebergement' => $hebergement,
+            'departement_choisi' => $departement_choisi,
+            'etage_choisi' => $etage_choisi,
+            'chambre_choisi' => $chambre_choisi,
+            'lit_choisi' => $lit_choisi,
+            'departements' =>  $this->em->getRepository(AcDepartement::class)->findBy(['active' => 1]),
+        ])->getContent();
+
+        return new JsonResponse($hebergement_infos);
+    }
+
     #[Route('/modifier', name: 'modifier')]
     public function modifier(Request $request)
     {

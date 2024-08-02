@@ -1,0 +1,32 @@
+<form id="affectation_save">
+	<label for="departement">Département:</label>
+	<select class="form-control" name="departement" id="departement">
+		{% if departement != null %}
+			<option value="{{departement.id}}">{{departement.designation}}</option>
+		{% endif %}
+	</select>
+
+	<label for="etage">Etage:</label>
+	<select class="form-control" name="etage" id="etage">
+		{% for etage in departement.pEtages %}
+			<option value="">Choix Etages</option>
+			<option value="{{etage.id}}">{{etage.designation}}</option>
+		{% endfor %}
+	</select>
+
+	<label for="chambre">Chambre:</label>
+	<select class="form-control" name="chambre" id="chambre"></select>
+
+	<label for="lit">Lit:</label>
+	<select class="form-control" name="lit" id="lit"></select>
+
+	<label for="periode">Periode de:</label>
+	<input type="date" name="date_debut" class="form-control" placeholder="Date Debut" id="date_debut">
+
+	<label for="periode">Periode au:</label>
+	<input type="date" name="date_fin" class="form-control" placeholder="Date Fin" id="date_fin">
+
+	<button type="submit" class="btn btn-success mt-4">
+		<i class="fas fa-check-circle"></i>
+		Enregister</button>
+</form>

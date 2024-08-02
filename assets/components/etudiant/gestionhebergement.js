@@ -172,7 +172,9 @@ $(document).ready(function () {
         }
         $('#etage').html(response).select2();
     })
-    $("body #etage").on('change', async function () {
+    $("body").on('change', '#etage', async function () {
+        // console.log('hh');
+
         const id_etage = $(this).val();
         let response = ""
 
@@ -183,7 +185,7 @@ $(document).ready(function () {
         $('#chambre').html(response).select2();
 
     })
-    $("body #chambre").on('change', async function () {
+    $("body").on('change', '#chambre', async function () {
         const id_chambre = $(this).val();
         let response = ""
 
@@ -195,6 +197,24 @@ $(document).ready(function () {
 
     })
 
+
+
+    const getHebergementInfos = async () => {
+        $('#modification_modal .modal-body').html('');
+        const icon = $("#modifier i");
+        icon.removeClass('fa-edit').addClass("fa-spinner fa-spin");
+        try {
+            const request = await axios.get('/etudiant/hebergement/getHebergementInfos/' + idHebergement);
+            const data = request.data;
+
+            $('body #hebergement_infos').html(data);
+            $('select').select2();
+            icon.addClass('fa-edit').removeClass("fa-spinner fa-spin");
+        } catch (error) {
+            // console.log(error.response.data);
+        }
+    }
+
     $("#modifier").on("click", () => {
         if (!idHebergement) {
             Toast.fire({
@@ -204,10 +224,11 @@ $(document).ready(function () {
             return;
         }
         // console.log('test')
+        getHebergementInfos();
         $("#modification_modal").modal('show');
     })
 
-    $("body #mdification_save").on("submit", async (e) => {
+    $("body").on("submit", "#mdification_save", async (e) => {
         e.preventDefault();
         var formData = new FormData($("#mdification_save")[0])
         formData.append("hebergement_id", idHebergement);

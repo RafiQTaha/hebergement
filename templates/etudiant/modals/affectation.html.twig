@@ -1,47 +1,16 @@
-<div class="modal" role="dialog" id="affectation_modal" aria-modal="true"> 
-<div class="modal-dialog modal-md" style="max-width: 400px !important;" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Hébérger un etudiant</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
-        <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- <div class="alert alert-info">Veuillez selectionner un ligne Pour Continuer Cette opération !!</div> -->
-        <form id="affectation_save">
-            <label for="departement">Département:</label>
-            <select class="form-control" name="departement" id="departement">
-              <option value="">Choix de département</option>
-              {% for departement in departements %}    
-                  <option value="{{departement.id}}" >{{departement.designation}}</option>
-              {% endfor %}
-            </select>
+<div class="modal" role="dialog" id="affectation_modal" aria-modal="true">
+	<div class="modal-dialog modal-md" style="max-width: 400px !important;" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Hébérger un etudiant</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div
+				class="modal-body" id="affectation_infos"><!-- <div class="alert alert-info">Veuillez selectionner un ligne Pour Continuer Cette opération !!</div> -->
 
-            <label for="etage">Etage:</label>
-            <select class="form-control" name="etage" id="etage">
-                
-            </select>
-
-            <label for="chambre">Chambre:</label>
-            <select class="form-control" name="chambre" id="chambre">
-                
-            </select>
-            
-            <label for="lit">Lit:</label>
-            <select class="form-control" name="lit" id="lit">
-                
-            </select>
-            
-            <label for="periode">Periode de:</label>
-						<input type="date" name="date_debut" class="form-control" placeholder="Date Debut" id="date_debut"  >
-            
-            <label for="periode">Periode au:</label>
-            <input type="date" name="date_fin" class="form-control" placeholder="Date Fin" id="date_fin" >
-
-            <button type="submit" class="btn btn-success mt-4"><i class="fas fa-check-circle"></i> Enregister</button>
-        </form>
-      </div>
-    </div>
-  </div>
+			</div>
+		</div>
+	</div>
 </div>
