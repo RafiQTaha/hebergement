@@ -335,7 +335,7 @@ class GestionHebergementController extends AbstractController
         }
         $writer = new Xlsx($spreadsheet);
         $current_year = date('m') > 7 ? date('Y') . '-' . date('Y') + 1 : date('Y') - 1 . '-' . date('Y');
-        $fileName = "Extraction Inscription $current_year.xlsx";
+        $fileName = "Extraction Hebergement $current_year.xlsx";
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $writer->save($temp_file);
         return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
