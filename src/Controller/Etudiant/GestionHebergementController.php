@@ -17,6 +17,8 @@ use App\Entity\AcDepartement;
 use App\Entity\LitInscription;
 use App\Entity\TAdmission;
 use App\Entity\Lit;
+use App\Entity\PEtages;
+use App\Entity\TChambre;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -141,7 +143,7 @@ class GestionHebergementController extends AbstractController
         foreach ($result as $key => $row) {
             $nestedData = array();
             $cd = $row['id'];
-            $nestedData[] = "<input type ='checkbox' class='check_admissible' id ='$cd' >";
+            // $nestedData[] = "<input type ='checkbox' class='check_admissible' id ='$cd' >";
             $nestedData[] = $cd;
             // dd($row);
 
@@ -171,36 +173,36 @@ class GestionHebergementController extends AbstractController
     #[Route('/supprimer', name: 'supprimer_hebergement')]
     public function supprimer_hebergement(Request $request): Response
     {
-        $ids = json_decode($request->get('ids_hebergement'));
-        if (count($ids) == 0) {
-            return new Response('Merci de choisir Au moins une Seance!', 500);
+        $litInscription = $this->em->getRepository(LitInscription::class)->find($request->get('idHebergement'));
+        if (!$litInscription) {
+            return new Response('Merci de choisir une Affectation!', 500);
         }
-        foreach ($ids as $id) {
-            $litInscripiton = $this->em->getRepository(LitInscription::class)->find($id);
-            if ($litInscripiton) {
-                $litInscripiton->setActive(false);
-                $litInscripiton->setUpdated(new DateTime('now'));
-                $litInscripiton->setUserUpdated($this->getUser());
-            }
+        $totalfacture = $this->em->getRepository(TOperationdet::class)->getSumMontantCAByPreins($litInscription->getInscription()->getAdmission()->getPreinscription())['total'];
+        $totalreglement = $this->em->getRepository(TReglement::class)->getSumMontantReglementByPreins($litInscription->getInscription()->getAdmission()->getPreinscription())['total'];
+        if ($totalfacture - $totalreglement > 0) {
+            return new JsonResponse("Facture non reglé, Merci de contacter le service Financière !", 500);
+        }
+        if ($litInscription) {
+            $litInscription->setActive(false);
+            $litInscription->setUpdated(new DateTime('now'));
+            $litInscription->setUserUpdated($this->getUser());
         }
         $this->em->flush();
-        return new Response('Seances Bien Supprimer', 200);
+        return new Response('Affectation Bien Supprimer', 200);
     }
 
     #[Route('/getHebergementInfos/{hebergement}', name: 'getHebergementInfos')]
     public function getEtudiantInfos(Request $request, LitInscription $hebergement)
     {
-        // dd("h");
         $departement_choisi = $hebergement->getLit()->getChambre()->getEtage()->getDepartement();
-        $etage_choisi = $hebergement->getLit()->getChambre()->getEtage();
-        $chambre_choisi = $hebergement->getLit()->getChambre();
-        $lit_choisi = $hebergement->getLit();
+        $etages = $this->em->getRepository(PEtages::class)->findBy(['departement'=>$departement_choisi,'active'=>1]);
+        $chambres = $this->em->getRepository(TChambre::class)->findBy(['etage'=>$hebergement->getLit()->getChambre()->getEtage(),'active'=>1]);
+        $lits = $this->em->getRepository(Lit::class)->findBy(['chambre'=>$hebergement->getLit()->getChambre(),'active'=>1]);
         $hebergement_infos = $this->render("etudiant/pages/hebergement_infos.html.twig", [
             'hebergement' => $hebergement,
-            'departement_choisi' => $departement_choisi,
-            'etage_choisi' => $etage_choisi,
-            'chambre_choisi' => $chambre_choisi,
-            'lit_choisi' => $lit_choisi,
+            'etages' => $etages,
+            'chambres' => $chambres,
+            'lits' => $lits,
             'departements' =>  $this->em->getRepository(AcDepartement::class)->findBy(['active' => 1]),
         ])->getContent();
 
@@ -225,7 +227,6 @@ class GestionHebergementController extends AbstractController
         if ($oldLit->getChambre()->getTypeChambre() != $nvLit->getChambre()->getTypeChambre()) {
             return new JsonResponse("Le type de chambre du nouveau lit doit être du même type que l'ancien!", 500);
         }
-
 
         $litInscription->setLit($nvLit);
         $litInscription->setUpdated(new DateTime('now'));

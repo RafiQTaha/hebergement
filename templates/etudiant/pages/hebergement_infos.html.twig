@@ -1,28 +1,34 @@
 <form id="mdification_save">
 	<label for="departement">Département:</label>
+	<select class="form-control" name="departement" id="departement">
+		<option value="{{hebergement.lit.chambre.etage.departement.id}}"  selected >{{hebergement.lit.chambre.etage.departement.designation}}</option>
+		{# {% for departement in departements %}
+			<option value="{{departement.id}}" {% if hebergement.lit.chambre.etage.departement.id == departement.id %} selected {% endif %}>{{departement.designation}}</option>
+		{% endfor %} #}
+	</select>
 
 	<label for="etage">Etage:</label>
 	<select class="form-control" name="etage" id="etage">
-		{% for etage in departement_choisi.pEtages %}
-			<option value="{{etage.id}}" {% if etage_choisi.id == etage.id%} selected {% endif %}>{{etage.designation}}</option>
+		{% for etage in etages %}
+			<option value="{{etage.id}}" {% if hebergement.lit.chambre.etage.id == etage.id %} selected {% endif %}>{{etage.designation}}</option>
 		{% endfor %}
 	</select>
 
 	<label for="chambre">Chambre:</label>
 	<select class="form-control" name="chambre" id="chambre">
-		{% for chambre in etage_choisi.tChambres %}
-			<option value="{{chambre.id}}" {% if chambre_choisi.id == chambre.id%} selected {% endif %}>{{chambre.designation}}</option>
+		{% for chambre in chambres %}
+			<option value="{{chambre.id}}" {% if hebergement.lit.chambre.id == chambre.id %} selected {% endif %}>{{chambre.designation}} - {{chambre.typeChambre.designation}}</option>
 		{% endfor %}
 	</select>
 
 	<label for="lit">Lit:</label>
 	<select class="form-control" name="lit" id="lit">
-		{% for lit in chambre_choisi.lits %}
-			<option value="{{lit.id}}" {% if lit_choisi.id == lit.id%} selected {% endif %}>{{lit.position}}</option>
+		{% for lit in lits %}
+			<option value="{{lit.id}}" {% if hebergement.lit.id == lit.id%} selected {% endif %}>{{lit.position}}</option>
 		{% endfor %}
 	</select>
 
 	<button type="submit" class="btn btn-success mt-4">
-		<i class="fas fa-check-circle"></i>
-		Modifier</button>
+		<i class="fas fa-check-circle"></i>Modifier
+	</button>
 </form>

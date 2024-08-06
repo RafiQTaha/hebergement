@@ -128,15 +128,16 @@ $(document).ready(function () {
     })
 
 
-    // $("body #departement").on("change", async function () {
-    //     const id_etab = $(this).val();
-    //     let response = ""
-    //     if (id_etab != "") {
-    //         const request = await axios.get('/api/etage/' + id_etab);
-    //         response = request.data
-    //     }
-    //     $('#etage').html(response).select2();
-    // })
+    $("body").on('change', '#departement', async function () {
+        console.log('test')
+        const id_departement = $(this).val();
+        let response = ""
+        if (id_departement != "") {
+            const request = await axios.get('/api/etage/' + id_departement);
+            response = request.data
+        }
+        $('#etage').html(response).select2();
+    })
     $("body").on('change', '#etage', async function () {
         const id_etage = $(this).val();
         let response = ""
@@ -163,16 +164,22 @@ $(document).ready(function () {
     const getEtudiantInfos = async () => {
         $('#affectation_modal .modal-body').html('');
         const icon = $("#affectation i");
-        icon.removeClass('fa-edit').addClass("fa-spinner fa-spin");
+        icon.removeClass('fa-money-bill-alt').addClass("fa-spinner fa-spin");
         try {
             const request = await axios.get('/etudiant/inscription/getEtudiantInfos/' + id_inscription);
             const data = request.data;
 
             $('body #affectation_infos').html(data);
             $('select').select2();
-            icon.addClass('fa-edit').removeClass("fa-spinner fa-spin");
+            icon.addClass('fa-money-bill-alt').removeClass("fa-spinner fa-spin");
+            $("#affectation_modal").modal('show');
         } catch (error) {
-            // console.log(error.response.data);
+            const message = error.response.data;
+            icon.addClass('fa-money-bill-alt').removeClass("fa-spinner fa-spin");
+            Toast.fire({
+                icon: 'error',
+                title: message,
+            })
         }
     }
 
@@ -186,7 +193,6 @@ $(document).ready(function () {
         }
         // console.log('test')
         getEtudiantInfos();
-        $("#affectation_modal").modal('show');
     })
 
     $("body").on("submit", "#affectation_save", async (e) => {

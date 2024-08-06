@@ -96,8 +96,7 @@ class GestionInscriptionController extends AbstractController
         inner join ac_etablissement etab on etab.id = form.etablissement_id 
         INNER JOIN pstatut st ON st.id = ins.statut_id
         inner join ac_promotion prom on prom.id = ins.promotion_id
-        $filtre and etu.sexe is not null";
-        // dd($sql);
+        $filtre ";
         $totalRows .= $sql;
         $sqlRequest .= $sql;
         $stmt = $this->em->getConnection()->prepare($sql);
@@ -105,17 +104,24 @@ class GestionInscriptionController extends AbstractController
         $totalRecords = count($newstmt->fetchAll());
         // dd($sql);
         $my_columns = DatatablesController::Pluck($columns, 'db');
+        // dump($columns);
+        
+        $my_columns = $columns;
+        unset($my_columns[6]);unset($my_columns[7]);unset($my_columns[8]);unset($my_columns[9]);
 
         // search 
         $pre = [
             "db" => "pre.code",
-            "dt" => 11
+            "dt" => 6
         ];
-        array_push($columns, $pre);
-        $where = DatatablesController::Search($request, $columns);
+        array_push($my_columns, $pre);
+        // dd($my_columns);
+        $where = DatatablesController::Search($request, $my_columns);
         if (isset($where) && $where != '') {
             $sqlRequest .= $where;
         }
+        // dd($where);
+        // dd($sqlRequest);
         $changed_column = $params->all('order')[0]['column'] > 0 ? $params->all('order')[0]['column'] - 1 : 0;
         $sqlRequest .= " ORDER BY " . DatatablesController::Pluck($columns, 'db')[$changed_column] . "   " . $params->all('order')[0]['dir'] . "  LIMIT " . $params->get('start') . " ," . $params->get('length') . " ";
         // $sqlRequest .= DatatablesController::Order($request, $columns);
@@ -168,13 +174,15 @@ class GestionInscriptionController extends AbstractController
     public function getEtudiantInfos(Request $request, TInscription $inscription)
     {
         $sexe = $inscription->getAdmission()->getPreinscription()->getEtudiant()->getSexe();
-        if ($sexe == "homme") {
-            $departement = $this->em->getRepository(AcDepartement::class)->find(2);
-        } elseif ($sexe == "femme") {
-            $departement = $this->em->getRepository(AcDepartement::class)->find(1);
+        if ($sexe == "HOME" or $sexe == "home") {
+            $departements = $this->em->getRepository(AcDepartement::class)->findBy(['id'=>2]);
+        } elseif ($sexe == "FEMME" or $sexe == "femme") {
+            $departements = $this->em->getRepository(AcDepartement::class)->findBy(['id'=>1]);
+        }else {
+            $departements = $this->em->getRepository(AcDepartement::class)->findAll();
         }
         $affectation_infos = $this->render("etudiant/pages/affectation_infos.html.twig", [
-            'departement' =>  $departement,
+            'departements' =>  $departements,
         ])->getContent();
 
         return new JsonResponse($affectation_infos);
@@ -208,9 +216,6 @@ class GestionInscriptionController extends AbstractController
         if ($dateDebut >= $dateFin) {
             return new JsonResponse('La date Fin doit etre superieur au Date Debut!!', 500);
         }
-
-
-
         $litInscription = new LitInscription();
         $litInscription->setLit($lit);
         $litInscription->setInscription($inscription);

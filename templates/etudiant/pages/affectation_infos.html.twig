@@ -1,18 +1,23 @@
 <form id="affectation_save">
 	<label for="departement">Département:</label>
 	<select class="form-control" name="departement" id="departement">
-		{% if departement != null %}
+			<option value="" selected>Choix Departement</option>
+			{% for departement in departements %}
+				<option value="{{departement.id}}">{{departement.designation}}</option>
+			{% endfor %}
+		{# {% if departement != null %}
 			<option value="{{departement.id}}">{{departement.designation}}</option>
-		{% endif %}
+		{% endif %} #}
 	</select>
 
 	<label for="etage">Etage:</label>
-	<select class="form-control" name="etage" id="etage">
+	<select class="form-control" name="etage" id="etage"></select>
+	{# <select class="form-control" name="etage" id="etage">
 		<option value="">Choix Etages</option>
 		{% for etage in departement.pEtages %}
 			<option value="{{etage.id}}">{{etage.designation}}</option>
 		{% endfor %}
-	</select>
+	</select> #}
 
 	<label for="chambre">Chambre:</label>
 	<select class="form-control" name="chambre" id="chambre"></select>

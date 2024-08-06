@@ -119,24 +119,24 @@ $(document).ready(function () {
         table.columns(2).search($("#promotion").val()).draw();
     })
 
-    $('body').on('click', '#datatables_gestion_hebergement tbody tr', function () {
-        const input = $(this).find("input");
-        if (input.is(":checked")) {
-            input.prop("checked", false);
-            const index = ids_hebergement.indexOf(input.attr("id"));
-            ids_hebergement.splice(index, 1);
-        } else {
-            input.prop("checked", true);
-            ids_hebergement.push(input.attr("id"));
-        }
-    })
+    // $('body').on('click', '#datatables_gestion_hebergement tbody tr', function () {
+    //     const input = $(this).find("input");
+    //     if (input.is(":checked")) {
+    //         input.prop("checked", false);
+    //         const index = ids_hebergement.indexOf(input.attr("id"));
+    //         ids_hebergement.splice(index, 1);
+    //     } else {
+    //         input.prop("checked", true);
+    //         ids_hebergement.push(input.attr("id"));
+    //     }
+    // })
 
     $('body').on('click', '#supprimer', async function (e) {
         e.preventDefault();
-        if (ids_hebergement.length === 0) {
+        if (!idHebergement) {
             Toast.fire({
                 icon: 'error',
-                title: 'Merci de Choisir au moins une ligne',
+                title: 'Merci de Choisir une ligne',
             })
             return;
         }
@@ -145,7 +145,7 @@ $(document).ready(function () {
             const icon = $("#supprimer i");
             icon.removeClass('fa-trash').addClass("fa-spinner fa-spin");
             var formData = new FormData();
-            formData.append('ids_hebergement', JSON.stringify(ids_hebergement));
+            formData.append('idHebergement', idHebergement);
             try {
                 const request = await axios.post('/etudiant/hebergement/supprimer', formData);
                 const response = request.data;
@@ -153,21 +153,25 @@ $(document).ready(function () {
                     icon: 'success',
                     title: response,
                 })
-                ids_hebergement = []
+                idHebergement = null
                 table.ajax.reload(null, false);
                 icon.addClass('fa-trash').removeClass("fa-spinner fa-spin");
             } catch (error) {
                 const message = error.response.data;
                 icon.addClass('fa-trash').removeClass("fa-spinner fa-spin");
+                Toast.fire({
+                    icon: 'error',
+                    title: message,
+                })
             }
         }
     })
 
     $("body #departement").on("change", async function () {
-        const id_etab = $(this).val();
+        const id_departement = $(this).val();
         let response = ""
-        if (id_etab != "") {
-            const request = await axios.get('/api/etage/' + id_etab);
+        if (id_departement != "") {
+            const request = await axios.get('/api/etage/' + id_departement);
             response = request.data
         }
         $('#etage').html(response).select2();
@@ -208,10 +212,16 @@ $(document).ready(function () {
             const data = request.data;
 
             $('body #hebergement_infos').html(data);
-            $('select').select2();
             icon.addClass('fa-edit').removeClass("fa-spinner fa-spin");
+            $("#modification_modal").modal('show');
+            $("#modification_modal select").select2();
         } catch (error) {
-            // console.log(error.response.data);
+            const message = error.response.data;
+            icon.addClass('fa-edit').removeClass("fa-spinner fa-spin");
+            Toast.fire({
+                icon: 'error',
+                title: message,
+            })
         }
     }
 
@@ -225,7 +235,6 @@ $(document).ready(function () {
         }
         // console.log('test')
         getHebergementInfos();
-        $("#modification_modal").modal('show');
     })
 
     $("body").on("submit", "#mdification_save", async (e) => {
