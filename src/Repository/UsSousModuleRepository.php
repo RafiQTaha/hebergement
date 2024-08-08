@@ -47,13 +47,27 @@ class UsSousModuleRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    public function findByAdmin() {
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.module', "m")
+            ->OrderBy('m.ordre', 'ASC')
+            ->addOrderBy('u.ordre', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+        // dd($request);
+    }
+
     public function findByUserOperations($user) {
         return $this->createQueryBuilder('u')
             ->innerJoin('u.operations', "usOperation")
             ->innerJoin('usOperation.users', "user")
+            ->innerJoin('u.module', "m")
             ->where('user = :user')
             ->setParameter('user', $user)
-            ->orderBy('u.ordre', 'ASC')
+            ->OrderBy('m.ordre', 'ASC')
+            ->addOrderBy('u.ordre', 'ASC')
             ->getQuery()
             ->getResult()
         ;
