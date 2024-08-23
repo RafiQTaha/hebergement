@@ -63,17 +63,14 @@ class BordereauController extends AbstractController
         $columns = array(
             array( 'db' => 'brd.id','dt' => 0 ),
             array( 'db' => 'brd.code','dt' => 1),
-            array( 'db' => 'etab.abreviation','dt' => 2),
-            array( 'db' => 'etab.designation','dt' => 3),
-            array( 'db' => 'lower(pae.designation)','dt' => 4),
-            array( 'db' => 'brd.montant','dt' => 5),
-            array( 'db' => 'DATE_FORMAT(brd.created,"%Y-%m-%d")','dt' => 6),
-            array( 'db' => 'user.username','dt' => 7),
+            array( 'db' => 'lower(pae.designation)','dt' => 2),
+            array( 'db' => 'brd.montant','dt' => 3),
+            array( 'db' => 'DATE_FORMAT(brd.created,"%Y-%m-%d")','dt' => 4),
+            array( 'db' => 'user.username','dt' => 5),
         );
         $sql = "SELECT " . implode(", ", DatatablesController::Pluck($columns, 'db')) . "
         FROM tbrdpaiement brd 
-        INNER JOIN xmodalites pae on pae.id = brd.modalite_id
-        INNER join ac_etablissement etab on etab.id = brd.etablissement_id
+        LEFT JOIN xmodalites pae on pae.id = brd.modalite_id
         LEFT join users user on  user.id = brd.user_created_id $filtre ";
         // dd($sql);
         $totalRows .= $sql;

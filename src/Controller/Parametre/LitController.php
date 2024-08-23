@@ -70,7 +70,7 @@ class LitController extends AbstractController
         inner join petages etg on etg.id = chm.etage_id
         inner join ac_departement dep on dep.id = etg.departement_id
         inner join type_chambre tc on tc.id = chm.type_chambre_id
-        inner join statut_chambre st on st.id = chm.statut_chambre_id
+        left join statut_chambre st on st.id = chm.statut_chambre_id
         $filtre ";
         // dd($sql);
         $totalRows .= $sql;
