@@ -245,5 +245,60 @@ $(document).ready(function () {
             $('#year_plus_one').text('');
         }
     });
+
+    $("#affecter_masse").on("click", (e) => {
+        e.preventDefault();
+        $("#affectation_en_masse").modal("show");
+        $("#affectation_en_masse .modal-body .alert").remove();
+    });
+
+    $("#affectation_canvas").on("click", function () {
+        window.open("/etudiant/inscription/canvas", "_blank");
+    });
+
+    $("body").on("click", "#affectation_masse_enregistre", async function (e) {
+        // const form = $("#inscription_masse_save");
+        // console.log(form[0]);
+        e.preventDefault();
+        const formData = new FormData();
+        const fileInput = $("body #file")[0];
+        formData.append("file", fileInput.files[0]);
+        let modalAlert = $("#affectation_en_masse .modal-body .alert");
+
+        modalAlert.remove();
+        const icon = $("#affectation_masse_enregistre i");
+        icon.removeClass("fa-check-circle").addClass("fa-spinner fa-spin");
+
+        try {
+            const request = await axios.post(
+                "/etudiant/inscription/affectation_masse",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            const response = request.data;
+            $("#affectation_en_masse .modal-body").prepend(
+                `<div class="alert alert-success">
+                <p>${response.message}</p>
+              </div>`
+            );
+            if (response.count > 0) {
+                window.open("/" + response.file, "_blank");
+            }
+            icon.addClass("fa-check-circle").removeClass("fa-spinner fa-spin ");
+            table.ajax.reload(null, false);
+        } catch (error) {
+            const message = error.response.data;
+            console.log(error, error.response);
+            modalAlert.remove();
+            $("#affectation_masse_save .modal-body").prepend(
+                `<div class="alert alert-danger">${message}</div>`
+            );
+            icon.addClass("fa-check-circle").removeClass("fa-spinner fa-spin ");
+        }
+    });
 })
 
