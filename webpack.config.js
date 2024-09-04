@@ -36,6 +36,8 @@ Encore
     .addEntry('bordereau', './assets/components/facture/bordereau.js')
     .addEntry('reglement', './assets/components/facture/reglement.js')
 
+    .addEntry('conseil_disciplinaire', './assets/components/conseil/conseil_disciplinaire.js')
+
     .addEntry('departement', './assets/components/parametre/departement.js')
     .addEntry('etage', './assets/components/parametre/etage.js')
     .addEntry('chambre', './assets/components/parametre/chambre.js')
