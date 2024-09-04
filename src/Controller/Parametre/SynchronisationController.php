@@ -27,6 +27,7 @@ class SynchronisationController extends AbstractController
         $this->api = $api;
         $this->api_univ = HttpClient::create();
         ini_set('max_execution_time', 6000);
+        ini_set('memory_limit', -1);
     }
     #[Route('/', name: 'parametre_Synchronisation', options: ['expose' => true])]
     public function synchronisation(Request $request): Response
@@ -66,7 +67,7 @@ class SynchronisationController extends AbstractController
     #[Route('/api_annee', name: 'api_annee', options: ['expose' => true])]
     public function api_annee()
     {
-        // return $this->InsertOrUpdateMydatabase('ac_annee', 'annee');
+        return $this->InsertOrUpdateMydatabase('ac_annee', 'annee');
         try {
             return $this->InsertOrUpdateMydatabase('ac_annee', 'annee');
         } catch (\Throwable $th) {
@@ -220,7 +221,7 @@ class SynchronisationController extends AbstractController
                         $updatedRow++;
                     }
                 }
-                
+
                 // dd('$data, $current_row');
             } else {
                 // dd($data);
@@ -246,12 +247,12 @@ class SynchronisationController extends AbstractController
             // Skip the common key
             if ($key !== $commonKey) {
                 if ($value == null) {
-                    $setClause[] = "`$key` = " . (is_numeric($value) ? "'".$value."'" : "null");
+                    $setClause[] = "`$key` = " . (is_numeric($value) ? "'" . $value . "'" : "null");
                     // dd($setClause);
                 } else {
-                    $value = str_contains($value, "'") ? str_replace("'", "\'", $value) : $value; 
+                    $value = str_contains($value, "'") ? str_replace("'", "\'", $value) : $value;
                     // $setClause[] = "`$key` = " . (is_numeric($value) ? "'".$value."'" : '"' . $value . '"');
-                    $setClause[] = "`$key` = '".$value."'";
+                    $setClause[] = "`$key` = '" . $value . "'";
                 }
             }
         }

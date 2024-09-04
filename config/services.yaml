@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
   facturation_reinscription: "%kernel.project_dir%/public/uploads/facturation_reinscription"
+  affectation_masse: "%kernel.project_dir%/public/uploads/affectation_masse"
   api_univ: http://www.uiass-etudiants.ma/api_u3sn/web/api/hebergement/
 
 services:

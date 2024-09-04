@@ -2,31 +2,34 @@
 
 namespace App\Controller\Etudiant;
 
+use DateTime;
 use Mpdf\Mpdf;
+use App\Entity\Lit;
 use App\Entity\PFrais;
 use App\Entity\PStatut;
 use App\Entity\POrganisme;
+use App\Entity\TAdmission;
 use App\Entity\TReglement;
 use App\Entity\TInscription;
+use App\Entity\AcDepartement;
 use App\Entity\TOperationcab;
 use App\Entity\TOperationdet;
+use App\Entity\LitInscription;
 use App\Entity\AcEtablissement;
 use App\Controller\ApiController;
 use App\Controller\DatatablesController;
-use App\Entity\AcDepartement;
-use App\Entity\LitInscription;
-use App\Entity\TAdmission;
-use App\Entity\Lit;
-use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as reader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/etudiant/inscription')]
 class GestionInscriptionController extends AbstractController
@@ -105,9 +108,12 @@ class GestionInscriptionController extends AbstractController
         // dd($sql);
         $my_columns = DatatablesController::Pluck($columns, 'db');
         // dump($columns);
-        
+
         $my_columns = $columns;
-        unset($my_columns[6]);unset($my_columns[7]);unset($my_columns[8]);unset($my_columns[9]);
+        unset($my_columns[6]);
+        unset($my_columns[7]);
+        unset($my_columns[8]);
+        unset($my_columns[9]);
 
         // search 
         $pre = [
@@ -175,10 +181,10 @@ class GestionInscriptionController extends AbstractController
     {
         $sexe = $inscription->getAdmission()->getPreinscription()->getEtudiant()->getSexe();
         if ($sexe == "HOME" or $sexe == "home") {
-            $departements = $this->em->getRepository(AcDepartement::class)->findBy(['id'=>2]);
+            $departements = $this->em->getRepository(AcDepartement::class)->findBy(['id' => 2]);
         } elseif ($sexe == "FEMME" or $sexe == "femme") {
-            $departements = $this->em->getRepository(AcDepartement::class)->findBy(['id'=>1]);
-        }else {
+            $departements = $this->em->getRepository(AcDepartement::class)->findBy(['id' => 1]);
+        } else {
             $departements = $this->em->getRepository(AcDepartement::class)->findAll();
         }
         $affectation_infos = $this->render("etudiant/pages/affectation_infos.html.twig", [
@@ -453,5 +459,223 @@ class GestionInscriptionController extends AbstractController
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $writer->save($temp_file);
         return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
+    }
+
+    #[Route('/canvas', name: 'affectation_canvas')]
+    public function affectation_canvas()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'id_inscription');
+        $sheet->setCellValue('B1', 'id_lit');
+        $sheet->setCellValue('C1', 'Date debut');
+        $sheet->setCellValue('D1', 'Date fin');
+
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'canvas_affectation.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+        $writer->save($temp_file);
+
+        return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
+    }
+
+    #[Route('/affectation_masse', name: 'affectation_masse')]
+    public function affectation_masse(Request $request, SluggerInterface $slugger)
+    {
+        ini_set('max_execution_time', 6000);
+        ini_set('memory_limit', -1);
+        $file = $request->files->get('file');
+        // dd($file);
+        if (!$file) {
+            return new JsonResponse('Prière d\'importer le fichier', 500);
+        }
+        if ($file->guessExtension() !== 'xlsx') {
+            return new JsonResponse('Prière d\'enregister un fichier xlsx', 500);
+        }
+
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // this is needed to safely include the file name as part of the URL
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '_' . $this->getUser()->getId() . '.' . $file->guessExtension();
+
+        // Move the file to the directory where brochures are stored
+        try {
+            $file->move(
+                $this->getParameter('affectation_masse'),
+                $newFilename
+            );
+        } catch (FileException $e) {
+            throw new \Exception($e);
+        }
+
+        $reader = new reader();
+        $spreadsheet = $reader->load($this->getParameter('affectation_masse') . '/' . $newFilename);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $spreadSheetArys = $worksheet->toArray();
+
+        unset($spreadSheetArys[0]);
+        $sheetCount = 0;
+
+        // dd($spreadSheetArys);
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'ID Preins');
+        $sheet->setCellValue('B1', 'Code Preins');
+        $sheet->setCellValue('C1', 'ID Admission');
+        $sheet->setCellValue('D1', 'Code Admission');
+        $sheet->setCellValue('E1', 'ID Inscription');
+        $sheet->setCellValue('F1', 'Code Inscription');
+        $sheet->setCellValue('G1', 'DEPARTEMENT');
+        $sheet->setCellValue('H1', 'ETAGE');
+        $sheet->setCellValue('I1', 'TYPE');
+        $sheet->setCellValue('J1', 'CHAMBRE');
+        $sheet->setCellValue('K1', 'POSITION');
+        $sheet->setCellValue('L1', 'DATE DEBUT');
+        $sheet->setCellValue('M1', 'DATE FIN');
+        $sheet->setCellValue('N1', 'ETAT');
+        $sheet->setCellValue('O1', 'ID Fact PYT');
+        $sheet->setCellValue('P1', 'Code Fact PYT');
+        $sheet->setCellValue('Q1', 'ID Fact ORG');
+        $sheet->setCellValue('R1', 'Code Fact ORG');
+        $sheet->setCellValue('S1', 'Nv/Existe');
+        $j = 2;
+
+        foreach ($spreadSheetArys as $arr) {
+            // dd($arr);
+            $id_inscription = $arr[0];
+            $id_lit = $arr[1];
+            $dateDebut = $arr[2];
+            $dateFin = $arr[3];
+
+            $dateTimeDebut = \DateTime::createFromFormat('Y-m-d', $dateDebut);
+            $dateTimeFin = \DateTime::createFromFormat('Y-m-d', $dateFin);
+            // dd($dateDebut, $dateTimeDebut);
+            if (!$dateTimeDebut) {
+                continue;
+            }
+            if (!$dateTimeFin) {
+                continue;
+            }
+
+            if ($dateTimeDebut >= $dateTimeFin) {
+                continue;
+            }
+
+            $inscription = $this->em->getRepository(TInscription::class)->find($id_inscription);
+
+            if ($inscription->getStatut()->getId() != 13) {
+                continue;
+            }
+            $exist = $this->em->getRepository(LitInscription::class)->FindAffectationByPeriode($inscription, $dateDebut, $dateFin);
+            // dd($exist);
+            $lit = $this->em->getRepository(Lit::class)->find($id_lit);
+            if (!$inscription || !$lit) {
+                continue;
+            }
+
+            $sheet->setCellValue('A' . $j, $inscription->getAdmission()->getPreinscription()->getId());
+            $sheet->setCellValue('B' . $j, $inscription->getAdmission()->getPreinscription()->getCode());
+            $sheet->setCellValue('C' . $j, $inscription->getAdmission()->getId());
+            $sheet->setCellValue('D' . $j, $inscription->getAdmission()->getCode());
+            $sheet->setCellValue('E' . $j, $inscription->getId());
+            $sheet->setCellValue('F' . $j, $inscription->getCode());
+
+            if (!$exist) {
+                $litInscription = new LitInscription();
+                $litInscription->setLit($lit);
+                $litInscription->setInscription($inscription);
+                $litInscription->setStart($dateTimeDebut);
+                $litInscription->setEnd($dateTimeFin);
+                $litInscription->setActive(1);
+                $litInscription->setCreated(new DateTime('now'));
+                $litInscription->setUserCreated($this->getUser());
+                $this->em->persist($litInscription);
+                $this->em->flush();
+
+                $sheet->setCellValue('G' . $j, $litInscription->getLit()->getChambre()->getEtage()->getDepartement()->getDesignation());
+                $sheet->setCellValue('H' . $j, $litInscription->getLit()->getChambre()->getEtage()->getDesignation());
+                $sheet->setCellValue('I' . $j, $litInscription->getLit()->getChambre()->getTypeChambre()->getDesignation());
+                $sheet->setCellValue('J' . $j, $litInscription->getLit()->getChambre()->getDesignation());
+                $sheet->setCellValue('K' . $j, $litInscription->getLit()->getPosition());
+                $sheet->setCellValue('L' . $j, $litInscription->getStart()->format('Y-m-d'));
+                $sheet->setCellValue('M' . $j, $litInscription->getEnd()->format('Y-m-d'));
+                $sheet->setCellValue('N' . $j, $litInscription->getActive() == 1 ? 'En cours' : 'Annulé');
+
+                $isBoursier = 0;
+                if ($inscription->getAdmission()->getPreinscription()->getNature() and $inscription->getAdmission()->getPreinscription()->getNature()->getId() != 1) {
+                    $isBoursier = 1;
+                }
+                $k = $isBoursier == 0 ? 1 : 2;
+                $k = 1;
+                $operationCab = new TOperationcab();
+                $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
+                $operationCab->setUserCreated($this->getUser());
+                $operationCab->setAnnee($inscription->getAnnee());
+                $operationCab->setLitInscription($litInscription);
+                $operationCab->setActive(1);
+                $operationCab->setDateContable(date('Y'));
+                $categorie = $k == 1 ? 'caution' : 'caution organisme';
+                $organisme = $k == 1 ? 'Payant' : 'Organisme';
+                $operationCab->setCategorie($categorie);
+                $operationCab->setOrganisme($organisme);
+                $operationCab->setCreated(new \DateTime("now"));
+                $this->em->persist($operationCab);
+                $this->em->flush();
+                $operationCab->setCode(
+                    "HEB-FAC" . str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT) . "/" . date('Y')
+                );
+                $this->em->flush();
+                for ($i = 1; $i <= $k; $i++) {
+                    $operationCab = new TOperationcab();
+                    $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
+                    $operationCab->setUserCreated($this->getUser());
+                    $operationCab->setAnnee($inscription->getAnnee());
+                    $operationCab->setLitInscription($litInscription);
+                    $operationCab->setActive(1);
+                    $operationCab->setDateContable(date('Y'));
+                    $categorie = $i == 1 ? 'inscription' : 'inscription organisme';
+                    $organisme = $i == 1 ? 'Payant' : 'Organisme';
+                    $operationCab->setCategorie($categorie);
+                    $operationCab->setOrganisme($organisme);
+                    $operationCab->setCreated(new \DateTime("now"));
+                    $this->em->persist($operationCab);
+                    $this->em->flush();
+                    $operationCab->setCode(
+                        "HEB-FAC" . str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT) . "/" . date('Y')
+                    );
+                    $this->em->flush();
+
+                    if ($organisme == 'Payant') {
+                        $sheet->setCellValue('O' . $j, $operationCab->getId());
+                        $sheet->setCellValue('P' . $j, $operationCab->getCode());
+                    } else {
+                        $sheet->setCellValue('Q' . $j, $operationCab->getId());
+                        $sheet->setCellValue('R' . $j, $operationCab->getCode());
+                    }
+                }
+                $sheet->setCellValue('S' . $j, "Nouveau");
+                $sheetCount++;
+            } else {
+                $sheet->setCellValue('G' . $j, $exist[0]->getLit()->getChambre()->getEtage()->getDepartement()->getDesignation());
+                $sheet->setCellValue('H' . $j, $exist[0]->getLit()->getChambre()->getEtage()->getDesignation());
+                $sheet->setCellValue('I' . $j, $exist[0]->getLit()->getChambre()->getTypeChambre()->getDesignation());
+                $sheet->setCellValue('J' . $j, $exist[0]->getLit()->getChambre()->getDesignation());
+                $sheet->setCellValue('K' . $j, $exist[0]->getLit()->getPosition());
+                $sheet->setCellValue('L' . $j, $exist[0]->getStart()->format('Y-m-d'));
+                $sheet->setCellValue('M' . $j, $exist[0]->getEnd()->format('Y-m-d'));
+                $sheet->setCellValue('N' . $j, $exist[0]->getActive() == 1 ? 'En cours' : 'Annulé');
+                $sheet->setCellValue('S' . $j, "Existe deja");
+            }
+            $j++;
+        }
+        $fileName = "";
+        if ($sheetCount > 0) {
+            $writer = new Xlsx($spreadsheet);
+            $fileName = 'Total des affectaion est ' . $sheetCount . '.xlsx';
+            $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+            $writer->save($fileName);
+        }
+        return new JsonResponse(['message' => "Total des affectaion est " . $sheetCount, 'file' => $fileName, 'count' => $sheetCount]);
     }
 }
