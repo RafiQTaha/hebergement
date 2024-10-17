@@ -105,7 +105,7 @@ const Toast = Swal.mixin({
         language: "fr",
         ajax: {
            dataType: 'json',
-           url: '/etudiant/rechercheavance/find',  
+           url: '/conseil/disciplinaire/find',  
         //    delay: 5,  // ini bebas mau di pake atau tidak
            data: function(params) {
              return {

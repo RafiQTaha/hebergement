@@ -9,6 +9,7 @@ use App\Entity\Agression;
 use App\Entity\InsSanctionner;
 use App\Entity\Sanction;
 use App\Entity\SousAgression;
+use App\Entity\TAdmission;
 use App\Entity\TInscription;
 use DateTime;
 use DateTimeZone;
@@ -558,5 +559,14 @@ class ConseildisciplinaireController extends AbstractController
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
         $writer->save($temp_file);
         return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
+    }
+    
+    #[Route('/find', name: 'etudiant_find')]
+    public function find(Request $request)
+    {
+        $admissions = $this->em->getRepository(TAdmission::class)->findAdmssions($request->query->get("search"));
+
+        // dd($admissions);
+        return new Response(json_encode($admissions));
     }
 }
