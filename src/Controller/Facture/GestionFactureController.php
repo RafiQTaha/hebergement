@@ -932,6 +932,7 @@ class GestionFactureController extends AbstractController
         $check = $this->em->getRepository(TOperationcab::class)->findBy([
             'preinscription' => $operationcab->getPreinscription(),
             'annee' => $operationcab->getAnnee(),
+            'litInscription' => $operationcab->getLitInscription(),
             'dateContable' => date('Y'),
             'organisme' => 'Organisme',
             'categorie' => 'inscription organisme',
@@ -977,6 +978,7 @@ class GestionFactureController extends AbstractController
         $check = $this->em->getRepository(TOperationcab::class)->findBy([
             'preinscription' => $operationcab->getPreinscription(),
             'annee' => $operationcab->getAnnee(),
+            'litInscription' => $operationcab->getLitInscription(),
             'dateContable' => date('Y'),
             'organisme' => 'Payant',
             'categorie' => 'inscription',
