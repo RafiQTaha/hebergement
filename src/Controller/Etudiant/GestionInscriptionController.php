@@ -202,6 +202,8 @@ class GestionInscriptionController extends AbstractController
         $dateFin = new DateTime($request->get('date_fin'));
 
         $inscription = $this->em->getRepository(TInscription::class)->find($request->get('inscription_id'));
+        $preinscription = $inscription->getAdmission()->getPreinscription();
+        $annee = $inscription->getAnnee();
         if ($inscription->getStatut()->getId() != 13) {
             return new JsonResponse("Cet Etudiant n'est plus inscrit sur systeme !", 500);
         }
@@ -234,33 +236,37 @@ class GestionInscriptionController extends AbstractController
         $this->em->flush();
 
         $isBoursier = 0;
-        if ($inscription->getAdmission()->getPreinscription()->getNature() and $inscription->getAdmission()->getPreinscription()->getNature()->getId() != 1) {
+        if ($inscription->getAnnee()->getFormation()->getEtablissement()->getId() == 28) {
             $isBoursier = 1;
         }
         $k = $isBoursier == 0 ? 1 : 2;
-        $operationCab = new TOperationcab();
-        $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
-        $operationCab->setUserCreated($this->getUser());
-        $operationCab->setAnnee($inscription->getAnnee());
-        $operationCab->setLitInscription($litInscription);
-        $operationCab->setActive(1);
-        $operationCab->setDateContable(date('Y'));
-        $categorie = $k == 1 ? 'caution' : 'caution organisme';
-        $organisme = $k == 1 ? 'Payant' : 'Organisme';
-        $operationCab->setCategorie($categorie);
-        $operationCab->setOrganisme($organisme);
-        $operationCab->setCreated(new \DateTime("now"));
-        $this->em->persist($operationCab);
-        $this->em->flush();
-        $operationCab->setCode(
-            "HEB-FAC" . str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT) . "/" . date('Y')
-        );
-        $this->em->flush();
+
         for ($i = 1; $i <= $k; $i++) {
+            // creation caution
             $operationCab = new TOperationcab();
-            $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
+            $operationCab->setPreinscription($preinscription);
             $operationCab->setUserCreated($this->getUser());
-            $operationCab->setAnnee($inscription->getAnnee());
+            $operationCab->setAnnee($annee);
+            $operationCab->setLitInscription($litInscription);
+            $operationCab->setActive(1);
+            $operationCab->setDateContable(date('Y'));
+            $categorie = $i == 1 ? 'caution' : 'caution organisme';
+            $organisme = $i == 1 ? 'Payant' : 'Organisme';
+            $operationCab->setCategorie($categorie);
+            $operationCab->setOrganisme($organisme);
+            $operationCab->setCreated(new \DateTime("now"));
+            $this->em->persist($operationCab);
+            $this->em->flush();
+            $operationCab->setCode(
+                "HEB-FAC" . str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT) . "/" . date('Y')
+            );
+            $this->em->flush();
+
+            // creation inscription
+            $operationCab = new TOperationcab();
+            $operationCab->setPreinscription($preinscription);
+            $operationCab->setUserCreated($this->getUser());
+            $operationCab->setAnnee($annee);
             $operationCab->setLitInscription($litInscription);
             $operationCab->setActive(1);
             $operationCab->setDateContable(date('Y'));
@@ -534,11 +540,15 @@ class GestionInscriptionController extends AbstractController
         $sheet->setCellValue('L1', 'DATE DEBUT');
         $sheet->setCellValue('M1', 'DATE FIN');
         $sheet->setCellValue('N1', 'ETAT');
-        $sheet->setCellValue('O1', 'ID Fact PYT');
-        $sheet->setCellValue('P1', 'Code Fact PYT');
-        $sheet->setCellValue('Q1', 'ID Fact ORG');
-        $sheet->setCellValue('R1', 'Code Fact ORG');
-        $sheet->setCellValue('S1', 'Nv/Existe');
+        $sheet->setCellValue('O1', 'Cuation');
+        $sheet->setCellValue('P1', 'Code Cuation');
+        $sheet->setCellValue('Q1', 'Inscription PYT');
+        $sheet->setCellValue('R1', 'Code Inscription PYT');
+        $sheet->setCellValue('S1', 'Cuation ORG');
+        $sheet->setCellValue('T1', 'Code Cuation ORG');
+        $sheet->setCellValue('U1', 'Inscription ORG');
+        $sheet->setCellValue('V1', 'Code Inscription ORG');
+        $sheet->setCellValue('W1', 'Nv/Existe');
         $j = 2;
 
         foreach ($spreadSheetArys as $arr) {
@@ -563,6 +573,8 @@ class GestionInscriptionController extends AbstractController
             }
 
             $inscription = $this->em->getRepository(TInscription::class)->find($id_inscription);
+            $preinscription = $inscription->getAdmission()->getPreinscription();
+            $annee = $inscription->getAnnee();
 
             if ($inscription->getStatut()->getId() != 13) {
                 continue;
@@ -603,34 +615,63 @@ class GestionInscriptionController extends AbstractController
                 $sheet->setCellValue('N' . $j, $litInscription->getActive() == 1 ? 'En cours' : 'Annulé');
 
                 $isBoursier = 0;
-                if ($inscription->getAdmission()->getPreinscription()->getNature() and $inscription->getAdmission()->getPreinscription()->getNature()->getId() != 1) {
+                if ($inscription->getAnnee()->getFormation()->getEtablissement()->getId() == 28) {
                     $isBoursier = 1;
                 }
                 $k = $isBoursier == 0 ? 1 : 2;
-                $k = 1;
-                $operationCab = new TOperationcab();
-                $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
-                $operationCab->setUserCreated($this->getUser());
-                $operationCab->setAnnee($inscription->getAnnee());
-                $operationCab->setLitInscription($litInscription);
-                $operationCab->setActive(1);
-                $operationCab->setDateContable(date('Y'));
-                $categorie = $k == 1 ? 'caution' : 'caution organisme';
-                $organisme = $k == 1 ? 'Payant' : 'Organisme';
-                $operationCab->setCategorie($categorie);
-                $operationCab->setOrganisme($organisme);
-                $operationCab->setCreated(new \DateTime("now"));
-                $this->em->persist($operationCab);
-                $this->em->flush();
-                $operationCab->setCode(
-                    "HEB-FAC" . str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT) . "/" . date('Y')
-                );
-                $this->em->flush();
+                // $k = 1;
+                // $operationCab = new TOperationcab();
+                // $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
+                // $operationCab->setUserCreated($this->getUser());
+                // $operationCab->setAnnee($inscription->getAnnee());
+                // $operationCab->setLitInscription($litInscription);
+                // $operationCab->setActive(1);
+                // $operationCab->setDateContable(date('Y'));
+                // $categorie = $k == 1 ? 'caution' : 'caution organisme';
+                // $organisme = $k == 1 ? 'Payant' : 'Organisme';
+                // $operationCab->setCategorie($categorie);
+                // $operationCab->setOrganisme($organisme);
+                // $operationCab->setCreated(new \DateTime("now"));
+                // $this->em->persist($operationCab);
+                // $this->em->flush();
+                // $operationCab->setCode(
+                //     "HEB-FAC" . str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT) . "/" . date('Y')
+                // );
+                // $this->em->flush();
                 for ($i = 1; $i <= $k; $i++) {
+                    // creation caution
                     $operationCab = new TOperationcab();
-                    $operationCab->setPreinscription($inscription->getAdmission()->getPreinscription());
+                    $operationCab->setPreinscription($preinscription);
                     $operationCab->setUserCreated($this->getUser());
-                    $operationCab->setAnnee($inscription->getAnnee());
+                    $operationCab->setAnnee($annee);
+                    $operationCab->setLitInscription($litInscription);
+                    $operationCab->setActive(1);
+                    $operationCab->setDateContable(date('Y'));
+                    $categorie = $i == 1 ? 'caution' : 'caution organisme';
+                    $organisme = $i == 1 ? 'Payant' : 'Organisme';
+                    $operationCab->setCategorie($categorie);
+                    $operationCab->setOrganisme($organisme);
+                    $operationCab->setCreated(new \DateTime("now"));
+                    $this->em->persist($operationCab);
+                    $this->em->flush();
+                    $operationCab->setCode(
+                        "HEB-FAC" . str_pad($operationCab->getId(), 8, '0', STR_PAD_LEFT) . "/" . date('Y')
+                    );
+                    $this->em->flush();
+
+                    if ($organisme == 'Payant') {
+                        $sheet->setCellValue('O' . $j, $operationCab->getId());
+                        $sheet->setCellValue('P' . $j, $operationCab->getCode());
+                    } else {
+                        $sheet->setCellValue('S' . $j, $operationCab->getId());
+                        $sheet->setCellValue('T' . $j, $operationCab->getCode());
+                    }
+
+                    // creation inscription
+                    $operationCab = new TOperationcab();
+                    $operationCab->setPreinscription($preinscription);
+                    $operationCab->setUserCreated($this->getUser());
+                    $operationCab->setAnnee($annee);
                     $operationCab->setLitInscription($litInscription);
                     $operationCab->setActive(1);
                     $operationCab->setDateContable(date('Y'));
@@ -647,14 +688,14 @@ class GestionInscriptionController extends AbstractController
                     $this->em->flush();
 
                     if ($organisme == 'Payant') {
-                        $sheet->setCellValue('O' . $j, $operationCab->getId());
-                        $sheet->setCellValue('P' . $j, $operationCab->getCode());
-                    } else {
                         $sheet->setCellValue('Q' . $j, $operationCab->getId());
                         $sheet->setCellValue('R' . $j, $operationCab->getCode());
+                    } else {
+                        $sheet->setCellValue('U' . $j, $operationCab->getId());
+                        $sheet->setCellValue('V' . $j, $operationCab->getCode());
                     }
                 }
-                $sheet->setCellValue('S' . $j, "Nouveau");
+                $sheet->setCellValue('W' . $j, "Nouveau");
                 $sheetCount++;
             } else {
                 $sheet->setCellValue('G' . $j, $exist[0]->getLit()->getChambre()->getEtage()->getDepartement()->getDesignation());
@@ -665,7 +706,7 @@ class GestionInscriptionController extends AbstractController
                 $sheet->setCellValue('L' . $j, $exist[0]->getStart()->format('Y-m-d'));
                 $sheet->setCellValue('M' . $j, $exist[0]->getEnd()->format('Y-m-d'));
                 $sheet->setCellValue('N' . $j, $exist[0]->getActive() == 1 ? 'En cours' : 'Annulé');
-                $sheet->setCellValue('S' . $j, "Existe deja");
+                $sheet->setCellValue('W' . $j, "Existe deja");
             }
             $j++;
         }

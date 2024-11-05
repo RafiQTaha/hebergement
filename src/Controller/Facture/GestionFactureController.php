@@ -117,16 +117,18 @@ class GestionFactureController extends AbstractController
 
         $columns = array(
             array('db' => 'opcab.id', 'dt' => 0),
-            array('db' => 'opcab.code', 'dt' => 1),
+            array('db' => 'RIGHT(opcab.code,10)', 'dt' => 1),
             array('db' => 'Upper(pre.code)', 'dt' => 2),
             array('db' => 'etu.nom', 'dt' => 3),
             array('db' => 'etu.prenom', 'dt' => 4),
             array('db' => 'etu.cin', 'dt' => 5),
             array('db' => 'etab.abreviation', 'dt' => 6),
             array('db' => 'Upper(stat.designation)', 'dt' => 7),
-            array('db' => 'upper(etu.nationalite)', 'dt' => 8),
-            array('db' => 'opcab.categorie', 'dt' => 9),
-            array('db' => 'opcab.active', 'dt' => 10),
+            // array('db' => 'upper(etu.nationalite)', 'dt' => 8),
+            array('db' => 'opcab.categorie', 'dt' => 8),
+            array('db' => 'opcab.active', 'dt' => 9),
+            array('db' => 'upper(tc.designation)', 'dt' => 10),
+            array('db' => 'lins.active as litStatut', 'dt' => 11),
         );
         $sql = "SELECT DISTINCT " . implode(", ", DatatablesController::Pluck($columns, 'db')) . "
         FROM `toperationcab` opcab
@@ -138,6 +140,11 @@ class GestionFactureController extends AbstractController
         INNER JOIN tetudiant etu on etu.id = pre.etudiant_id
         INNER JOIN ac_formation frma on frma.id = an.formation_id
         INNER JOIN ac_etablissement etab on etab.id = frma.etablissement_id
+        INNER JOIN lit_inscription lins on lins.id = opcab.lit_inscription_id
+        inner join lit on lit.id = lins.lit_id
+        inner join tchambre chm on chm.id = lit.chambre_id
+        inner join type_chambre tc on tc.id = chm.type_chambre_id
+        left join statut_chambre stchm on stchm.id = chm.statut_chambre_id
         $filtre ";
         // dd($sql);
         $totalRows .= $sql;
@@ -171,7 +178,7 @@ class GestionFactureController extends AbstractController
             $etat_bg = "";
             foreach (array_values($row) as $key => $value) {
                 if ($key > 0) {
-                    if ($key == 10) {
+                    if ($key == 9) {
                         $operationTotal = $this->em->getRepository(TOperationdet::class)->getSumMontantByCodeFacture($cd)['total'];
                         $nestedData[] = $operationTotal;
                         $reglementTotal = $this->em->getRepository(TReglement::class)->getSumMontantByCodeFacture($cd)['total'];
@@ -202,6 +209,9 @@ class GestionFactureController extends AbstractController
                         }
                         $nestedData[] = $org;
                         $value = $value == 0 ? 'Cloture' : 'Ouverte';
+                    }
+                    if ($key == 11) {
+                        $value = $value == 1 ? "En Cours" : "Anullé";
                     }
                     $nestedData[] = $value;
                 }
