@@ -515,7 +515,7 @@ class GestionFactureController extends AbstractController
         if ($frais == null) {
             return new JsonResponse('Merci de verifier le frais!', 500);
         }
-        $org = $operationcab->getOrganisme() == 'Payant' ? 7 : $request->get('organisme_id');
+        $org = $operationcab->getOrganisme() == 'Payant' ? 7 : 1;
         $org = $this->em->getRepository(POrganisme::class)->find($org);
 
         $operationDet = new TOperationdet();
@@ -610,14 +610,15 @@ class GestionFactureController extends AbstractController
         $sheet->setCellValue('S1', 'ORG');
         $sheet->setCellValue('T1', 'Statut');
         $sheet->setCellValue('U1', 'D-Created');
-        $sheet->setCellValue('V1', 'Departement');
-        $sheet->setCellValue('W1', 'Etage');
-        $sheet->setCellValue('X1', 'Chambre');
-        $sheet->setCellValue('Y1', 'T-Chambre');
-        $sheet->setCellValue('Z1', 'Position');
-        $sheet->setCellValue('AA1', 'Debut');
-        $sheet->setCellValue('AB1', 'Fin');
-        $sheet->setCellValue('AC1', 'Etat');
+        $sheet->setCellValue('V1', 'ID HEBERGEMENT');
+        $sheet->setCellValue('w1', 'Departement');
+        $sheet->setCellValue('X1', 'Etage');
+        $sheet->setCellValue('Y1', 'Chambre');
+        $sheet->setCellValue('Z1', 'T-Chambre');
+        $sheet->setCellValue('AA1', 'Position');
+        $sheet->setCellValue('AB1', 'Debut');
+        $sheet->setCellValue('AC1', 'Fin');
+        $sheet->setCellValue('AD1', 'Etat');
         $i = 2;
         $j = 1;
         // $currentyear = '2022/2023';
@@ -673,14 +674,15 @@ class GestionFactureController extends AbstractController
             if ($operationcab['created'] != "") {
                 $sheet->setCellValue('U' . $i, $operationcab['created']->format('d-m-Y'));
             }
-            $sheet->setCellValue('V' . $i, $operationcab['departement']);
-            $sheet->setCellValue('W' . $i, $operationcab['etage']);
-            $sheet->setCellValue('X' . $i, $operationcab['nchambre']);
-            $sheet->setCellValue('Y' . $i, $operationcab['tchambre']);
-            $sheet->setCellValue('Z' . $i, $operationcab['position']);
-            $sheet->setCellValue('AA' . $i, $operationcab['debut']->format('d-m-Y'));
-            $sheet->setCellValue('AB' . $i, $operationcab['fin']->format('d-m-Y'));
-            $sheet->setCellValue('AC' . $i, $operationcab['etat'] == 1 ? "En Cours" : "Annulée");
+            $sheet->setCellValue('V' . $i, $operationcab['id_hebergement']);
+            $sheet->setCellValue('W' . $i, $operationcab['departement']);
+            $sheet->setCellValue('X' . $i, $operationcab['etage']);
+            $sheet->setCellValue('Y' . $i, $operationcab['nchambre']);
+            $sheet->setCellValue('Z' . $i, $operationcab['tchambre']);
+            $sheet->setCellValue('AA' . $i, $operationcab['position']);
+            $sheet->setCellValue('AB' . $i, $operationcab['debut']->format('d-m-Y'));
+            $sheet->setCellValue('AC' . $i, $operationcab['fin']->format('d-m-Y'));
+            $sheet->setCellValue('AD' . $i, $operationcab['etat'] == 1 ? "En Cours" : "Annulée");
             $i++;
             $j++;
         }
